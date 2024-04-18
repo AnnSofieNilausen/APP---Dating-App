@@ -11,20 +11,38 @@ namespace APApiDbS2024InClass.Model
 
 		public Profile() { }
 
-		[JsonPropertyName("id")]
-		public int ID { get; set; }
-		[JsonPropertyName("firstName")]
+		[JsonPropertyName("Pid")]
+		public int Pid { get; set; }
+		[JsonPropertyName("FName")]
 		public string FName { get; set; }
-		[JsonPropertyName("lastName")]
+		[JsonPropertyName("LName")]
 		public string LName { get; set; }
-		[JsonPropertyName("studyProgramID")]
-		public int StudyProgramID { get; set; }
 		[JsonPropertyName("dob")]
 		public DateTime DOB { get; set; }
 		[JsonPropertyName("email")]
 		public string Email { get; set; }
-		[JsonPropertyName("phone")]
-		public string Phone { get; set; }
-	}
+		[JsonPropertyName("Gender")]
+		public string Gender { get; set; }
+        [JsonPropertyName("AoL")]
+        public string AoL { get; set; }
+        [JsonPropertyName("Username")]
+        public string Username { get; set; }
+        [JsonPropertyName("Sexual_Orientation")]
+        public string Sexual_Orientation { get; set; }
+        [JsonPropertyName("Bio")]
+        public string Bio { get; set; }
+        [JsonPropertyName("Searching_For")]
+        public string Searching_For { get; set; }
+        [JsonPropertyName("Interests")]
+        public string Interests { get; set; }
+        [JsonPropertyName("Occupation")]
+        public string Occupation { get; set; }
+        [JsonPropertyName("Pictures")]
+        public string Pictures { get; set; }
+        [JsonPropertyName("Likes")]
+        public string Likes { get; set; }
+        [JsonPropertyName("Matches")]
+        public string Matches { get; set; }
+    }
 }
 

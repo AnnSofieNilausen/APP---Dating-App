@@ -68,7 +68,7 @@ namespace APApiDbS2024InClass.Controllers
                 return NotFound($"Profile with id {student.ID} not found");
             }
 
-            bool status = Repository.UpdateStudent(student);
+            bool status = Repository.UpdateProfile(student);
             if (status)
             {
                 return Ok();

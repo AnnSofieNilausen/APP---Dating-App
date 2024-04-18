@@ -29,19 +29,31 @@ namespace APApiDbS2024InClass.DataRepository
                 {
                     Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FName = data["firstname"].ToString(),
-                        LName = data["lastname"].ToString(),
-                        StudyProgramID = (int)data["studyprogramid"],
+                        FName = data["FName"].ToString(),
+                        LName = data["LName"].ToString(),
                         DOB = Convert.ToDateTime(data["dob"]),
                         Email = data["email"].ToString(),
-                        Phone = data["phone"].ToString()
+                        Gender = data["Gender"].ToString(),
+                        AoL = data["AoL"].ToString(),
+                        Username = data["Username"].ToString(),
+                        Sexual_Orientation = data["Sexual_Orientation"].ToString(),
+                        Bio = data["Bio"].ToString(),
+                        Searching_For = data["Searching_For"].ToString(),
+                        Interests = data["Interests"].ToString(),
+                        Occupation = data["Interests"].ToString(),
+                        Pictures = data["Pictures"].ToString(),
+                        Likes = data["Likes"].ToString(),
+                        Matches = data["Matches"].ToString()
+
+
+
                     };
 
-                    students.Add(s);
+                    profiles.Add(s);
 
                 }
 
-                return students;
+                return profiles;
             }
 
             return null;
@@ -69,12 +81,11 @@ namespace APApiDbS2024InClass.DataRepository
                 {
                     Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FirstName = data["firstname"].ToString(),
-                        LastName = data["lastname"].ToString(),
-                        StudyProgramID = (int)data["studyprogramid"],
+                        FName = data["firstname"].ToString(),
+                        LName = data["lastname"].ToString(),
                         DOB = Convert.ToDateTime(data["dob"]),
                         Email = data["email"].ToString(),
-                        Phone = data["phone"].ToString()
+                        Gender = data["phone"].ToString()
                     };
 
                     return s;
@@ -100,12 +111,11 @@ values
 ";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FirstName);
-            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LastName);
-            cmd.Parameters.AddWithValue("@studyprogramid", NpgsqlDbType.Integer, s.StudyProgramID);
+            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FName);
+            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LName);
             cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Phone);
+            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Gender);
 
             //will return true if all goes well
             bool result = InsertData(dbConn, cmd);
@@ -113,7 +123,7 @@ values
             return result;
         }
 
-        public bool UpdateStudent(Profile s)
+        public bool UpdateProfile(Profile s)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
@@ -128,12 +138,11 @@ update student set
 where
 id = @id";
 
-            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FirstName);
-            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LastName);
-            cmd.Parameters.AddWithValue("@studyprogramid", NpgsqlDbType.Integer, s.StudyProgramID);
+            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FName);
+            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LName);
             cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Phone);
+            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Gender);
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, s.ID);
 
             bool result = UpdateData(dbConn, cmd);
