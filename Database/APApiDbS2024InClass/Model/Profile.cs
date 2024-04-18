@@ -4,9 +4,9 @@ namespace APApiDbS2024InClass.Model
 {
 	public class Profile
 	{
-		public Profile(int id)
+		public Profile(int Pid)
 		{
-			ID = id;
+			Pid = Pid;
 		}
 
 		public Profile() { }

@@ -81,11 +81,21 @@ namespace APApiDbS2024InClass.DataRepository
                 {
                     Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FName = data["firstname"].ToString(),
-                        LName = data["lastname"].ToString(),
+                        FName = data["FName"].ToString(),
+                        LName = data["LName"].ToString(),
                         DOB = Convert.ToDateTime(data["dob"]),
                         Email = data["email"].ToString(),
-                        Gender = data["phone"].ToString()
+                        Gender = data["Gender"].ToString(),
+                        AoL = data["AoL"].ToString(),
+                        Username = data["Username"].ToString(),
+                        Sexual_Orientation = data["Sexual_Orientation"].ToString(),
+                        Bio = data["Bio"].ToString(),
+                        Searching_For = data["Searching_For"].ToString(),
+                        Interests = data["Interests"].ToString(),
+                        Occupation = data["Interests"].ToString(),
+                        Pictures = data["Pictures"].ToString(),
+                        Likes = data["Likes"].ToString(),
+                        Matches = data["Matches"].ToString()
                     };
 
                     return s;
@@ -115,7 +125,17 @@ values
             cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LName);
             cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Gender);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, s.Gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, s.AoL);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, s.Username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, s.Sexual_Orientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, s.Bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, s.Searching_For);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, s.Interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, s.Occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Text, s.Pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Text, s.Likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Text, s.Matches);
 
             //will return true if all goes well
             bool result = InsertData(dbConn, cmd);
@@ -138,12 +158,22 @@ update student set
 where
 id = @id";
 
+           
             cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FName);
             cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LName);
             cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Gender);
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, s.ID);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, s.Gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, s.AoL);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, s.Username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, s.Sexual_Orientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, s.Bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, s.Searching_For);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, s.Interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, s.Occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Text, s.Pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Text, s.Likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Text, s.Matches);
 
             bool result = UpdateData(dbConn, cmd);
             return result;
