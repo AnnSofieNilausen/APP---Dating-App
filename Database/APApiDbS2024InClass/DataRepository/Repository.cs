@@ -8,10 +8,10 @@ namespace APApiDbS2024InClass.DataRepository
     public class Repository : BaseRepository
     {
         //Get a list of students
-        public List<Student> GetStudents()
+        public List<Profile> GetProfiles()
         {
             //creating empty list to fill it from database
-            var students = new List<Student>();
+            var profiles = new List<Profile>();
 
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -27,10 +27,10 @@ namespace APApiDbS2024InClass.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Student s = new Student(Convert.ToInt32(data["id"]))
+                    Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FirstName = data["firstname"].ToString(),
-                        LastName = data["lastname"].ToString(),
+                        FName = data["firstname"].ToString(),
+                        LName = data["lastname"].ToString(),
                         StudyProgramID = (int)data["studyprogramid"],
                         DOB = Convert.ToDateTime(data["dob"]),
                         Email = data["email"].ToString(),
@@ -48,10 +48,10 @@ namespace APApiDbS2024InClass.DataRepository
         }
 
         //Get a single student using Id
-        public Student GetStudentById(int id)
+        public Profile GetStudentById(int id)
         {
             //creating empty list to fill it from database
-            var students = new List<Student>();
+            var students = new List<Profile>();
 
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -67,7 +67,7 @@ namespace APApiDbS2024InClass.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Student s = new Student(Convert.ToInt32(data["id"]))
+                    Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
                         FirstName = data["firstname"].ToString(),
                         LastName = data["lastname"].ToString(),
@@ -88,7 +88,7 @@ namespace APApiDbS2024InClass.DataRepository
         }
 
         //add a new student
-        public bool InsertStudent(Student s)
+        public bool InsertStudent(Profile s)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
@@ -113,7 +113,7 @@ values
             return result;
         }
 
-        public bool UpdateStudent(Student s)
+        public bool UpdateStudent(Profile s)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();

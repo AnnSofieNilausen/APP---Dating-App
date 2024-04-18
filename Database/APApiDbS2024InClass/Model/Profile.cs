@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-
 namespace APApiDbS2024InClass.Model
 {
-	public class Student
+	public class Profile
 	{
-		public Student(int id)
+		public Profile(int id)
 		{
 			ID = id;
 		}
 
-		public Student() { }
+		public Profile() { }
 
 		[JsonPropertyName("id")]
 		public int ID { get; set; }
 		[JsonPropertyName("firstName")]
-		public string FirstName { get; set; }
+		public string FName { get; set; }
 		[JsonPropertyName("lastName")]
-		public string LastName { get; set; }
+		public string LName { get; set; }
 		[JsonPropertyName("studyProgramID")]
 		public int StudyProgramID { get; set; }
 		[JsonPropertyName("dob")]

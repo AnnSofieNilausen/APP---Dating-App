@@ -7,29 +7,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace APApiDbS2024InClass.Controllers
 {
     [Route("api/[controller]")]
-    public class StudentController : Controller
+    public class ProfileController : Controller
     {
         private Repository Repository { get; }
 
-        public StudentController()
+        public ProfileController()
         {
             Repository = new Repository();
         }
 
-        // GET: api/student
+        // GET: api/Profile
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(Repository.GetStudents());
+            return Ok(Repository.GetProfiles());
         }
-
+        
         // GET api/student/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            Student student = Repository.GetStudentById(id);
+            Profile student = Repository.GetStudentById(id);
             if (student == null)
-                return NotFound($"Student with id {id} not found");
+                return NotFound($"Profile with id {id} not found");
 
             return Ok(student);
         }
@@ -37,11 +37,11 @@ namespace APApiDbS2024InClass.Controllers
        
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody]Student student)
+        public ActionResult Post([FromBody]Profile student)
         {
             if (student == null)
             {
-                return BadRequest("Student info not correct");
+                return BadRequest("Profile info not correct");
             }
 
             bool status = Repository.InsertStudent(student);
@@ -55,17 +55,17 @@ namespace APApiDbS2024InClass.Controllers
 
         // PUT api/values/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Student student)
+        public ActionResult Put([FromBody] Profile student)
         {
             if (student == null)
             {
-                return BadRequest("Student info not correct");
+                return BadRequest("Profile info not correct");
             }
 
-            Student existinStudent = Repository.GetStudentById(student.ID);
+            Profile existinStudent = Repository.GetStudentById(student.ID);
             if (existinStudent == null)
             {
-                return NotFound($"Student with id {student.ID} not found");
+                return NotFound($"Profile with id {student.ID} not found");
             }
 
             bool status = Repository.UpdateStudent(student);
@@ -81,10 +81,10 @@ namespace APApiDbS2024InClass.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Student existingStudent = Repository.GetStudentById(id);
+            Profile existingStudent = Repository.GetStudentById(id);
             if (existingStudent == null)
             {
-                return NotFound($"Student with id {id} not found");
+                return NotFound($"Profile with id {id} not found");
             }
 
             bool status = Repository.DeleteStudent(id);
