@@ -6,11 +6,10 @@ namespace APApiDbS2024InClass.Model
 	{
 		public Profile(int Pid)
 		{
-			Pid = Pid;
+			this.Pid = Pid;
+
 		}
-
 		public Profile() { }
-
 		[JsonPropertyName("Pid")]
 		public int Pid { get; set; }
 		[JsonPropertyName("FName")]

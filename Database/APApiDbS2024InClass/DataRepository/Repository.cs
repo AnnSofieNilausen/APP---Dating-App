@@ -27,7 +27,7 @@ namespace APApiDbS2024InClass.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Profile s = new Profile(Convert.ToInt32(data["id"]))
+                    Profile s = new Profile(Convert.ToInt32(data["Pid"]))
                     {
                         FName = data["FName"].ToString(),
                         LName = data["LName"].ToString(),
