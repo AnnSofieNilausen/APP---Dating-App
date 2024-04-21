@@ -88,7 +88,7 @@ namespace APApiDbS2024InClass.Model
             }
         }
 
-        /// <summary>
+        /// <summary!>
         /// Creates a hashed version of a password to securely store passwords.
         /// Hashing is a one-way process using SHA256.
         /// </summary>
