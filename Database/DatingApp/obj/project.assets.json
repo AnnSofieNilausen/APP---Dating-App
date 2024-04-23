@@ -654,11 +654,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/APApiDbS2024InClass.csproj",
+      "projectUniqueName": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj",
       "projectName": "APApiDbS2024InClass",
-      "projectPath": "/Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/APApiDbS2024InClass.csproj",
+      "projectPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj",
       "packagesPath": "/Users/annsofienilausen/.nuget/packages/",
-      "outputPath": "/Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/obj/",
+      "outputPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/annsofienilausen/.nuget/NuGet/NuGet.Config"

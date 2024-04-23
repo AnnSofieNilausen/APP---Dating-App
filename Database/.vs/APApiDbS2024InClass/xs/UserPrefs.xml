@@ -1,33 +1,17 @@
-﻿<Properties StartupConfiguration="{1623520D-9AA0-4D9B-BA1F-DA053EA97162}|https">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="APApiDbS2024InClass/Controllers/StudentController.cs">
-    <Files>
-      <File FileName="APApiDbS2024InClass/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
-      <File FileName="APApiDbS2024InClass/Model/Student.cs" Line="1" Column="1" />
-      <File FileName="APApiDbS2024InClass/DataRepository/BaseRepository.cs" Line="10" Column="10" />
-      <File FileName="APApiDbS2024InClass/DataRepository/Repository.cs" Line="1" Column="1" />
-      <File FileName="APApiDbS2024InClass/Controllers/StudentController.cs" Line="62" Column="63" />
-      <File FileName="APApiDbS2024InClass/Program.cs" Line="26" Column="29" />
-    </Files>
+﻿<Properties>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.APApiDbS2024InClass PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="APApiDbS2024InClass" expanded="True">
-            <Node name="APApiDbS2024InClass" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="StudentController.cs" selected="True" />
-              </Node>
-              <Node name="DataRepository" expanded="True" />
-              <Node name="Model" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="APApiDbS2024InClass" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.APApiDbS2024InClass PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
