@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\Angular",
+    "\\Database",
+    "\\Database\\.idea",
+    "\\Database\\.idea\\.idea.APApiDbS2024InClass",
+    "\\Database\\.idea\\.idea.APApiDbS2024InClass\\.idea",
+    "\\Database\\APApiDbS2024InClass",
+    "\\Database\\APApiDbS2024InClass\\Model"
+  ],
+  "SelectedNode": "\\Database\\APApiDbS2024InClass\\Model\\UserAuthentication.cs",
+  "PreviewInSolutionExplorer": false
+}
