@@ -71,3 +71,5 @@ namespace DatingApp.Model
         }
     }
 }
+
+//lav om til repository, sørg for der er function for at delete match, udskift med repository. 
