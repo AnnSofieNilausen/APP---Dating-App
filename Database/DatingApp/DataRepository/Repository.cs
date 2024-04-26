@@ -48,10 +48,10 @@ namespace DatingApp.DataRepository
         }
 
         //Get a single student using Id
-        public Profile GetStudentById(int id)
+        public Profile GetProfileById(int id)
         {
             //creating empty list to fill it from database
-            var students = new List<Profile>();
+            var profile = new List<Profile>();
 
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -88,7 +88,7 @@ namespace DatingApp.DataRepository
         }
 
         //add a new student
-        public bool InsertStudent(Profile s)
+        public bool InsertProfile(Profile s)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
@@ -118,7 +118,7 @@ values
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
-update student set
+update profile set
     firstname=@firstname,
     lastname=@lastname,
     studyprogramid=@studyprogramid,
@@ -128,14 +128,28 @@ update student set
 where
 id = @id";
 
-            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FirstName);
-            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LastName);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, s.FirstName);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, s.LastName);
             cmd.Parameters.AddWithValue("@studyprogramid", NpgsqlDbType.Integer, s.StudyProgramID);
             cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
             cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
             cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Phone);
             cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, s.ID);
-
+            { "@Fname", fname},
+                { "@Lname", lname},
+                { "@DoB", dob},
+                { "@Email", email},
+                { "@Phone", phone},
+                { "@Username", username},
+                { "@Password", password},
+                { "@SexualOrientation", sexualOrientation},
+                { "@Bio", bio},
+                { "@SearchingFor", searchingFor},
+                { "@Interests", interests},
+                { "@Occupation", occupation},
+                { "@Pictures", pictures},
+                { "@Instagram", instagram ?? ""},
+                { "@Snapchat", snapchat ?? ""}
             bool result = UpdateData(dbConn, cmd);
             return result;
         }
@@ -145,7 +159,7 @@ id = @id";
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
-delete from student
+delete from profile
 where id = @id
 ";
 

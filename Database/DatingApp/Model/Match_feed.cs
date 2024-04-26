@@ -2,7 +2,7 @@
 {
     public class Match_feed
     {
-        //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
+        //first thing we should do is to find another profile, make sure the profile is not either liked or matched.
     public int DisplayProfile() {  return 0; }
         //Add While loop
         //Get profile through repository of foreign ID
