@@ -8,7 +8,7 @@
         //Get profile through repository of foreign ID
             //Check they are not in list of matches or likes(Consider making this a function for itself)
             //if True - find new ID, if False - continue
-        //await Liking or disliking of profile
+        //await Liking or disliking of profile - API
         //if like call IsLike function
             //continue
         //if dislike run again
