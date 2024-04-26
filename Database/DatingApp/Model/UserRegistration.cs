@@ -1,6 +1,7 @@
 ﻿using System;
 using Npgsql;
 using DatingApp.DataRepository;
+using System.Collections.Generic;
 
 namespace DatingApp.Model
 {
@@ -23,16 +24,37 @@ namespace DatingApp.Model
                 throw new ArgumentException("At least one social media account (Instagram or Snapchat) must be provided.");
             }
 
-            // SQL query to insert user data into the Profile table
+            // Prepare the SQL query using parameters to insert user data into the database.
             string query = @"
             INSERT INTO Profile 
             (Fname, Lname, DoB, Email, Phone, Username, Password, Sexual_Orientation, 
             Bio, Searching_For, Interests, Occupation, Pictures, Instagram, Snapchat) 
             VALUES 
-            ('" + fname + "', '" + lname + "', '" + dob + "', '" + email + "', '" + phone + "', '" + username + "', '" + password + "', '" + sexualOrientation + "', '" + bio + "', '" + searchingFor + "', '" + interests + "', '" + occupation + "', '" + pictures + "', '" + (instagram ?? "") + "', '" + (snapchat ?? "") + "')";
+            (@Fname, @Lname, @DoB, @Email, @Phone, @Username, @Password, @SexualOrientation, 
+            @Bio, @SearchingFor, @Interests, @Occupation, @Pictures, @Instagram, @Snapchat)";
 
-            // Execute the SQL query to register the user and return the result
-            return ExecuteNonQuery(query);
+            // Create a dictionary to hold SQL parameters
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@Fname", fname},
+                {"@Lname", lname},
+                {"@DoB", dob},
+                {"@Email", email},
+                {"@Phone", phone},
+                {"@Username", username},
+                {"@Password", password},
+                {"@SexualOrientation", sexualOrientation},
+                {"@Bio", bio},
+                {"@SearchingFor", searchingFor},
+                {"@Interests", interests},
+                {"@Occupation", occupation},
+                {"@Pictures", pictures},
+                {"@Instagram", instagram ?? ""},
+                {"@Snapchat", snapchat ?? ""}
+            };
+
+            // Execute the SQL query to register the user and return the result as true if the operation affected at least one row.
+            return ExecuteNonQuery(query, parameters) > 0;
         }
     }
 }
