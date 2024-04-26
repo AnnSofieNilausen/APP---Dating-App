@@ -1,59 +1,68 @@
-﻿using System.Collections.Generic;
+﻿using Npgsql;
 using System;
-using DatingApp.DataRepository;
+using System.Collections.Generic;
+using System.Data;
 
-namespace DatingApp.Model
+namespace DatingApp.DataRepository
 {
-    // Inherits from BaseRepository which contains methods to interact with the database
-    public class MatchFinder : BaseRepository
+    public class MatchRepository : BaseRepository
     {
         /// <summary>
-        /// Retrieves all profiles that have matched with the specified user based on mutual likes.
+        /// Retrieves a list of mutual matches for a specified user by querying the Matches table.
+        /// This method finds users that have mutually liked each other.
         /// </summary>
-        /// <param name="userId">The user ID for whom matches are being retrieved.</param>
-        /// <returns>A list of Profile objects representing all matched users.</returns>
-        public List<Profile> GetMatches(int userId)
+        /// <param name="userId">The user ID to retrieve matches for.</param>
+        /// <returns>A list of user IDs that are mutual matches.</returns>
+        public List<int> GetMatches(int userId)
         {
-            // List to store matched profiles
-            List<Profile> matches = new List<Profile>();
+            // SQL query to find mutual likes.
+            // It selects other users who appear as matches for the given user and where the given user is also a match for them.
+            string query = "SELECT other_user_id FROM Matches WHERE user_id = @UserId AND other_user_id IN (SELECT user_id FROM Matches WHERE other_user_id = @UserId)";
 
-            // Unsafe SQL query with direct user input concatenation
-            string query = $@"
-                SELECT p.*
-                FROM Profile p
-                INNER JOIN Likes l ON p.ID = l.Pid2 OR p.ID = l.Pid
-                WHERE (l.Pid = {userId} OR l.Pid2 = {userId}) AND l.Match = TRUE AND p.ID != {userId}";
-
-            // Use GetData to fetch data and construct Profile objects for each match
-            foreach (var record in GetData(query))  // Assuming GetData is adapted to not use parameters
+            // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
+            Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                matches.Add(new Profile
-                {
-                    ID = Convert.ToInt32(record["ID"]),
-                    FName = record["Fname"].ToString(),
-                    LName = record["Lname"].ToString(),
-                    DOB = Convert.ToDateTime(record["DoB"]),
-                    Email = record["Email"].ToString(),
-                    Phone = record["Phone"].ToString(),
-                    // Additional properties can be added as needed
-                });
+                {"@UserId", userId}
+            };
+
+            // Initialize a list to hold the IDs of matching users.
+            List<int> matches = new List<int>();
+
+            // Execute the query and iterate over each data record returned.
+            foreach (IDataRecord record in GetData(query, parameters))
+            {
+                // Add the other_user_id from each record to the list of matches.
+                matches.Add((int)record["other_user_id"]);
             }
 
+            // Return the list of matches.
             return matches;
         }
 
-
-        // Method to delete a match between two users
-        public bool DeleteMatch(int userId, int matchId)
+        /// <summary>
+        /// Deletes a match between the specified user and another user from the Matches table.
+        /// </summary>
+        /// <param name="userId">The user ID of the first user.</param>
+        /// <param name="matchUserId">The user ID of the match to be deleted.</param>
+        /// <returns>True if the operation was successful, indicating one or more rows were affected, false otherwise.</returns>
+        public bool DeleteMatch(int userId, int matchUserId)
         {
-            // SQL command to delete a match from the Likes table where both user IDs match the given IDs
-            string sql = "DELETE FROM Likes WHERE (Pid = @UserId AND Pid2 = @MatchId) OR (Pid = @MatchId AND Pid2 = @UserId) AND Match = TRUE";
+            // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
+            // ensuring that all references to this match are removed.
+            string query = "DELETE FROM Matches WHERE (user_id = @UserId AND other_user_id = @MatchUserId) OR (user_id = @MatchUserId AND other_user_id = @UserId)";
 
-            // Call the ExecuteNonQuery method from the BaseRepository class
-            int rowsAffected = ExecuteNonQuery(sql);
+            // Parameters are used to safely inject the user IDs into the SQL command.
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@UserId", userId},
+                {"@MatchUserId", matchUserId}
+            };
 
-            // Return true if at least one row was affected, indicating success
-            return rowsAffected > 0;
+            // Execute the delete command and get the number of rows affected.
+            int affectedRows = ExecuteNonQuery(query, parameters);
+
+            // Return true if at least one row was affected, indicating a successful delete.
+            return affectedRows > 0;
         }
     }
 }

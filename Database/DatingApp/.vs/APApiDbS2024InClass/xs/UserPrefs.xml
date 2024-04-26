@@ -1,3 +1,40 @@
 ﻿<Properties StartupConfiguration="{9C0CA70A-251A-45CA-9727-79C8E1E9FA9B}|https">
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.APApiDbS2024InClass PreferredExecutionTarget="/Applications/Arc.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Model/UserRegistration.cs">
+    <Files>
+      <File FileName="Model/Match_feed.cs" Line="1" Column="1" />
+      <File FileName="Model/MatchFinder.cs" Line="7" Column="2" />
+      <File FileName="DataRepository/Repository.cs" Line="1" Column="1" />
+      <File FileName="Model/Profile.cs" Line="1" Column="1" />
+      <File FileName="Model/UserAuthentication.cs" Line="20" Column="45" />
+      <File FileName="Model/UserRegistration.cs" Line="12" Column="10" />
+      <File FileName="DataRepository/BaseRepository.cs" Line="15" Column="18" />
+      <File FileName="appsettings.json" />
+      <File FileName="Program.cs" />
+      <File FileName="WeatherForecast.cs" Line="14" Column="1" />
+      <File FileName="Controllers/MainController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/ProfileController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="APApiDbS2024InClass">
+            <Node name="APApiDbS2024InClass">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DataRepository" expanded="True" />
+              <Node name="Model" expanded="True">
+                <Node name="UserRegistration.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
