@@ -1,9 +1,10 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using DatingApp.DataRepository;
 using Npgsql;
 
 namespace DatingApp.Model
 {
-    public class Match_feed
+    public class Match_feed : BaseRepository
     {
         //Connecting string for the database
         private string connectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
@@ -131,53 +132,11 @@ namespace DatingApp.Model
             //If it's not a match, add the like to the like list
             if (!isMatch)
             {
-                AddLikeToRepository(userId, profileId);
+                IsProfileLiked(userId, profileId);
             }
 
             //Return the result based on wheter it's a match
-            return isMatch;
-        }
-
-        //Method to check if a match exists between the current user and another profile
-        public bool IsMatch(int userId)
-        {
-            try
-            {
-                //SQL query to check if a match exists
-                string query = @"
-                    SELECT COUNT(*)
-                    FROM Likes AS L1
-                    JOIN Likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
-                    WHERE L1.UserId = @UserId
-                ";
-
-                using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
-                {
-                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                    {
-                        //Add parameters to the command to prevent SQL injection
-                        command.Parameters.AddWithValue("@UserId", userId);
-
-                        connection.Open();
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-
-                        //If the count is greater than 0, a match exists
-                        return count > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                //Handle exceptions, such as database connection errors
-                Console.WriteLine($$"Error checking for match: {ex.Message}");
-                return false;
-            }
-        }
-
-        //Method to add a like to the like list through the repository
-        private void AddLikeToRepository(int userId, int profileId)
-        {
-            //Implement logic 
+            return isMatch;                     
         }
 
 
