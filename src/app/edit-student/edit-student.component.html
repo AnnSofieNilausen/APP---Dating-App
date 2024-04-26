@@ -1,0 +1,22 @@
+<form name="studentFormGroup">
+   <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput type="text" [(ngModel)]="student.firstName" [formControl]="firstNameFormControl" name="studentFirstName">
+   </mat-form-field><br />
+   <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput type="text" [(ngModel)]="student.lastName" [formControl]="lastNameFormControl" name="studentLastName">
+   </mat-form-field><br />
+   <mat-form-field>
+      <mat-label>Study Program</mat-label>
+      <input matInput type="text" [(ngModel)]="student.studyProgramID"  [formControl]="studyProgramIDFormControl" name="studentProgramID">
+   </mat-form-field><br />
+   <mat-form-field>
+      <mat-label>DOB</mat-label>
+      <input matInput type="text" [matDatepicker]="picker" [(ngModel)]="student.dob"  [formControl]="dobFormControl" name="studentDOB">
+      <mat-hint>YYYY-MM-DD</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field><br />
+   <button [disabled]="!this.studentFormGroup.valid" mat-raised-button (click)="updateStudent()">Update</button>
+</form>
