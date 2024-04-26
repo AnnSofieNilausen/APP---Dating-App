@@ -1,16 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\.github",
-    "\\.github\\workflows",
     "\\Angular",
-    "\\Database",
+    "\\Angular2",
     "\\Database\\.idea",
-    "\\Database\\.idea\\.idea.APApiDbS2024InClass",
-    "\\Database\\.idea\\.idea.APApiDbS2024InClass\\.idea",
-    "\\Database\\APApiDbS2024InClass",
-    "\\Database\\APApiDbS2024InClass\\Model"
+    "\\Database\\DatingApp",
+    "\\Database\\DatingApp\\Controllers",
+    "\\Database\\DatingApp\\DataRepository",
+    "\\Database\\DatingApp\\Model"
   ],
-  "SelectedNode": "\\Database\\APApiDbS2024InClass\\Model\\UserAuthentication.cs",
+  "SelectedNode": "\\Angular2",
   "PreviewInSolutionExplorer": false
 }
