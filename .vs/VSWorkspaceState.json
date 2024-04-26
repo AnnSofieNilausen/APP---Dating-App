@@ -3,12 +3,13 @@
     "",
     "\\Angular",
     "\\Angular2",
+    "\\Database",
     "\\Database\\.idea",
     "\\Database\\DatingApp",
     "\\Database\\DatingApp\\Controllers",
     "\\Database\\DatingApp\\DataRepository",
     "\\Database\\DatingApp\\Model"
   ],
-  "SelectedNode": "\\Angular2",
+  "SelectedNode": "\\Database\\DatingApp\\DataRepository\\Repository.cs",
   "PreviewInSolutionExplorer": false
 }
