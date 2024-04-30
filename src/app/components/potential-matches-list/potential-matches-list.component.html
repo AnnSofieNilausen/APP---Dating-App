@@ -1,1 +1,15 @@
-<p>potential-matches-list works!</p>
+<div *ngIf="currentProfile; else noProfileTemplate">
+    <h2>{{ currentProfile.name }}, {{ currentProfile.age }}</h2>
+    <p>Interests: {{ currentProfile.interests }}</p>
+    <p>Area of Living: {{ currentProfile.aol }}</p>
+    <p *ngIf="currentProfile.searchingFor">Searching For: {{ currentProfile.searchingFor }}</p>
+    <p *ngIf="currentProfile.bio">Bio: {{ currentProfile.bio }}</p>
+    <p *ngIf="currentProfile.occupation">Occupation: {{ currentProfile.occupation }}</p>
+    <button (click)="likeProfile()">Like</button>
+    <button (click)="dislikeProfile()">Dislike</button>
+  </div>
+  
+  <ng-template #noProfileTemplate>
+    <p>No more profiles available.</p>
+  </ng-template>
+  

@@ -1,33 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserProfile } from '../model/user-profile';
+import { UserProfile } from '../models/user-profile'; // Adjust the path as necessary
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'http://localhost:5057/api/profiles'; // chaneg to our API URL
+  private apiUrl = 'http://your-api-url.com/api/users'; // Base URL for user-related API endpoints
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // Create a new user profile
-  createProfile(profile: UserProfile): Observable<UserProfile> {
-    return this.http.post<UserProfile>(this.apiUrl, profile);
+  // Fetches the profile of a user by their ID
+  getProfile(userId: number): Observable<UserProfile> {
+    // Constructs the URL to access the user's profile and makes an HTTP GET request
+    return this.http.get<UserProfile>(`${this.apiUrl}/${userId}`);
   }
 
-  // Get the user profile
-  getProfile(id: number): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/${id}`);
-  }
-
-  // Update user profile
+  // Updates the user's profile with new data
   updateProfile(profile: UserProfile): Observable<UserProfile> {
+    // Makes an HTTP PUT request to update the user's profile on the server
+    // Assumes the backend expects a user ID as part of the URL
     return this.http.put<UserProfile>(`${this.apiUrl}/${profile.pid}`, profile);
-  }
-
-  // Delete user profile
-  deleteProfile(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

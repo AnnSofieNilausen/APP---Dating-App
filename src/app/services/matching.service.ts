@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PotentialMatch } from '../model/potential-match';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchingService {
-  private apiUrl = 'http://localhost:5057/api/matches'; // replace with our API URL
+  private apiUrl = 'http://your-api-url.com/api/matching'; // Adjust as needed
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // Get potential matches for the user
-  getPotentialMatches(): Observable<PotentialMatch[]> {
-    return this.http.get<PotentialMatch[]>(`${this.apiUrl}/potential`);
+  // Fetches the next potential match
+  getNextProfile(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/next`);
   }
 
-  // Like a profile
-  likeProfile(userId: number, likedUserId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/like`, { userId, likedUserId });
+  // Sends a 'like' for a specific profile ID
+  likeProfile(profileId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/like/${profileId}`, {});
   }
 
-  // Dislike a profile
-  dislikeProfile(userId: number, dislikedUserId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/dislike`, { userId, dislikedUserId });
+  // Sends a 'dislike' for a specific profile ID
+  dislikeProfile(profileId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/dislike/${profileId}`, {});
   }
 }
