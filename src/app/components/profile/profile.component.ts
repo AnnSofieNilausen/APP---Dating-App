@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../services/profile.service'; // Ensure the correct path to your service
+import { ProfileService } from '../services/ProfileService'; // Ensure the correct path to your service
 
 @Component({
   selector: 'app-profile',
