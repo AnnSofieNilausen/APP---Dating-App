@@ -29,7 +29,7 @@ namespace DatingApp.Controllers.Main
             if (profile == null)
                 return NotFound($"Profile with id {id} not found");
 
-            return Ok(student);
+            return Ok(profile);
         }
 
         //Post
@@ -59,13 +59,13 @@ namespace DatingApp.Controllers.Main
                 return BadRequest("Profile info not correct");
             }
 
-            Profile existinStudent = Repository.GetStudentById(student.ID);
-            if (existinStudent == null)
+            Profile existinProfile = Repository.GetProfileById(profile.ID);
+            if (existinProfile == null)
             {
-                return NotFound($"Profile with id {student.ID} not found");
+                return NotFound($"Profile with id {profile.ID} not found");
             }
 
-            bool status = Repository.UpdateStudent(student);
+            bool status = Repository.UpdateProfile(profile);
             if (status)
             {
                 return Ok();
@@ -78,19 +78,19 @@ namespace DatingApp.Controllers.Main
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Profile existingStudent = Repository.GetStudentById(id);
+            Profile existingStudent = Repository.GetProfileById(id);
             if (existingStudent == null)
             {
                 return NotFound($"Profile with id {id} not found");
             }
 
-            bool status = Repository.DeleteStudent(id);
+            bool status = Repository.DeleteProfile(id);
             if (status)
             {
                 return NoContent();
             }
 
-            return BadRequest($"Unable to delete student with id {id}");
+            return BadRequest($"Unable to delete profile with id {id}");
         }
     }
 }
@@ -105,26 +105,19 @@ namespace DatingApp.Controllers.Main
                 return NotFound($"Profile with id {id} not found");
             }
 
-            bool status = Repository.DeleteStudent(id);
+            bool status = Repository.DeleteProfile(id);
             if (status)
             {
                 return NoContent();
             }
 
-            return BadRequest($"Unable to delete student with id {id}");
+            return BadRequest($"Unable to delete profile with id {id}");
         }
 
 
 
 
     }
-
-
-
-
-
-
-
 
 
 }
