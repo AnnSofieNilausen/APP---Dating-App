@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MutualMatch } from '../model/mutual-match';
+import { MatchesService } from '../service/matches.service';
 
 @Component({
   selector: 'app-mutual-matches-list',
-  standalone: true,
-  imports: [],
   templateUrl: './mutual-matches-list.component.html',
-  styleUrl: './mutual-matches-list.component.css'
+  styleUrls: ['./mutual-matches-list.component.css']
 })
-export class MutualMatchesListComponent {
+export class MutualMatchesListComponent implements OnInit {
+  mutualMatches: MutualMatch[] = [];
 
+  constructor(private matchesService: MatchesService) {}
+
+  ngOnInit(): void {
+    this.matchesService.getMutualMatches().subscribe((matches) => {
+      this.mutualMatches = matches;
+    });
+  }
 }
