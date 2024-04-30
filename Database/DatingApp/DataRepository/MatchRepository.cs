@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace DatingApp.DataRepository
+namespace DatingApp.DataRepository.Matches
 {
-    public class MatchRepository : BaseRepository
+    public class MatchRepository
     {
         /// <summary>
         /// Retrieves a list of mutual matches for a specified user by querying the Matches table.

@@ -9,7 +9,7 @@ namespace DatingApp.Controllers.Main
     {
         private Repository Repository { get; }
 
-        public ProfileController()
+        public MatchfeedController()
         {
             Repository = new Repository();
         }

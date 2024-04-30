@@ -18,7 +18,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = "select * from student";
+            cmd.CommandText = "select * from profile";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -113,7 +113,7 @@ values
             return result;
         }
 
-        public bool UpdateStudent(Profile s)
+        public bool UpdateProfile(Profile s)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
@@ -154,7 +154,7 @@ id = @id";
             return result;
         }
 
-        public bool DeleteStudent(int id)
+        public bool DeleteProfile(int id)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();

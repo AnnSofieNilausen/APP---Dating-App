@@ -81,7 +81,7 @@ namespace DatingApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Profile existingStudent = Repository.GetStudentById(id);
+            Profile existingStudent = Repository.GetProfileById(id);
             if (existingStudent == null)
             {
                 return NotFound($"Profile with id {id} not found");

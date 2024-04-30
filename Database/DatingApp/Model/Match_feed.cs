@@ -10,31 +10,40 @@ namespace DatingApp.Model
         private string connectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
         //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
         //Method to display a profile for the current user
-        public int DisplayProfile(int userId)
+        // Method to retrieve a random profile ID from the repositary
+        private int GetRandomProfile()
         {
-            int displayedProfileId = 0;
+            string query = "SELECT PID FROM profile ORDER BY RAND() LIMIT 1"
 
-            //loop until a suitable profile is found
-            while (true)
+        using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
             {
-                //Get a random profile ID from the repositary
-                displayedProfileId = GetRandomProfileId();
+                using ((NpgsqlCommand command = new NpgsqlCommand(query, connection)) {
 
-                //Check if the profile is not liked by the current user
-                if (!IsLike(userId, displayedProfileId))
-                {
-                    break; //Exit the loop if the profile is not liked
+                Dictionary<string, object> Matchfeed_profile = new Dictionary<string, object>
+            {
+                {"@PiD", pid},
+                {"@Fname", fname},
+                {"@Lname", lname},
+                {"@DoB", dob},
+                {"@Email", email},
+                {"@Phone", phone},
+                {"@Username", username},
+                {"@Password", password},
+                {"@SexualOrientation", sexualOrientation},
+                {"@Bio", bio},
+                {"@SearchingFor", searchingFor},
+                {"@Interests", interests},
+                {"@Occupation", occupation},
+                {"@Pictures", pictures},
+                {"@Instagram", instagram ?? ""},
+                {"@Snapchat", snapchat ?? ""}
+            };
+
+
                 }
             }
 
-            return displayedProfileId;
-        }
-
-        // Method to retrieve a random profile ID from the repositary
-        private int GetRandomProfileId()
-        {
-            //Implement logic retrieve a random profile ID
-            return 0; //Placeholder, replace with actual logic
+            return Matchfeed_profile;
         }
 
         //Method to check whether the current user has already liked the displayed profile
