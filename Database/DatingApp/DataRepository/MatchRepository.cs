@@ -1,19 +1,33 @@
-﻿using Npgsql;
+﻿using DatingApp.Model;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
 namespace DatingApp.DataRepository.Matches
 {
-    public class MatchRepository
+    public class MatchRepository: Repository
     {
+        //Get Match profiles from List of IDs
+        public List<Profile> GetMatchProfiles(int userId)
+        {
+            List<int> ID = GetMatchIds(userId);
+            List<Profile> matches = new List<Profile>();
+            for (int i = 0; i < ID.Count; i++)
+            {
+                matches.Add(GetProfileById(ID[i]));
+            }
+
+           return matches;
+        }
+
         /// <summary>
         /// Retrieves a list of mutual matches for a specified user by querying the Matches table.
         /// This method finds users that have mutually liked each other.
         /// </summary>
         /// <param name="userId">The user ID to retrieve matches for.</param>
         /// <returns>A list of user IDs that are mutual matches.</returns>
-        public List<int> GetMatches(int userId)
+        public List<int> GetMatchIds(int userId)
         {
             // SQL query to find mutual likes.
             // It selects other users who appear as matches for the given user and where the given user is also a match for them.
@@ -40,7 +54,7 @@ namespace DatingApp.DataRepository.Matches
                 }                
             }
 
-            // Return the list of matches.
+            // Return the list of matches in ID format.
             return matches;
         }
 

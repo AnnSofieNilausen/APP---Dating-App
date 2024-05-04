@@ -2,9 +2,9 @@ using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DatingApp.Controllers.Main
+namespace DatingApp.Controllers.Match
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Match]")]
     public class MainController : Controller
     {
         private Repository Repository { get; }

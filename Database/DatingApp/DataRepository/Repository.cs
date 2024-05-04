@@ -18,7 +18,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = "select * from profile";
+            cmd.CommandText = "select * from Profile";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -27,7 +27,7 @@ namespace DatingApp.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Profile s = new Profile(Convert.ToInt32(data["id"]))
+                    Profile s = new Profile(Convert.ToInt32(data["Pid"]))
                     {
 
                         FName = data["Fname"].ToString(),
@@ -71,7 +71,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = $"select * from profile where Pid = {id}";
+            cmd.CommandText = $"select * from Profile where Pid = {id}";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -80,7 +80,7 @@ namespace DatingApp.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Profile s = new Profile(Convert.ToInt32(data["Pid"]))
+                    Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                     {
                         FName = data["Fname"].ToInt()
                         FName = data["Fname"].ToString(),
@@ -101,7 +101,7 @@ namespace DatingApp.DataRepository
                         snapchat = data["Snapchat"].ToString()
                     };
 
-                    return s;
+                    return p;
 
                 }
 
@@ -111,7 +111,7 @@ namespace DatingApp.DataRepository
             return null;
         }
 
-        //add a new student
+        //add a new profile
         public bool InsertProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -159,9 +159,21 @@ update profile set
     Lname=@Lname,
     DoB=@DoB,
     Gender=@Gender,
-    Username=@Username
+    AoL=@AoL,
+    Username=@Username,
+    Sexual_Orientation=@Sexual_Orientation,
+    Bio=@Bio,
+    Searching_For=@Searching_For,
+    Interests=@Interests,
+    Occupation=@Occupation,
+    Pictures=@Pictures,
+    Likes=@Likes,
+    Matches=@Matches,
+    Snapchat=@Snapchat,
+    Instagram=@Instagram
+    
 where
-id = @id";
+Pid = @Pid";
 
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
             cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FirstName);
@@ -205,11 +217,11 @@ id = @id";
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
 delete from Profile
-where Pid = @id
+where Pid = @Pid
 ";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, id);
+            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, id);
 
             //will return true if all goes well
             bool result = DeleteData(dbConn, cmd);
