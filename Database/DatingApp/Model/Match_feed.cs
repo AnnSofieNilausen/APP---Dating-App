@@ -14,7 +14,7 @@ namespace DatingApp.Model
         private int GetRandomProfile()
         {
             string query = "SELECT PID FROM profile ORDER BY RAND() LIMIT 1"
-
+        
         using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
             {
                 using ((NpgsqlCommand command = new NpgsqlCommand(query, connection)) {
@@ -46,16 +46,17 @@ namespace DatingApp.Model
             return Matchfeed_profile;
         }
 
-        //Method to check whether the current user has already liked the displayed profile
-        public bool IsProfileLiked(int userId, int profileId)
+        //Method to check whether the current user has already been liked by the displayed profile
+        public bool IsProfileLiked(int liker, int liked)
         {
             bool isLiked = false;
 
-            //SQL query to chedck if the current user has liked the displayed profile
+            //SQL query to check if the current user has liked the displayed profile
+            //Pid_1 = Liker, Pid_2 = Liked
             string query = @"
             SELECT COUNT(*)
             FROM Likes
-            WHERE UserId = @UserId AND LikedProfileId = @ProfileId
+            WHERE Pid_1 = @UserId AND Pid_2 = @ProfileId
         ";
 
             try
@@ -67,8 +68,8 @@ namespace DatingApp.Model
                     using ((NpgsqlCommand command = new NpgsqlCommand(query, connection))
                    {
                         // Add parameters to the command to prevent SQL injection
-                        command.Parameters.AddWithValue("@UserId", userId);
-                        command.Parameters.AddWithValue("@ProfileId", profileId);
+                        command.Parameters.AddWithValue("@UserId", liker);
+                        command.Parameters.AddWithValue("@ProfileId", liked);
 
                         // Open the database connection
                         connection.Open();

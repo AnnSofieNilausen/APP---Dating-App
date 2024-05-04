@@ -17,7 +17,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL query to find mutual likes.
             // It selects other users who appear as matches for the given user and where the given user is also a match for them.
-            string query = "SELECT other_user_id FROM Matches WHERE user_id = @UserId AND other_user_id IN (SELECT user_id FROM Matches WHERE other_user_id = @UserId)";
+            string query = "SELECT * FROM Matches WHERE Pid_1 OR Pid_2 = @UserId;
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -31,8 +31,13 @@ namespace DatingApp.DataRepository.Matches
             // Execute the query and iterate over each data record returned.
             foreach (IDataRecord record in GetData(query, parameters))
             {
-                // Add the other_user_id from each record to the list of matches.
-                matches.Add((int)record["other_user_id"]);
+                if record["Pid_1"] = userId{
+                    matches.Add((int)record["Pid_2"]);
+                }
+                else
+                {
+                    matches.Add((int)record["Pid_1"]);
+                }                
             }
 
             // Return the list of matches.
