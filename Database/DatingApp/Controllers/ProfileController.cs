@@ -23,15 +23,15 @@ namespace DatingApp.Controllers
             return Ok(Repository.GetProfiles());
         }
         
-        // GET api/student/5
+        // GET api/profile/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            Profile student = Repository.GetStudentById(id);
-            if (student == null)
+            Profile profile = Repository.GetProfileById(id);
+            if profile == null)
                 return NotFound($"Profile with id {id} not found");
 
-            return Ok(student);
+            return Ok(profile);
         }
 
        
@@ -44,7 +44,7 @@ namespace DatingApp.Controllers
                 return BadRequest("Profile info not correct");
             }
 
-            bool status = Repository.InsertStudent(profile);
+            bool status = Repository.InsertProfile(profile);
             if (status)
             {
                 return Ok();
@@ -93,7 +93,7 @@ namespace DatingApp.Controllers
                 return NoContent();
             }
 
-            return BadRequest($"Unable to delete student with id {id}");
+            return BadRequest($"Unable to delete profile with id {id}");
         }
     }
 }
