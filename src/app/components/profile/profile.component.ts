@@ -19,6 +19,7 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup; // This FormGroup will contain our form data and validation rules
+user: any;
 
   constructor(
     private profileService: ProfileService, private router: Router, // Inject the ProfileService for HTTP operations
@@ -71,3 +72,5 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
+
+//testing 
