@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Controllers
 {
-    [Route("api/[controller]/[Profile]")]
+    [Route("api/[controller]")]
     public class ProfileController : Controller
     {
         private Repository Repository { get; }

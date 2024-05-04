@@ -60,7 +60,76 @@ namespace DatingApp.DataRepository
             return null;
         }
 
-        //Get a single student using Id
+        //Get a single profile using Id but without sensitive information
+        //Match = true, get match information incl. social media
+        //Match = false, get profile with limited information
+        public Profile GetSafeProfileById(int id, bool match)
+        {
+            //creating empty list to fill it from database
+            var profile = new List<Profile>();
+
+            //create a new connection for database
+            var dbConn = new NpgsqlConnection(ConnectionString);
+
+            //creating an SQL command
+            var cmd = dbConn.CreateCommand();
+            cmd.CommandText = $"select * from Profile where Pid = {id}";
+
+            //call the base method to get data
+            var data = GetData(dbConn, cmd);
+
+            if (data != null)
+            {
+                if (data.Read()) //if there is any data for given id
+                {
+                    if (match)
+                    {
+                        Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                        {
+                            FName = data["Fname"].ToInt(),
+                            FName = data["Fname"].ToString(),
+                            LName = data["Lname"].ToString(),
+                            DOB = Convert.ToDateTime(data["DoB"]),
+                            gender = data["Gender"].ToString(),
+                            AoL = data["AoL"].ToString(),                                                       
+                            bio = data["Bio"].ToString(),                            
+                            interests = data["Interests"].ToString(),
+                            occupation = data["Occupation"].ToString(),
+                            pictures = data["Pictures"].ToString(),
+                            instagram = data["Instagram"].ToString(),
+                            snapchat = data["Snapchat"].ToString()
+                        };
+
+                    }
+                    else
+                    {
+                        Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                        {
+                            FName = data["Fname"].ToInt(),
+                            FName = data["Fname"].ToString(),
+                            LName = data["Lname"].ToString(),
+                            DOB = Convert.ToDateTime(data["DoB"]),
+                            gender = data["Gender"].ToString(),
+                            AoL = data["AoL"].ToString(),
+                            bio = data["Bio"].ToString(),
+                            searchingFor = data["Searching_For"].ToString(),
+                            interests = data["Interests"].ToString(),
+                            occupation = data["Occupation"].ToString(),
+                            pictures = data["Pictures"].ToString(),                          
+                        };
+
+                    }
+                    
+                    return p;
+
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+        //get matchfeed or matched profile(removed sensitive info)
         public Profile GetProfileById(int id)
         {
             //creating empty list to fill it from database
@@ -82,13 +151,13 @@ namespace DatingApp.DataRepository
                 {
                     Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                     {
-                        FName = data["Fname"].ToInt()
+                        FName = data["Fname"].ToInt(),
                         FName = data["Fname"].ToString(),
                         LName = data["Lname"].ToString(),
                         DOB = Convert.ToDateTime(data["DoB"]),
                         gender = data["Gender"].ToString(),
                         AoL = data["AoL"].ToString(),
-                        username = data["Username"].ToString()
+                        username = data["Username"].ToString(),
                         sexualOrientation = data["Sexual_Orientation"].ToString(),
                         bio = data["Bio"].ToString(),
                         searchingFor = data["Searching_For"].ToString(),
@@ -110,7 +179,6 @@ namespace DatingApp.DataRepository
 
             return null;
         }
-
         //add a new profile
         public bool InsertProfile(Profile p)
         {

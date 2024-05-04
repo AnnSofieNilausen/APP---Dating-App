@@ -15,7 +15,7 @@ namespace DatingApp.DataRepository.Matches
             List<Profile> matches = new List<Profile>();
             for (int i = 0; i < ID.Count; i++)
             {
-                matches.Add(GetProfileById(ID[i]));
+                matches.Add(GetSafeProfileById(ID[i], true));
             }
 
            return matches;
@@ -31,7 +31,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL query to find mutual likes.
             // It selects other users who appear as matches for the given user and where the given user is also a match for them.
-            string query = "SELECT * FROM Matches WHERE Pid_1 OR Pid_2 = @UserId;
+            string query = "SELECT * FROM Matches WHERE (Pid_1 = @UserId) OR (Pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -68,7 +68,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
             // ensuring that all references to this match are removed.
-            string query = "DELETE FROM Matches WHERE (user_id = @UserId AND other_user_id = @MatchUserId) OR (user_id = @MatchUserId AND other_user_id = @UserId)";
+            string query = "DELETE FROM Matches WHERE (Pid_1 = @UserId AND Pid_2 = @MatchUserId) OR (Pid_1 = @MatchUserId AND Pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user IDs into the SQL command.
             Dictionary<string, object> parameters = new Dictionary<string, object>
