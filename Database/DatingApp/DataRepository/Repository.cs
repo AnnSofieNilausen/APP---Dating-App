@@ -71,7 +71,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = $"select * from profile where id = {id}";
+            cmd.CommandText = $"select * from profile where Pid = {id}";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -80,7 +80,7 @@ namespace DatingApp.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Profile s = new Profile(Convert.ToInt32(data["id"]))
+                    Profile s = new Profile(Convert.ToInt32(data["Pid"]))
                     {
                         FName = data["Fname"].ToInt()
                         FName = data["Fname"].ToString(),

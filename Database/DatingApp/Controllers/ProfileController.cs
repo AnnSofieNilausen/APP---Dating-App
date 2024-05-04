@@ -37,14 +37,14 @@ namespace DatingApp.Controllers
        
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody]Profile student)
+        public ActionResult Post([FromBody]Profile profile)
         {
-            if (student == null)
+            if (profile == null)
             {
                 return BadRequest("Profile info not correct");
             }
 
-            bool status = Repository.InsertStudent(student);
+            bool status = Repository.InsertStudent(profile);
             if (status)
             {
                 return Ok();
@@ -55,20 +55,20 @@ namespace DatingApp.Controllers
 
         // PUT api/values/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Profile student)
+        public ActionResult Put([FromBody] Profile profile)
         {
-            if (student == null)
+            if (profile == null)
             {
                 return BadRequest("Profile info not correct");
             }
 
-            Profile existinStudent = Repository.GetStudentById(student.ID);
-            if (existinStudent == null)
+            Profile existingprofile = Repository.GetProfileById(profile.ID);
+            if (existingprofile == null)
             {
-                return NotFound($"Profile with id {student.ID} not found");
+                return NotFound($"Profile with id {profile.ID} not found");
             }
 
-            bool status = Repository.UpdateStudent(student);
+            bool status = Repository.UpdateProfile(profile);
             if (status)
             {
                 return Ok();
@@ -81,13 +81,13 @@ namespace DatingApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Profile existingStudent = Repository.GetProfileById(id);
-            if (existingStudent == null)
+            Profile existingProfile = Repository.GetProfileById(id);
+            if (existingProfile == null)
             {
                 return NotFound($"Profile with id {id} not found");
             }
 
-            bool status = Repository.DeleteStudent(id);
+            bool status = Repository.DeleteProfile(id);
             if (status)
             {
                 return NoContent();
