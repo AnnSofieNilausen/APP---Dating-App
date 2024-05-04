@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj": {}
+    "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj": {}
   },
   "projects": {
-    "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj": {
+    "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj",
+        "projectUniqueName": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj",
         "projectName": "APApiDbS2024InClass",
-        "projectPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/APApiDbS2024InClass.csproj",
+        "projectPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj",
         "packagesPath": "/Users/annsofienilausen/.nuget/packages/",
-        "outputPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/Database/DatingApp/obj/",
+        "outputPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/annsofienilausen/.nuget/NuGet/NuGet.Config"
