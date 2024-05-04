@@ -16,7 +16,7 @@ namespace DatingApp.Model
 
         public Profile() { }
 
-		[JsonPropertyName("id")]
+		[JsonPropertyName("Pid")]
 		public int ID { get; set; }
 		[JsonPropertyName("FName")]
 		public string FName { get; set; }
@@ -24,10 +24,10 @@ namespace DatingApp.Model
 		public string LName { get; set; }
 		[JsonPropertyName("dob")]
 		public DateTime DOB { get; set; }
-		[JsonPropertyName("email")]
-		public string Email { get; set; }
-		[JsonPropertyName("phone")]
-		public string Phone { get; set; }
+		[JsonPropertyName("gender")]
+		public string gender { get; set; }
+		[JsonPropertyName("AoL")]
+		public string AoL { get; set; }
         [JsonPropertyName("username")]
         public string username { get; set; }
         [JsonPropertyName("password")]
@@ -44,6 +44,10 @@ namespace DatingApp.Model
         public string occupation { get; set; }
         [JsonPropertyName("pictures")]
         public string pictures { get; set; }
+        [JsonPropertyName("likes")]
+        public int likes { get; set; }
+        [JsonPropertyName("matches")]
+        public int matches { get; set; }
         [JsonPropertyName("instagram")]
         public string instagram { get; set; }
         [JsonPropertyName("snapchat")]

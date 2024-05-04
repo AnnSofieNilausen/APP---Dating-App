@@ -29,12 +29,25 @@ namespace DatingApp.DataRepository
                 {
                     Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FName = data["firstname"].ToString(),
-                        LName = data["lastname"].ToString(),
-                        StudyProgramID = (int)data["studyprogramid"],
-                        DOB = Convert.ToDateTime(data["dob"]),
-                        Email = data["email"].ToString(),
-                        Phone = data["phone"].ToString()
+
+                        FName = data["Fname"].ToString(),
+                        LName = data["Lname"].ToString(),
+                        DOB = Convert.ToDateTime(data["DoB"]),
+                        gender = data["Gender"].ToString(),
+                        AoL = data["AoL"].ToString(),
+                        username = data["Username"].ToString()
+                        sexualOrientation = data["Sexual_Orientation"].ToString(),
+                        bio = data["Bio"].ToString(),
+                        searchingFor = data["Searching_For"].ToString(),
+                        interests = data["Interests"].ToString(),
+                        occupation = data["Occupation"].ToString(),
+                        pictures = data["Pictures"].ToString(),
+                        likes = data["Likes"].ToString(),
+                        matches = data["Matches"].ToString(),
+                        instagram = data["Instagram"].ToString(),
+                        snapchat = data["Snapchat"].ToString()
+
+
                     };
 
                     students.Add(s);
@@ -58,7 +71,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = $"select * from student where id = {id}";
+            cmd.CommandText = $"select * from profile where id = {id}";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -69,12 +82,23 @@ namespace DatingApp.DataRepository
                 {
                     Profile s = new Profile(Convert.ToInt32(data["id"]))
                     {
-                        FirstName = data["firstname"].ToString(),
-                        LastName = data["lastname"].ToString(),
-                        StudyProgramID = (int)data["studyprogramid"],
-                        DOB = Convert.ToDateTime(data["dob"]),
-                        Email = data["email"].ToString(),
-                        Phone = data["phone"].ToString()
+                        FName = data["Fname"].ToInt()
+                        FName = data["Fname"].ToString(),
+                        LName = data["Lname"].ToString(),
+                        DOB = Convert.ToDateTime(data["DoB"]),
+                        gender = data["Gender"].ToString(),
+                        AoL = data["AoL"].ToString(),
+                        username = data["Username"].ToString()
+                        sexualOrientation = data["Sexual_Orientation"].ToString(),
+                        bio = data["Bio"].ToString(),
+                        searchingFor = data["Searching_For"].ToString(),
+                        interests = data["Interests"].ToString(),
+                        occupation = data["Occupation"].ToString(),
+                        pictures = data["Pictures"].ToString(),
+                        likes = data["Likes"].ToString(),
+                        matches = data["Matches"].ToString(),
+                        instagram = data["Instagram"].ToString(),
+                        snapchat = data["Snapchat"].ToString()
                     };
 
                     return s;
@@ -88,24 +112,36 @@ namespace DatingApp.DataRepository
         }
 
         //add a new student
-        public bool InsertProfile(Profile s)
+        public bool InsertProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
-insert into student
-(firstname,lastname, studyprogramid, dob, email, phone)
+insert into Profile
+(Fname,Lname, DoB, Gender, AoL, Username, Sexual_Orientation, Bio, Searching_For, Interests, Occupation, Pictures, Likes, Matches, Instagram, Snapchat)
 values
-(@firstname,@lastname, @studyprogramid, @dob, @email, @phone)
+(@firstname,@lastname, @dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
 ";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@firstname", NpgsqlDbType.Text, s.FirstName);
-            cmd.Parameters.AddWithValue("@lastname", NpgsqlDbType.Text, s.LastName);
-            cmd.Parameters.AddWithValue("@studyprogramid", NpgsqlDbType.Integer, s.StudyProgramID);
-            cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
-            cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Phone);
+            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FirstName);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LastName);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.searchingFor);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.matches);
+            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.instagram);
+            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.snapchat);
+            
 
             //will return true if all goes well
             bool result = InsertData(dbConn, cmd);
@@ -113,35 +149,44 @@ values
             return result;
         }
 
-        public bool UpdateProfile(Profile s)
+        public bool UpdateProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
 update profile set
-    firstname=@firstname,
-    lastname=@lastname,
-    studyprogramid=@studyprogramid,
-    dob=@dob,
-    email=@email,
-    phone=@phone
+    Fname=@Fname,
+    Lname=@Lname,
+    DoB=@DoB,
+    Gender=@Gender,
+    Username=@Username
 where
 id = @id";
 
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, s.FirstName);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, s.LastName);
-            cmd.Parameters.AddWithValue("@studyprogramid", NpgsqlDbType.Integer, s.StudyProgramID);
-            cmd.Parameters.AddWithValue("@dob", NpgsqlDbType.Date, s.DOB);
-            cmd.Parameters.AddWithValue("@email", NpgsqlDbType.Text, s.Email);
-            cmd.Parameters.AddWithValue("@phone", NpgsqlDbType.Text, s.Phone);
-            cmd.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, s.ID);
+            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FirstName);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LastName);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.searchingFor);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.matches);
+            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.instagram);
+            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.snapchat);
+
             { "@Fname", fname},
                 { "@Lname", lname},
                 { "@DoB", dob},
-                { "@Email", email},
-                { "@Phone", phone},
+                { "@Gender", gender},
+                { "@AoL", AoL},
                 { "@Username", username},
-                { "@Password", password},
                 { "@SexualOrientation", sexualOrientation},
                 { "@Bio", bio},
                 { "@SearchingFor", searchingFor},
@@ -159,8 +204,8 @@ id = @id";
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"
-delete from profile
-where id = @id
+delete from Profile
+where Pid = @id
 ";
 
             //adding parameters in a better way

@@ -4,10 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Controllers.Auth
 {
-    [HttpGet]
+    [HttpGet("Username")]
     public ActionResult Get()
     {
-        return Ok(Repository.GetProfiles());
+        public ActionResult Get(int id)
+        {
+             student = Repository.GetStudentById(id);
+            if (student == null)
+                return NotFound($"Profile with id {id} not found");
+
+            return Ok(student);
+        }
     }
 
 
