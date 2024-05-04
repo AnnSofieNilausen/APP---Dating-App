@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { ProfileService } from "/Users/annsofienilausen/Desktop/APP---Dating-App2/Angular2/src/app/services/profile.service";
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+
 
 @Component({
   selector: 'app-profile',
+  standalone: true,
+  providers: [provideNativeDateAdapter()],
+  imports: [MatDatepickerModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -11,7 +21,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup; // This FormGroup will contain our form data and validation rules
 
   constructor(
-    private profileService: ProfileService, // Inject the ProfileService for HTTP operations
+    private profileService: ProfileService, private router: Router, // Inject the ProfileService for HTTP operations
     private fb: FormBuilder // Inject FormBuilder for form creation
   ) 
   
