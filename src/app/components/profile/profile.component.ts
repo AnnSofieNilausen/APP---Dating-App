@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../services/ProfileService'; // Ensure the correct path to your service
+import { ProfileService } from "/Users/annsofienilausen/Desktop/APP---Dating-App2/Angular2/src/app/services/profile.service";
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +13,15 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService, // Inject the ProfileService for HTTP operations
     private fb: FormBuilder // Inject FormBuilder for form creation
-  ) {}
+  ) 
+  
+  {// Initialize the form group with default values and validators
+    this.profileForm = this.fb.group({
+      fname: ['', Validators.required],
+      lname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      bio: ['']
+    });}
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -46,6 +54,7 @@ export class ProfileComponent implements OnInit {
         .subscribe({
           next: () => console.log('Profile updated successfully!'),
           error: (err) => console.error('Failed to update profile', err)
+
         });
     } else {
       console.log('Form is not valid'); // Log or handle invalid form cases
