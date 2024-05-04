@@ -28,7 +28,7 @@ namespace DatingApp.Controllers
         public ActionResult Get(int id)
         {
             Profile profile = Repository.GetProfileById(id);
-            if profile == null)
+            if (profile == null)
                 return NotFound($"Profile with id {id} not found");
 
             return Ok(profile);
@@ -97,4 +97,6 @@ namespace DatingApp.Controllers
         }
     }
 }
+
+// Testing 
 
