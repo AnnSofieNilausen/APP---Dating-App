@@ -44,7 +44,13 @@ namespace DatingApp.DataRepository.Matches
             List<int> matches = new List<int>();
 
             // Execute the query and iterate over each data record returned.
-            foreach (IDataRecord record in GetData(parameters, query))
+            foreach (IDataRecord record in GetData(query, NpgsqlConnection(ConnectionString)){
+                Parameters =
+                {
+                new("@UserId", userId),
+                
+                }
+            })
             {
                 if (Convert.ToInt32(record["Pid_1"]) == userId){
                     matches.Add((int)record["Pid_2"]);
