@@ -37,6 +37,32 @@ namespace DatingApp.DataRepository
                 cmd.ExecuteNonQuery();
                 return true;
             }
+
+        //Lets us parse a get with Parameters
+            protected IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
+            {
+                using (var conn = new NpgsqlConnection(ConnectionString))
+                {
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        // Add parameters to the command.
+                        foreach (var param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
+                        conn.Open();
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                yield return reader;
+                                }
+                        }
+                    }
+                }
+            }
         }
-    }
+     }
 

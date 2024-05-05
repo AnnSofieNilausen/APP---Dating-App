@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d95e2527074d985fa5f5f35f1183f3ba2a83905")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52d9db517fe414d940057826992e1f06d3e17db4")]
 [assembly: System.Reflection.AssemblyProductAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
