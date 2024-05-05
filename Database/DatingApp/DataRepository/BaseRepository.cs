@@ -1,5 +1,12 @@
 ﻿using Npgsql;
 using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+using System.Data;
+
+
+>>>>>>> 4cf9758eaa909b20cf208862513495d48a0bf5a4
 namespace DatingApp.DataRepository
     {
         public class BaseRepository
