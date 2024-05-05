@@ -50,11 +50,11 @@ namespace DatingApp.DataRepository
 
                     };
 
-                    students.Add(s);
+                    profiles.Add(s);
 
                 }
 
-                return students;
+                return profiles;
             }
 
             return null;
@@ -193,8 +193,8 @@ values
 
             //adding parameters in a better way
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FirstName);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LastName);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
             cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
             cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);

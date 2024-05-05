@@ -44,3 +44,13 @@
 /Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/obj/Debug/net7.0/APApiDbS2024InClass.dll
 /Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/obj/Debug/net7.0/refint/APApiDbS2024InClass.dll
 /Users/annsofienilausen/Desktop/Skole noter/CBS/Master finals/Object oritented programming/Exam/Database/APP---Dating-App/Database/APApiDbS2024InClass/obj/Debug/net7.0/APApiDbS2024InClass.pdb
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.csproj.AssemblyReference.cache
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.GeneratedMSBuildEditorConfig.editorconfig
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.AssemblyInfoInputs.cache
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.AssemblyInfo.cs
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.csproj.CoreCompileInputs.cache
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.MvcApplicationPartsAssemblyInfo.cs
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.MvcApplicationPartsAssemblyInfo.cache
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.dll
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/refint/APApiDbS2024InClass.dll
+/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.pdb

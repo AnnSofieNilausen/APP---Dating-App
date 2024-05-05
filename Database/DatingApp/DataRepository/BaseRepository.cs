@@ -8,7 +8,8 @@ namespace DatingApp.DataRepository
     public class BaseRepository
     {
         // This string connects to the database.
-        internal const string ConnectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
+        internal const string ConnectionString = $"Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourPassword;";
+        NpgsqlConnectionStringBuilder
 
         /// <summary>
         /// Executes a SELECT SQL command with parameters and returns the data as a stream of IDataRecord.
