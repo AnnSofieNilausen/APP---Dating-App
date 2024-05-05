@@ -15,13 +15,13 @@ public class UserAuthentication : BaseRepository
     public bool AuthenticateUser(string username, string password)
     {
         // SQL query to check if the username and password combination exists, using parameters.
-        string query = "SELECT COUNT(*) FROM Login WHERE Username = @Username AND Password = @Password";
+        string query = "SELECT COUNT(*) FROM Login WHERE username = @username AND password = @password";
 
         // Prepare parameters for the query 
         Dictionary<string, object> parameters = new Dictionary<string, object>
         {
-            {"@Username", username},
-            {"@Password", password}
+            {"@username", username},
+            {"@password", password}
         };
 
         // Call the base class method to execute the query with parameters and get the results.
@@ -39,7 +39,16 @@ public class UserAuthentication : BaseRepository
     }
     public int GetUserIdFromLogin(string username, string password)
     {
+        string query1 = "SELECT pid FROM Profile WHERE username = @username AND password = @password";
+        // Prepare parameters for the query 
+        Dictionary<string, object> parameters = new Dictionary<string, object>
+        {
+            {"@username", username},
+            {"@password", password}
+        };
 
+        // Call the base class method to execute the query with parameters and get the results.
+        var records = GetDataDyn(query1, parameters);
 
 
     }

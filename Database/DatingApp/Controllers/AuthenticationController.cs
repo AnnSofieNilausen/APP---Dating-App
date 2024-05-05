@@ -16,7 +16,7 @@ namespace DatingApp.Controllers.Auth
         }
 
 
-        [HttpGet("Username")]
+        [HttpGet("username")]
            
                 public ActionResult Get(string username, string password)
                 {

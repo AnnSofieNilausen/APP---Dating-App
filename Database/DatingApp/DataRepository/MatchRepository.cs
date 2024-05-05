@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Data;
 using DatingApp.Model.P;
 
-namespace DatingApp.DataRepository.Matches
+namespace DatingApp.DataRepository.matches
 {
     public class MatchRepository: Repository
     {
-        //Get Match profiles from List of IDs
+        //Get match profiles from List of IDs
         public List<Profile> GetMatchProfiles(int userId)
         {
             List<int> ID = GetMatchIds(userId);
@@ -23,7 +23,7 @@ namespace DatingApp.DataRepository.Matches
         }
 
         /// <summary>
-        /// Retrieves a list of mutual matches for a specified user by querying the Matches table.
+        /// Retrieves a list of mutual matches for a specified user by querying the matches table.
         /// This method finds users that have mutually liked each other.
         /// </summary>
         /// <param name="userId">The user ID to retrieve matches for.</param>
@@ -32,7 +32,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL query to find mutual likes.
             // It selects other users who appear as matches for the given user and where the given user is also a match for them.
-            string query = "SELECT * FROM Matches WHERE (Pid_1 = @UserId) OR (Pid_2 = @UserId)";
+            string query = "SELECT * FROM matches WHERE (pid_1 = @UserId) OR (pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -46,13 +46,13 @@ namespace DatingApp.DataRepository.Matches
             // Execute the query and iterate over each data record returned.
             foreach (IDataRecord record in GetDataDyn(query, parameters))
             {
-                if (Convert.ToInt32(record["Pid_1"]) == userId)
+                if (Convert.ToInt32(record["pid_1"]) == userId)
                 {
-                    matches.Add((int)record["Pid_2"]);
+                    matches.Add((int)record["pid_2"]);
                 }
                 else
                 {
-                    matches.Add((int)record["Pid_1"]);
+                    matches.Add((int)record["pid_1"]);
                 }
             }
 
@@ -61,7 +61,7 @@ namespace DatingApp.DataRepository.Matches
         }
 
         /// <summary>
-        /// Deletes a match between the specified user and another user from the Matches table.
+        /// Deletes a match between the specified user and another user from the matches table.
         /// </summary>
         /// <param name="userId">The user ID of the first user.</param>
         /// <param name="matchUserId">The user ID of the match to be deleted.</param>
@@ -70,7 +70,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
             // ensuring that all references to this match are removed.
-            string query = "DELETE FROM Matches WHERE (Pid_1 = @UserId AND Pid_2 = @MatchUserId) OR (Pid_1 = @MatchUserId AND Pid_2 = @UserId)";
+            string query = "DELETE FROM matches WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user IDs into the SQL command.
             Dictionary<string, object> parameters = new Dictionary<string, object>
