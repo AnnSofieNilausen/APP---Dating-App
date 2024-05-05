@@ -9,9 +9,9 @@ namespace DatingApp.Model
 			ID = id;
 		}
 
-        public Profile(int fname)
+        public Profile(string fname)
         {
-            Fname = fname;
+            username = fname;
         }
 
         public Profile() { }

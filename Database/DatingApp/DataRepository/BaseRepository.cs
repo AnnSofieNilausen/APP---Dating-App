@@ -1,70 +1,44 @@
 ﻿using Npgsql;
 using System;
+<<<<<<< HEAD
+=======
 using System.Collections.Generic;
 using System.Data;
 
 
+>>>>>>> 4cf9758eaa909b20cf208862513495d48a0bf5a4
 namespace DatingApp.DataRepository
-{
-    public class BaseRepository
     {
-        // This string connects to the database.
-        internal const string ConnectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
-
-        /// <summary>
-        /// Executes a SELECT SQL command with parameters and returns the data as a stream of IDataRecord.
-        /// </summary>
-        /// <param name="query">The parameterized SQL query string.</param>
-        /// <param name="parameters">The parameters to use in the query.</param>
-        /// <returns>An enumerable of IDataRecord, allowing for reading results one row at a time.</returns>
-        protected IEnumerable<IDataRecord> GetData(string query, Dictionary<string, object> parameters)
+        public class BaseRepository
         {
-            using (var conn = new NpgsqlConnection(ConnectionString))
+            protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourPassword;";
+
+            protected NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
             {
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    // Add parameters to the command.
-                    foreach (var param in parameters)
-                    {
-                        cmd.Parameters.AddWithValue(param.Key, param.Value);
-                    }
-
-                    conn.Open();
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            yield return reader;
-                        }
-                    }
-                }
+                conn.Open();
+                return cmd.ExecuteReader();
             }
-        }
 
-        /// <summary>
-        /// Executes an INSERT, UPDATE, or DELETE SQL command with parameters.
-        /// </summary>
-        /// <param name="query">The parameterized SQL command string.</param>
-        /// <param name="parameters">The parameters to use in the command.</param>
-        /// <returns>The number of rows affected by the command.</returns>
-        protected int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
-        {
-            using (var conn = new NpgsqlConnection(ConnectionString))
+            protected bool InsertData(NpgsqlConnection conn, NpgsqlCommand cmd)
             {
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    // Add parameters to the command.
-                    foreach (var param in parameters)
-                    {
-                        cmd.Parameters.AddWithValue(param.Key, param.Value);
-                    }
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
 
-                    conn.Open();
+            protected bool UpdateData(NpgsqlConnection conn, NpgsqlCommand cmd)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
 
-                    return cmd.ExecuteNonQuery();
-                }
+            protected bool DeleteData(NpgsqlConnection conn, NpgsqlCommand cmd)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                return true;
             }
         }
     }
-}
+

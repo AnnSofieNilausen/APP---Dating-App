@@ -7,7 +7,7 @@ namespace DatingApp.DataRepository
 {
     public class Repository : BaseRepository
     {
-        //Get a list of students
+        //Get a list of Profiles
         public List<Profile> GetProfiles()
         {
             //creating empty list to fill it from database
@@ -35,22 +35,26 @@ namespace DatingApp.DataRepository
                         DOB = Convert.ToDateTime(data["DoB"]),
                         gender = data["Gender"].ToString(),
                         AoL = data["AoL"].ToString(),
-                        username = data["Username"].ToString()
+                        username = data["Username"].ToString(),
                         sexualOrientation = data["Sexual_Orientation"].ToString(),
                         bio = data["Bio"].ToString(),
                         searchingFor = data["Searching_For"].ToString(),
                         interests = data["Interests"].ToString(),
                         occupation = data["Occupation"].ToString(),
                         pictures = data["Pictures"].ToString(),
-                        likes = data["Likes"].ToString(),
-                        matches = data["Matches"].ToString(),
+                        likes = Convert.ToInt32(data["Likes"]),
+                        matches = Convert.ToInt32(data["Matches"]),
                         instagram = data["Instagram"].ToString(),
                         snapchat = data["Snapchat"].ToString()
 
 
                     };
 
+<<<<<<< HEAD
+                    profiles.Add(s);
+=======
                     profiles.Add(p);
+>>>>>>> 4cf9758eaa909b20cf208862513495d48a0bf5a4
 
                 }
 
@@ -86,6 +90,11 @@ namespace DatingApp.DataRepository
                     {
                         Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                         {
+<<<<<<< HEAD
+                           
+=======
+                            Pid = data["Pid"].ToInt(),
+>>>>>>> 4cf9758eaa909b20cf208862513495d48a0bf5a4
                             FName = data["Fname"].ToString(),
                             LName = data["Lname"].ToString(),
                             DOB = Convert.ToDateTime(data["DoB"]),
@@ -104,7 +113,7 @@ namespace DatingApp.DataRepository
                     {
                         Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                         {
-                            FName = data["Fname"].ToInt(),
+           
                             FName = data["Fname"].ToString(),
                             LName = data["Lname"].ToString(),
                             DOB = Convert.ToDateTime(data["DoB"]),
@@ -191,8 +200,8 @@ values
 
             //adding parameters in a better way
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FirstName);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LastName);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
             cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
             cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);
