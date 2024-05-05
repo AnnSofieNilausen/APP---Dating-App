@@ -2,6 +2,7 @@ using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.DataRepository.Matches;
+using DatingApp.Model.P;
 
 namespace DatingApp.Controllers.Match
 {
