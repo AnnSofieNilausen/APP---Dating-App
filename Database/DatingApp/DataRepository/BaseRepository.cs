@@ -63,6 +63,24 @@ namespace DatingApp.DataRepository
                     }
                 }
             }
+        protected int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+        {
+            using (var conn = new NpgsqlConnection(ConnectionString))
+            {
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    // Add parameters to the command.
+                    foreach (var param in parameters)
+                    {
+                        cmd.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+
+                    conn.Open();
+
+                    return cmd.ExecuteNonQuery();
+                }
+            }
         }
+    }
      }
 
