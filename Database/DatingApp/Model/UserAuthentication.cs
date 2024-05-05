@@ -25,7 +25,7 @@ public class UserAuthentication : BaseRepository
         };
 
         // Call the base class method to execute the query with parameters and get the results.
-        var records = GetData(query, parameters);
+        var records = GetDataDyn(query, parameters);
 
         // Check if the count of users with the provided username and password is greater than 0.
         foreach (IDataRecord record in records)

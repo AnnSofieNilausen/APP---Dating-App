@@ -11,7 +11,7 @@ namespace DatingApp.DataRepository
         {
             protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourPassword;";
 
-            protected NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
+            protected NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlC ommand cmd)
             {
                 conn.Open();
                 return cmd.ExecuteReader();
