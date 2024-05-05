@@ -15,7 +15,7 @@ public class UserAuthentication : BaseRepository
     public bool AuthenticateUser(string username, string password)
     {
         // SQL query to check if the username and password combination exists, using parameters.
-        string query = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND Password = @Password";
+        string query = "SELECT COUNT(*) FROM Login WHERE Username = @Username AND Password = @Password";
 
         // Prepare parameters for the query 
         Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -25,11 +25,7 @@ public class UserAuthentication : BaseRepository
         };
 
         // Call the base class method to execute the query with parameters and get the results.
-<<<<<<< HEAD
         var records = GetDataDyn(query, parameters);
-=======
-        var records = ExecuteNonQuery(query, parameters);
->>>>>>> 33ddc19ace5a66cd5da49339370cfd49a2913b52
 
         // Check if the count of users with the provided username and password is greater than 0.
         foreach (IDataRecord record in records)
@@ -40,5 +36,11 @@ public class UserAuthentication : BaseRepository
 
         // Return false if no user matches the provided credentials.
         return false;
+    }
+    public int GetUserIdFromLogin(string username, string password)
+    {
+
+
+
     }
 }
