@@ -27,7 +27,7 @@ namespace DatingApp.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Profile s = new Profile(Convert.ToInt32(data["Pid"]))
+                    Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                     {
 
                         FName = data["Fname"].ToString(),
@@ -50,11 +50,11 @@ namespace DatingApp.DataRepository
 
                     };
 
-                    students.Add(s);
+                    profiles.Add(p);
 
                 }
 
-                return students;
+                return profiles;
             }
 
             return null;
@@ -86,7 +86,7 @@ namespace DatingApp.DataRepository
                     {
                         Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                         {
-                            FName = data["Fname"].ToInt(),
+                            Pid = data["Pid"].ToInt(),
                             FName = data["Fname"].ToString(),
                             LName = data["Lname"].ToString(),
                             DOB = Convert.ToDateTime(data["DoB"]),
