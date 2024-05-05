@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-namespace DatingApp.Model
+namespace DatingApp.Model.P
 {
 	public class Profile
 	{

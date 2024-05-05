@@ -1,7 +1,7 @@
 using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
-using DatingApp.DataRepository.Matches
+using DatingApp.DataRepository.Matches;
 
 namespace DatingApp.Controllers.Match
 {
@@ -14,9 +14,10 @@ namespace DatingApp.Controllers.Match
         {
             Repository = new Repository();
         }
+        MatchRepository matchrepository = new MatchRepository();
 
         // GET: api/Profile/5
-        [HttpGet()
+        [HttpGet()]
         public ActionResult Get()
         {
             return BadRequest("No Profile Found");
@@ -26,7 +27,8 @@ namespace DatingApp.Controllers.Match
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            Profile profile = MatchRepository.GetMatchProfiles(id);
+            List<Profile> profile = new List<Profile>();
+            profile = matchrepository.GetMatchProfiles(id);
             if (profile == null)
                 return NotFound($"Profile with id {id} not found");
 
@@ -84,46 +86,25 @@ namespace DatingApp.Controllers.Match
             if (existingProfile == null)
             {
                 return NotFound($"Profile with id {userID} not found");
-            }else if (existingForeignProfile == matcherID)
+            }else if (existingForeignProfile.ID == matcherID)
             {
                 return NotFound($"Profile with id {matcherID} not found");
             }
 
-            bool status = MatchRepository.DeleteMatch(userID, matcherID);
+            bool status = matchrepository.DeleteMatch(userID, matcherID);
             if (status)
             {
                 return NoContent();
             }
 
-            return BadRequest($"Unable to delete Match with id {id}");
+            return BadRequest($"Unable to delete Match with id {userID}");
         }
     }
 }
 
-//Delete
-[HttpDelete("{id}")]
-        public ActionResult Delete(int id)
-        {
-            Profile existingprofile = Repository.GetProfileById(id);
-            if (existingprofile == null)
-            {
-                return NotFound($"Profile with id {id} not found");
-            }
-
-            bool status = Repository.DeleteProfile(id);
-            if (status)
-            {
-                return NoContent();
-            }
-
-            return BadRequest($"Unable to delete profile with id {id}");
-        }
 
 
 
 
-    }
 
-
-}
-
+  

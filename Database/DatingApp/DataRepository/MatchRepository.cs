@@ -3,6 +3,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using DatingApp.Model.P;
 
 namespace DatingApp.DataRepository.Matches
 {
@@ -31,7 +32,7 @@ namespace DatingApp.DataRepository.Matches
         {
             // SQL query to find mutual likes.
             // It selects other users who appear as matches for the given user and where the given user is also a match for them.
-            string query = "SELECT * FROM Matches WHERE (Pid_1 = @UserId) OR (Pid_2 = @UserId)";
+            String query = "SELECT * FROM Matches WHERE (Pid_1 = @UserId) OR (Pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -43,9 +44,9 @@ namespace DatingApp.DataRepository.Matches
             List<int> matches = new List<int>();
 
             // Execute the query and iterate over each data record returned.
-            foreach (IDataRecord record in GetData(query, parameters))
+            foreach (IDataRecord record in GetData(parameters, query))
             {
-                if record["Pid_1"] = userId{
+                if (Convert.ToInt32(record["Pid_1"]) == userId){
                     matches.Add((int)record["Pid_2"]);
                 }
                 else
