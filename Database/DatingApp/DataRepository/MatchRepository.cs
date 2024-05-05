@@ -80,7 +80,7 @@ namespace DatingApp.DataRepository.Matches
             };
 
             // Execute the delete command and get the number of rows affected.
-            int affectedRows = GetDataDyn(query, parameters);
+            int affectedRows = ExecuteNonQuery(query, parameters);
 
             // Return true if at least one row was affected, indicating a successful delete.
             return affectedRows > 0;
