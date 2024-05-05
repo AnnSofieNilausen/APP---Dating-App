@@ -86,7 +86,6 @@ namespace DatingApp.DataRepository
                     {
                         Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                         {
-                            Pid = data["Pid"].ToInt(),
                             FName = data["Fname"].ToString(),
                             LName = data["Lname"].ToString(),
                             DOB = Convert.ToDateTime(data["DoB"]),
@@ -99,7 +98,7 @@ namespace DatingApp.DataRepository
                             instagram = data["Instagram"].ToString(),
                             snapchat = data["Snapchat"].ToString()
                         };
-
+                        return p;
                     }
                     else
                     {
@@ -117,10 +116,9 @@ namespace DatingApp.DataRepository
                             occupation = data["Occupation"].ToString(),
                             pictures = data["Pictures"].ToString(),                          
                         };
-
+                        return p;
                     }
                     
-                    return p;
 
                 }
 
