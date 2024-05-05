@@ -1,6 +1,7 @@
 ﻿using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
+using DatingApp.Model.P;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -98,5 +99,4 @@ namespace DatingApp.Controllers
     }
 }
 
-// Testing 
 

@@ -1,49 +1,34 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using DatingApp.DataRepository;
 using Npgsql;
+using DatingApp.Model.P;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatingApp.Model
 {
     public class Match_feed : BaseRepository
     {
+        Repository repo = new Repository();
         //Connecting string for the database
         private string connectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
         //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
         //Method to display a profile for the current user
         // Method to retrieve a random profile ID from the repositary
-        private int GetRandomProfile()
+        private Profile GetRandomProfile()
         {
-            string query = "SELECT PID FROM profile ORDER BY RAND() LIMIT 1"
-        
-        using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
+            string query = "SELECT PID FROM profile ORDER BY RAND() LIMIT 1";
+
+            using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
             {
-                using ((NpgsqlCommand command = new NpgsqlCommand(query, connection)) {
-
-                Dictionary<string, object> Matchfeed_profile = new Dictionary<string, object>
-            {
-                {"@PiD", pid},
-                {"@Fname", fname},
-                {"@Lname", lname},
-                {"@DoB", dob},
-                {"@gender", gender},
-                {"@AoL", AoL},
-                {"@Username", username},
-                {"@Password", password},
-                {"@SexualOrientation", sexualOrientation},
-                {"@Bio", bio},
-                {"@SearchingFor", searchingFor},
-                {"@Interests", interests},
-                {"@Occupation", occupation},
-                {"@Pictures", pictures},
-                {"@Instagram", instagram ?? ""},
-                {"@Snapchat", snapchat ?? ""}
-            };
-
-
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    connection.Open();
+                    int randid = Convert.ToInt32(command.ExecuteScalar());
+                    Profile Matchfeed_profile = repo.GetSafeProfileById(randid, false);
+                    return Matchfeed_profile;
                 }
             }
-
-            return Matchfeed_profile;
+            
         }
 
         //Method to check whether the current user has already been liked by the displayed profile
@@ -62,10 +47,10 @@ namespace DatingApp.Model
             try
             {
                 //Establish connection to the PostgreSQL database
-                using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
 
-                    using ((NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                    {
                         // Add parameters to the command to prevent SQL injection
                         command.Parameters.AddWithValue("@UserId", liker);
@@ -107,7 +92,7 @@ namespace DatingApp.Model
                     WHERE L1.UserId = @UserId
                 ";
 
-                using (NpgsqlConnection connection = new NpgsqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
@@ -122,7 +107,9 @@ namespace DatingApp.Model
                         return count > 0;
                     }
                 }
-             catch (Exception ex)
+            }
+
+            catch (Exception ex)
             {
                 //Handle exceptions, such as database connection errors
                 Console.WriteLine($"Error checking for match: {ex.Message}");
