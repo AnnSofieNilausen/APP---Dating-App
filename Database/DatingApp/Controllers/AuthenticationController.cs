@@ -3,6 +3,7 @@ using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.DataRepository;
 using DatingApp.Model.Auth;
+using DatingApp.Model.P;
 
 namespace DatingApp.Controllers.Auth
 {
@@ -33,7 +34,9 @@ namespace DatingApp.Controllers.Auth
                 int profid = userAuthentication.GetUserIdFromLogin(username, password);
                 if (profid == 0) { return BadRequest("Wrong password or username"); }
 
-                else { return repository.GetProfileById(profid); }
+                else {
+                    Profile profile = Repository.GetProfileById(profid); 
+                    return profile; }
             }
 
             else
