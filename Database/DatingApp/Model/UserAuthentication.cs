@@ -65,13 +65,10 @@ namespace DatingApp.Model.Auth
                 if (record != null && Convert.ToInt32(record[0]) > 0)
                 {
                     return Convert.ToInt32(record[0]);
-                    break;
                 }
-                else 
-                {
                     return 0;
-                }
-                break;
+                
+                
             }
 
 
