@@ -13,14 +13,12 @@ namespace DatingApp.DataRepository
 
         protected NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
-<<<<<<< HEAD
+
             conn.Open();
             return cmd.ExecuteReader();
         }
-=======
-            protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; username=postgres; password=yourPassword;";
->>>>>>> 9eee6bd589db4f848aae85d8e409853132ce3e88
 
+         
         protected bool InsertData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();

@@ -11,8 +11,8 @@ namespace DatingApp.Controllers.Auth
 
         public AuthenticationController()
         {
-            Repository = new Repository();
-            UserAuthentication = new UserAuthentication();
+            Repository repository = new Repository();
+            UserAuthentication userAuthentication = new UserAuthentication();
         }
 
 
@@ -20,7 +20,7 @@ namespace DatingApp.Controllers.Auth
 
         public ActionResult Get(string username, string password)
         {
-            bool access = UserAuthentication.AuthenticateUser(username, password);
+            bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
                 return BadRequest($"Wrong password or username");
@@ -29,14 +29,15 @@ namespace DatingApp.Controllers.Auth
             else if (access == true)
             {
                 int profid = UserAuthentication.GetUserIdFromLogin(username, password);
-                if (profid == 0) return BadRequest("Wrong password or username")
-                        else return Repository.GetProfileById(profid);
+                if (profid == 0) { return BadRequest("Wrong password or username"); }
+
+                else { return Repository.GetProfileById(profid); }
             }
 
             else
             {
-                return BadRequest($"Something Went Wrong")
-                }
+                return BadRequest($"Something Went Wrong");
+            }
 
         }
 
