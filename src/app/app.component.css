@@ -1,36 +1,45 @@
 /* Toolbar styling */
 mat-toolbar {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
- }
- 
- .spacer {
-   flex: 1 1 auto;
- }
- 
- /* Menu and toggle button */
- mat-icon-button {
-   margin-left: 10px;
- }
- 
- /* Slide toggle styling */
- mat-slide-toggle {
-   margin: 0 10px;
- }
- 
- /* Overall body styling for consistent background and text colors */
- body {
-   margin: 0;
-   font-family: 'Roboto', sans-serif;
-   background-color: #f4f4f4;
-   color: #333;
- }
- 
- /* Link styling for navigation */
- a {
-   text-decoration: none;
-   color: inherit;
- }
- 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #A8DADC; /* Pastel blue for a friendly and inviting look */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Light shadow for a subtle depth */
+  color: #333; /* Keeping text dark for contrast and readability */
+  padding: 0 20px; /* Adequate padding for visual comfort */
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Menu and toggle button */
+mat-icon-button {
+  margin-left: 10px;
+}
+
+/* Slide toggle styling */
+mat-slide-toggle {
+  margin: 0 10px;
+}
+
+/* Overall body styling for consistent background and text colors */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4; /* Soft light background to keep things light and airy */
+  color: #333; /* Dark text for ease of reading */
+}
+
+/* Link styling for navigation */
+a {
+  text-decoration: none;
+  color: inherit; /* Ensuring links blend seamlessly with other text */
+}
+
+/* Adjustments for responsiveness and interaction */
+@media (max-width: 768px) {
+  mat-toolbar {
+    padding: 0 15px; /* Slightly less padding on smaller screens */
+  }
+}

@@ -1,56 +1,61 @@
-/* Styling for the login container */
+/* General styling for the login container */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-  }
-  
-  form {
-    padding: 20px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  button.login-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button.login-btn:hover {
-    background-color: #003875;
-  }
-  
-  /* Responsive adjustments for smaller screens */
-  @media (max-width: 600px) {
-    form {
-      width: 90%;
-    }
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #EAE7DC; /* Light beige background for a warm and soft look */
+}
+
+form {
+  padding: 40px;
+  background: #FFFFFF; /* Pure white background for the form */
+  border: 1px solid #C9C5BA; /* Light gray border for subtle definition */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  width: 300px; /* Ensures the form doesn’t stretch too wide */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333333; /* Soft dark grey for text */
+  font-weight: 500; /* Slightly bolder label for better readability */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #B3B6B7; /* Neutral grey for input borders */
+  border-radius: 4px;
+  box-sizing: border-box; /* Makes sure padding doesn’t affect the width */
+}
+
+button.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #8D8741; /* Olive green, pulled from the couch color for buttons */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button.login-btn:hover {
+  background-color: #727438; /* A darker shade for hover effect, deeper olive */
+}
+
+.error-message {
+  color: #D33F49; /* Soft red for error messages, make sure it's not too harsh */
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+

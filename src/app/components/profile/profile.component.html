@@ -4,13 +4,63 @@
     <mat-label>First Name</mat-label>
     <input matInput [(ngModel)]="userProfile.firstName" name="firstName" required>
   </mat-form-field>
-  
+
   <mat-form-field appearance="fill">
     <mat-label>Last Name</mat-label>
     <input matInput [(ngModel)]="userProfile.lastName" name="lastName" required>
   </mat-form-field>
 
-  <!-- Add more fields similarly -->
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="userProfile.email" name="email" type="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="userProfile.dob" name="dob">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <input matInput [(ngModel)]="userProfile.gender" name="gender">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Area of Life (AoL)</mat-label>
+    <input matInput [(ngModel)]="userProfile.aol" name="aol">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="userProfile.username" name="username">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Sexual Orientation</mat-label>
+    <input matInput [(ngModel)]="userProfile.sexualOrientation" name="sexualOrientation">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Bio</mat-label>
+    <textarea matInput [(ngModel)]="userProfile.bio" name="bio"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Searching For</mat-label>
+    <input matInput [(ngModel)]="userProfile.searchingFor" name="searchingFor">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Interests</mat-label>
+    <input matInput [(ngModel)]="userProfile.interests" name="interests">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Occupation</mat-label>
+    <input matInput [(ngModel)]="userProfile.occupation" name="occupation">
+  </mat-form-field>
 
   <button type="submit" mat-raised-button color="primary">Update Profile</button>
 </form>

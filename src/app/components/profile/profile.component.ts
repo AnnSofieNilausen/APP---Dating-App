@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [CommonModule, MatFormField, MatLabel, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatFormField, MatLabel, FormsModule, ReactiveFormsModule, MatDatepickerModule],
 })
 export class ProfileComponent implements OnInit {
   @Input() id!: number;  // Input property to receive id from parent component

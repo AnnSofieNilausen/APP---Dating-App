@@ -10,8 +10,8 @@ export const routes: Routes = [
   { path: 'mutual-matches', component: MutualMatchesListComponent },
   { path: 'potential-matches', component: MatchingComponent },
   {path: 'login', component: LoginComponent},
-  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '', redirectTo: '/profile', pathMatch: 'full' } // Redirect to profile by default
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/profile', pathMatch: 'full' } // Redirect to profile by default
 ];
 
 @NgModule({
