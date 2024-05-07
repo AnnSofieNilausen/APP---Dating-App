@@ -86,3 +86,14 @@ C:/Users/jona9/source/repos/APP---Dating-App/Database/DatingApp/obj/Debug/net7.0
 /Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.csproj.CopyComplete
 /Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/APApiDbS2024InClass.genruntimeconfig.cache
 /Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/Debug/net7.0/ref/APApiDbS2024InClass.dll
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.csproj.AssemblyReference.cache
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.AssemblyInfoInputs.cache
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.AssemblyInfo.cs
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.csproj.CoreCompileInputs.cache
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.sourcelink.json
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.dll
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\refint\APApiDbS2024InClass.dll
+C:\Users\jona9\source\repos\APP---Dating-App\Database\DatingApp\obj\Debug\net7.0\APApiDbS2024InClass.pdb
