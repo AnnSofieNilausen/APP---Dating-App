@@ -8,11 +8,13 @@ namespace DatingApp.Controllers.Auth
 {
     public class AuthenticationController : Controller
     {
+        private Repository Repository { get; }
+        private UserAuthentication userAuthentication;
 
         public AuthenticationController()
         {
-            Repository repository = new Repository();
-            UserAuthentication userAuthentication = new UserAuthentication();
+            repository = new Repository();
+            userAuthentication = new UserAuthentication();
         }
 
 
