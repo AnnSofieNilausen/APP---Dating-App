@@ -1,4 +1,7 @@
 export interface MutualMatch {
+userId: any;
+commonInterests: any;
+userPhotoUrl: any;
     matchId: bigint; // Identifier for the match
     pid1: bigint;    // Profile ID of the first user
     pid2: bigint;    // Profile ID of the second user

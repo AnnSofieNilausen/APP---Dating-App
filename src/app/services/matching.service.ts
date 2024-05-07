@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class MatchingService {
 
   constructor(private http: HttpClient) { }
 
-  // Fetches the next potential match
-  getNextProfile(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/next`);
+  // Fetches a list of potential matches
+  getProfiles(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/profiles`);
   }
 
   // Sends a 'like' for a specific profile ID

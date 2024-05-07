@@ -1,58 +1,67 @@
-/* Body styles */
-body{
-    font-family: Ariel, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0; /*Remove default margin*/
-    padding: 0; /*Remove default padding*/
-}
-
-/*Container styles*/
-.matches-container{
-    max-width:600px;
-    margin: 20px auto; 
-    padding: 20px;
-}
-
-/*Form input styles*/
-form{
-    display: grid; /*Use CSS grid for layout*/
-    grid-gap: 10px; /*Add some space between grid items*/
-}
-
-label{
-    font-weight: bold; /*Make labels bold*/
-}
-
-input[type="text"],
-input[type="number"],
-select,
-textarea{
-    width: 100%; /*Take up full width*/
-    padding: 8px;
+/* Styling for the mutual matches list */
+.matches-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  .match-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-textarea{
-    resize: vertical;
-}
-
-/*Button styles*/
-button[type="submit"]{
-    background-color: #4caf50;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .user-info {
+    flex-grow: 1;
+  }
+  
+  .user-info h3 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .user-info p {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .view-profile-btn {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-button[type="submit"]:hover{
-    background-color: #45a049;
-}
-
-/*Additional styles*/
-option{
-    font-size: 16px; /*Set font size for dropdown options*/
-}
+    outline: none;
+  }
+  
+  .view-profile-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .match-item {
+      flex-direction: column;
+      align-items: start;
+    }
+  
+    .view-profile-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  

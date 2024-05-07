@@ -1,3 +1,36 @@
-.mat-color {
-   background-color: aqua;
-}
+/* Toolbar styling */
+mat-toolbar {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+ }
+ 
+ .spacer {
+   flex: 1 1 auto;
+ }
+ 
+ /* Menu and toggle button */
+ mat-icon-button {
+   margin-left: 10px;
+ }
+ 
+ /* Slide toggle styling */
+ mat-slide-toggle {
+   margin: 0 10px;
+ }
+ 
+ /* Overall body styling for consistent background and text colors */
+ body {
+   margin: 0;
+   font-family: 'Roboto', sans-serif;
+   background-color: #f4f4f4;
+   color: #333;
+ }
+ 
+ /* Link styling for navigation */
+ a {
+   text-decoration: none;
+   color: inherit;
+ }
+ 

@@ -1,0 +1,28 @@
+/* Styling for the navigation bar */
+.navigation-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #333;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  a:hover, a.active {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .navigation-bar {
+      flex-direction: column;
+    }
+  }
+  

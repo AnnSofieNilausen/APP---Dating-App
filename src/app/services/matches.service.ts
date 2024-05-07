@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MutualMatch } from '../model/mutual-match';
+import { MutualMatch } from '../models/mutual-match';
+import { CommonModule } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'

@@ -1,39 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { MatchingService } from '../services/matching.service'; // Ensure the correct path
+import { MatchingService } from '../../services/matching.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-matching',
-  templateUrl: './matching.component.html',
-  styleUrls: ['./matching.component.css']
+  standalone: true,
+  templateUrl: './potential-matches-list.component.html',
+  styleUrls: ['./potential-matches-list.component.css'],
+  imports: [CommonModule]
 })
 export class MatchingComponent implements OnInit {
-  currentProfile: any = null;
+  profiles: any[] = [];
 
   constructor(private matchingService: MatchingService) { }
 
   ngOnInit() {
-    this.loadNextProfile();
+    this.loadProfiles();
   }
 
-  // Loads the next profile to be displayed
-  loadNextProfile(): void {
-    this.matchingService.getNextProfile().subscribe({
-      next: (profile) => this.currentProfile = profile,
-      error: (err) => console.error('Failed to load profile', err)
+  // Loads the profiles to be displayed
+  loadProfiles(): void {
+    this.matchingService.getProfiles().subscribe({
+      next: (profiles) => this.profiles = profiles,
+      error: (err) => console.error('Failed to load profiles', err)
     });
   }
 
   // Handles the 'Like' action
-  likeProfile(): void {
-    this.matchingService.likeProfile(this.currentProfile.id).subscribe({
-      complete: () => this.loadNextProfile() // Load next profile after liking
+  likeProfile(profileId: number): void {
+    this.matchingService.likeProfile(profileId).subscribe({
+      complete: () => this.profiles = this.profiles.filter(p => p.id !== profileId)
     });
   }
 
   // Handles the 'Dislike' action
-  dislikeProfile(): void {
-    this.matchingService.dislikeProfile(this.currentProfile.id).subscribe({
-      complete: () => this.loadNextProfile() // Load next profile after disliking
+  dislikeProfile(profileId: number): void {
+    this.matchingService.dislikeProfile(profileId).subscribe({
+      complete: () => this.profiles = this.profiles.filter(p => p.id !== profileId)
     });
   }
 }

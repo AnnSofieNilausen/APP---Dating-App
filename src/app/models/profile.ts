@@ -1,4 +1,8 @@
 export interface UserProfile {
+    id: any;
+    firstName: any;
+    lastName: any;
+    email: any;
     pid: bigint;
     fname: string;
     lname?: string;       // '?' indicates that the property is optional and can be null

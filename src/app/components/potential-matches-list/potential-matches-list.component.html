@@ -1,15 +1,18 @@
-<div *ngIf="currentProfile; else noProfileTemplate">
-    <h2>{{ currentProfile.name }}, {{ currentProfile.age }}</h2>
-    <p>Interests: {{ currentProfile.interests }}</p>
-    <p>Area of Living: {{ currentProfile.aol }}</p>
-    <p *ngIf="currentProfile.searchingFor">Searching For: {{ currentProfile.searchingFor }}</p>
-    <p *ngIf="currentProfile.bio">Bio: {{ currentProfile.bio }}</p>
-    <p *ngIf="currentProfile.occupation">Occupation: {{ currentProfile.occupation }}</p>
-    <button (click)="likeProfile()">Like</button>
-    <button (click)="dislikeProfile()">Dislike</button>
-  </div>
-  
-  <ng-template #noProfileTemplate>
-    <p>No more profiles available.</p>
-  </ng-template>
-  
+<div *ngIf="profiles.length; else noProfiles">
+  <ul class="profiles-list">
+    <li *ngFor="let profile of profiles" class="profile-item">
+      <img [src]="profile.pictureUrl" alt="{{profile.name}}'s profile picture" class="profile-picture">
+      <div class="profile-info">
+        <h3>{{ profile.name }}</h3>
+        <p>{{ profile.description }}</p>
+      </div>
+      <div class="actions">
+        <button (click)="likeProfile(profile.id)" class="like-btn">Like</button>
+        <button (click)="dislikeProfile(profile.id)" class="dislike-btn">Dislike</button>
+      </div>
+    </li>
+  </ul>
+</div>
+<ng-template #noProfiles>
+  <p>No profiles available to display. Please check back later.</p>
+</ng-template>

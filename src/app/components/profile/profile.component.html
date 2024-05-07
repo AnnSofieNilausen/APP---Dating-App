@@ -1,62 +1,16 @@
-<html lang="en">
-  <head>
-    <!--The following meta tags specify important settings for the html document:
-      1) Charset Declaration: Specifies UTF-8 encoding for proper character interpretation.
-      2) Viewport Setting: Controls how the browser renders the webpage on different devices. -->
-      <meta charset ="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title> User Profile Editing</title>
-      <!--Link to the CSS file for the profile component-->
-      <link rel="stylesheet" href="profile.component.css">
-  </head>
-  <body>
-    <h1>Edit User Profile</h1>
-    <!--Form for editing user profile, submits on "submit" event-->
-    <form (submit)="onSubmit()">
-     <div>
-      <label for="fname">First Name:</label>
-      <!-- Input field for first name, uses two-way data binding with ngModel -->
-      <input type="text" id="fname" [(ngModel)]="user.fname" name="fname" required>
-      <!-- Validation message for first name-->
-      <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="validation-message">
-        <div *ngIf="fname.errors.required">
-          First Name is required.
-        </div>
-      </div>
-     </div>
-    <div>
-      <label for="lname">Last Name:</label>
-      <!-- Input field for last name, uses two-way data binding with ngModel -->
-      <input type="text" id="lname" [(ngModel)]="user.lname" name="lname" required>
-      <!--Validation message for last name-->
-       <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="validation-message">
-        <div *ngIf="lname.errors.required">
-            Last name is required.
-        </div>
-       </div>
-    </div>
-    <div>
-      <label for="email">Email:</label>
-      <!--Input field for email, uses two-way data binding with ngModel -->
-      <input type="email" id="email"[(ngModel)]="user.email" name="email" required #email="ngModel">
-      <!--Validation message for email-->
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="validation-message">
-        <div *ngIf="email.errors.required">
-          Email is required.
-        </div>
-        <div *ngIf="email.errors.email">
-          Please enter a valid email address.
-        </div>
-      </div>
-    </div>
-    <div>
-      <label for="bio">Bio:</label>
-      <!-- Textarea for bio, uses two-way data binding with ngModel -->
-      <textarea id="bio" [(ngModel)]="user.bio" name="bio"></textarea>
-    </div>
-    <!-- Submit button for the form -->
-    <button type="submit">Update Profile</button>
-  </form>
-</body>
-</html>
+<!-- profile.component.html -->
+<form (ngSubmit)="updateProfile()">
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="userProfile.firstName" name="firstName" required>
+  </mat-form-field>
   
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="userProfile.lastName" name="lastName" required>
+  </mat-form-field>
+
+  <!-- Add more fields similarly -->
+
+  <button type="submit" mat-raised-button color="primary">Update Profile</button>
+</form>
