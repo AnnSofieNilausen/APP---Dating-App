@@ -4,13 +4,12 @@ using Npgsql;
 using DatingApp.Model.P;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace DatingApp.Model
+namespace DatingApp.Model.Matchfeed
 {
     public class Match_feed : BaseRepository
     {
         Repository repo = new Repository();
-        //Connecting string for the database
-        private string connectionString = "Host=localhost; Port=5432; Database=Dating App; username=yourUsername; password=yourPassword;";
+       
         //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
         //Method to display a profile for the current user
         // Method to retrieve a random profile ID from the repositary
