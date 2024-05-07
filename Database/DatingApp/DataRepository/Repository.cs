@@ -19,7 +19,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = "select * from Profile";
+            cmd.CommandText = "select * from profile";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -31,22 +31,22 @@ namespace DatingApp.DataRepository
                     Profile p = new Profile(Convert.ToInt32(data["Pid"]))
                     {
 
-                        FName = data["Fname"].ToString(),
-                        LName = data["Lname"].ToString(),
+                        FName = data["fname"].ToString(),
+                        LName = data["lname"].ToString(),
                         DOB = Convert.ToDateTime(data["DoB"]),
-                        gender = data["Gender"].ToString(),
-                        AoL = data["AoL"].ToString(),
-                        username = data["Username"].ToString(),
-                        sexualOrientation = data["Sexual_Orientation"].ToString(),
-                        bio = data["Bio"].ToString(),
-                        searchingFor = data["Searching_For"].ToString(),
-                        interests = data["Interests"].ToString(),
-                        occupation = data["Occupation"].ToString(),
-                        pictures = data["Pictures"].ToString(),
-                        likes = Convert.ToInt32(data["Likes"]),
-                        matches = Convert.ToInt32(data["Matches"]),
-                        instagram = data["Instagram"].ToString(),
-                        snapchat = data["Snapchat"].ToString()
+                        gender = data["gender"].ToString(),
+                        AoL = data["aol"].ToString(),
+                        username = data["username"].ToString(),
+                        sexualOrientation = data["sexual_orientation"].ToString(),
+                        bio = data["bio"].ToString(),
+                        searchingFor = data["searching_for"].ToString(),
+                        interests = data["interests"].ToString(),
+                        occupation = data["occupation"].ToString(),
+                        pictures = data["pictures"].ToString(),
+                        likes = Convert.ToInt32(data["likes"]),
+                        matches = Convert.ToInt32(data["matches"]),
+                        instagram = data["instagram"].ToString(),
+                        snapchat = data["snapchat"].ToString()
 
 
                     };
@@ -78,7 +78,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = $"select * from Profile where Pid = {id}";
+            cmd.CommandText = $"select * from profile where pid = {id}";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -89,38 +89,38 @@ namespace DatingApp.DataRepository
                 {
                     if (match)
                     {
-                        Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                        Profile p = new Profile(Convert.ToInt32(data["pid"]))
                         {
                  
-                            FName = data["Fname"].ToString(),
-                            LName = data["Lname"].ToString(),
-                            DOB = Convert.ToDateTime(data["DoB"]),
+                            fname = data["fname"].ToString(),
+                            lname = data["lname"].ToString(),
+                            dob = Convert.ToDateTime(data["dob"]),
                             gender = data["Gender"].ToString(),
-                            AoL = data["AoL"].ToString(),                                                       
-                            bio = data["Bio"].ToString(),                            
-                            interests = data["Interests"].ToString(),
-                            occupation = data["Occupation"].ToString(),
-                            pictures = data["Pictures"].ToString(),
-                            instagram = data["Instagram"].ToString(),
-                            snapchat = data["Snapchat"].ToString()
+                            aol = data["aol"].ToString(),                                                       
+                            bio = data["bio"].ToString(),                            
+                            interests = data["interests"].ToString(),
+                            occupation = data["occupation"].ToString(),
+                            pictures = data["pictures"].ToString(),
+                            instagram = data["instagram"].ToString(),
+                            snapchat = data["snapchat"].ToString()
                         };
                         return p;
                     }
                     else
                     {
-                        Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                        Profile p = new Profile(Convert.ToInt32(data["pid"]))
                         {
            
-                            FName = data["Fname"].ToString(),
-                            LName = data["Lname"].ToString(),
-                            DOB = Convert.ToDateTime(data["DoB"]),
+                            fname = data["fname"].ToString(),
+                            lname = data["lname"].ToString(),
+                            dob = Convert.ToDateTime(data["dob"]),
                             gender = data["Gender"].ToString(),
-                            AoL = data["AoL"].ToString(),
-                            bio = data["Bio"].ToString(),
-                            searchingFor = data["Searching_For"].ToString(),
-                            interests = data["Interests"].ToString(),
-                            occupation = data["Occupation"].ToString(),
-                            pictures = data["Pictures"].ToString(),                          
+                            aol = data["aol"].ToString(),
+                            bio = data["bio"].ToString(),
+                            searchingFor = data["searching_for"].ToString(),
+                            interests = data["interests"].ToString(),
+                            occupation = data["occupation"].ToString(),
+                            pictures = data["pictures"].ToString(),                          
                         };
                         return p;
                     }
@@ -143,7 +143,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = $"select * from Profile where Pid = {id}";
+            cmd.CommandText = $"select * from profile where pid = {id}";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);
@@ -152,25 +152,25 @@ namespace DatingApp.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                    Profile p = new Profile(Convert.ToInt32(data["pid"]))
                     {
                 
-                        FName = data["Fname"].ToString(),
-                        LName = data["Lname"].ToString(),
-                        DOB = Convert.ToDateTime(data["DoB"]),
-                        gender = data["Gender"].ToString(),
-                        AoL = data["AoL"].ToString(),
-                        username = data["Username"].ToString(),
-                        sexualOrientation = data["Sexual_Orientation"].ToString(),
-                        bio = data["Bio"].ToString(),
-                        searchingFor = data["Searching_For"].ToString(),
-                        interests = data["Interests"].ToString(),
-                        occupation = data["Occupation"].ToString(),
-                        pictures = data["Pictures"].ToString(),
-                        likes = Convert.ToInt32(data["Likes"]),
-                        matches = Convert.ToInt32(data["Matches"]),
-                        instagram = data["Instagram"].ToString(),
-                        snapchat = data["Snapchat"].ToString()
+                        fname = data["fname"].ToString(),
+                        lname = data["lname"].ToString(),
+                        dob = Convert.ToDateTime(data["dob"]),
+                        gender = data["gender"].ToString(),
+                        aol = data["aol"].ToString(),
+                        username = data["username"].ToString(),
+                        sexualOrientation = data["sexual_orientation"].ToString(),
+                        bio = data["bio"].ToString(),
+                        searchingFor = data["searching_for"].ToString(),
+                        interests = data["interests"].ToString(),
+                        occupation = data["occupation"].ToString(),
+                        pictures = data["pictures"].ToString(),
+                        likes = Convert.ToInt32(data["likes"]),
+                        matches = Convert.ToInt32(data["matches"]),
+                        instagram = data["instagram"].ToString(),
+                        snapchat = data["snapchat"].ToString()
                     };
 
                     return p;
@@ -192,11 +192,11 @@ namespace DatingApp.DataRepository
 
             //adding parameters in a better way
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FName);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LName);
-            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
             cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
-            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.aol);
             cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
             cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
             cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);
@@ -242,11 +242,11 @@ where
 Pid = @Pid";
 
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.FName);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.LName);
-            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.DOB);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
             cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
-            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.AoL);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.aol);
             cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
             cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
             cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);

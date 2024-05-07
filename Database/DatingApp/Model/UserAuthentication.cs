@@ -63,7 +63,8 @@ namespace DatingApp.Model.Auth
                 {
                     return Convert.ToInt32(record[0]);
                 }
-                    return 0;
+
+                return 0;
                 
                 
             }
