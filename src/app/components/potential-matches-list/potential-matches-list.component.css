@@ -1,76 +1,70 @@
-.profiles-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* Styling for the profile container */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  width: 300px; /* Set a fixed square size */
+  height: 300px; /* Set a fixed square size */
+  position: relative;
+}
+
+.profile-picture {
+  width: 100%;
+  height: auto;
+  max-height: 150px; /* Adjust based on your preference */
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.action-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+}
+
+.like-btn {
+  right: -60px; /* Adjust based on your layout */
+  background-color: #4CAF50;
+}
+
+.dislike-btn {
+  left: -60px; /* Adjust based on your layout */
+  background-color: #f44336;
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
   }
-  
-  .profile-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+
+  .action-btn {
+    position: static;
+    transform: none;
+    margin: 5px;
   }
-  
-  .profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
-  
-  .profile-info h3 {
-    margin: 0 0 5px 0;
-    color: #333;
-  }
-  
-  .profile-info p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #666;
-  }
-  
-  .actions {
-    margin-left: auto;
-  }
-  
+
   .like-btn, .dislike-btn {
-    padding: 10px 20px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
+    width: 100%;
   }
-  
-  .like-btn {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .dislike-btn {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  /* Extra styling for responsiveness and aesthetic improvements */
-  @media (max-width: 600px) {
-    .profile-item {
-      flex-direction: column;
-      align-items: start;
-    }
-  
-    .actions {
-      margin-left: 0;
-      margin-top: 10px;
-    }
-  
-    .profile-picture {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-  }
-  
+}

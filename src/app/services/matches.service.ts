@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   providedIn: 'root'
 })
 export class MatchesService {
-  private apiUrl = 'http://localhost:5057/api/matches'; // Replace with our API URL
+  private apiUrl = 'http://localhost:5057/api/matche';
 
   constructor(private http: HttpClient) {}
 

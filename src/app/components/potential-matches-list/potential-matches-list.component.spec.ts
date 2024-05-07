@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PotentialMatchesListComponent } from './potential-matches-list.component';
+import { MatchingComponent } from './potential-matches-list.component';
 
 describe('PotentialMatchesListComponent', () => {
-  let component: PotentialMatchesListComponent;
-  let fixture: ComponentFixture<PotentialMatchesListComponent>;
+  let component: MatchingComponent;
+  let fixture: ComponentFixture<MatchingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PotentialMatchesListComponent]
+      imports: [MatchingComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PotentialMatchesListComponent);
+    fixture = TestBed.createComponent(MatchingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

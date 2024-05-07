@@ -21,18 +21,36 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService, private router: Router) {}
 
   ngOnInit() {
-    if (this.id) {
-      this.profileService.getProfile(this.id).subscribe({
-        next: (profile) => {
-          this.userProfile = profile;
-        },
-        error: (err) => console.error('Failed to load profile', err)
-      });
-    }
+    this.loadProfile();
+  }
+
+  loadProfile() {
+    this.profileService.getProfile(this.id).subscribe({
+      next: (profile) => {
+        this.userProfile = profile;
+      },
+      error: (err) => console.error('Failed to load profile', err)
+    });
   }
 
   updateProfile() {
-    // Update profile logic here
-    console.log('Profile updated');
+    this.profileService.updateProfile(this.userProfile).subscribe({
+      next: () => {
+        console.log('Profile updated successfully');
+        // Optionally redirect or perform additional actions
+        this.router.navigate(['/profile']);  // Example redirection
+      },
+      error: (err) => console.error('Error updating profile:', err)
+    });
+  }
+
+  deleteProfile() {
+    this.profileService.deleteProfile(this.userProfile.id).subscribe({
+      next: () => {
+        console.log('Profile deleted successfully');
+        this.router.navigate(['/']);  // Redirect to home or another appropriate route
+      },
+      error: (err) => console.error('Error deleting profile:', err)
+    });
   }
 }

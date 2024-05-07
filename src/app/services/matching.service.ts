@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   providedIn: 'root'
 })
 export class MatchingService {
-  private apiUrl = 'http://your-api-url.com/api/matching'; // Adjust as needed
+  private apiUrl = 'http://your-api-url.com/api/matchfeed'; 
 
   constructor(private http: HttpClient) { }
 

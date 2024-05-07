@@ -15,7 +15,7 @@ export class ProfileService {
 
   // Fetches the profile of a user by their ID
   getProfile(userId: number): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/profileController/${userId}`);
+    return this.http.get<UserProfile>(`${this.apiUrl}/profile/${userId}`);
   }
 
   // Updates the user's profile with new data

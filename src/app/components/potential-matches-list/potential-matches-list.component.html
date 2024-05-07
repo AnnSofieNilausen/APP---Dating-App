@@ -1,17 +1,15 @@
-<div *ngIf="profiles.length; else noProfiles">
-  <ul class="profiles-list">
-    <li *ngFor="let profile of profiles" class="profile-item">
+<div *ngIf="profiles.length; else noProfiles" class="profile-container">
+  <ng-container *ngFor="let profile of profiles">
+    <div class="profile-card">
+      <button (click)="dislikeProfile(profile.id)" class="dislike-btn action-btn">Dislike</button>
       <img [src]="profile.pictureUrl" alt="{{profile.name}}'s profile picture" class="profile-picture">
       <div class="profile-info">
         <h3>{{ profile.name }}</h3>
         <p>{{ profile.description }}</p>
       </div>
-      <div class="actions">
-        <button (click)="likeProfile(profile.id)" class="like-btn">Like</button>
-        <button (click)="dislikeProfile(profile.id)" class="dislike-btn">Dislike</button>
-      </div>
-    </li>
-  </ul>
+      <button (click)="likeProfile(profile.id)" class="like-btn action-btn">Like</button>
+    </div>
+  </ng-container>
 </div>
 <ng-template #noProfiles>
   <p>No profiles available to display. Please check back later.</p>

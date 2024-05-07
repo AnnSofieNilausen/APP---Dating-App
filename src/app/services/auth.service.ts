@@ -1,31 +1,38 @@
+// auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:5057/api/login'; // Adjust as needed for your API
+  private apiUrl = 'http://localhost:5057/api/authentication'; // Base API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.loginUrl, { username, password }, { headers });
+  // Attempts to log the user in with provided credentials
+  login(username: string, password: string): Observable<boolean> {
+    const loginPayload = { username, password };
+    return this.http.post<any>(`${this.apiUrl}/login`, loginPayload).pipe(
+      tap(res => {
+        // Redirect to the profile page after successful login
+        this.router.navigate(['/profile']);
+        return true;
+      }),
+      catchError(error => {
+        // Log the error and throw a user-friendly message
+        console.error('Login error:', error);
+        return throwError(() => new Error('Login failed, please try again.'));
+      })
+    );
   }
 
-  // Assuming token storage in local storage for simplicity
-  saveToken(token: string): void {
-    localStorage.setItem('userToken', token);
-  }
-
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('userToken');
-  }
-
+  // Logs the user out
   logout(): void {
-    localStorage.removeItem('userToken');
+    // Navigate to the login page after logout
+    this.router.navigate(['/login']);
   }
 }

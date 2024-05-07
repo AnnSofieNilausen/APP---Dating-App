@@ -1,16 +1,14 @@
-<div *ngIf="mutualMatches && mutualMatches.length > 0; else noMatches">
-    <ul class="matches-list">
-      <li *ngFor="let match of mutualMatches" class="match-item">
-        <img [src]="match.userPhotoUrl" alt="{{match.username}}'s photo" class="user-photo">
-        <div class="user-info">
-          <h3>{{ match.username }}</h3>
-          <p>{{ match.commonInterests.length }} common interests: {{ match.commonInterests.join(', ') }}</p>
-        </div>
-        <button class="view-profile-btn" (click)="viewProfile(match.userId)">View Profile</button>
-      </li>
-    </ul>
+<!-- mutual-matches-list.component.html -->
+<div *ngIf="mutualMatches.length; else noMatches" class="matches-grid">
+  <div *ngFor="let match of mutualMatches" class="match-card">
+    <img [src]="match.userPhotoUrl" alt="{{match.username}}'s photo" class="user-photo">
+    <div class="user-info">
+      <h3>{{ match.fname }} {{ match.lname }}</h3>
+      <p>{{ match.commonInterests.join(', ') }}</p>
+    </div>
+    <button class="delete-match-btn" (click)="deleteMatch(match.matchId)">Delete Match</button>
   </div>
-  <ng-template #noMatches>
-    <p>No mutual matches found. Try expanding your network!</p>
-  </ng-template>
-  
+</div>
+<ng-template #noMatches>
+  <p>No mutual matches found. Try expanding your network!</p>
+</ng-template>

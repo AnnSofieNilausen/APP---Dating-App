@@ -1,67 +1,60 @@
-/* Styling for the mutual matches list */
-.matches-list {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 800px;
+/* mutual-matches-list.component.css */
+.matches-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 20px; /* Spacing between cards */
+  padding: 20px;
+  max-width: 1200px; /* Limiting max width for better control */
+  margin: 0 auto; /* Centering grid */
+}
+
+.match-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items vertically */
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  position: relative; /* Needed for absolute positioning of the delete button */
+}
+
+.user-photo {
+  width: 100%; /* Full width of the card */
+  height: auto;
+  border-radius: 50%; /* Circle shape */
+  margin-bottom: 10px;
+}
+
+.user-info {
+  text-align: center;
+  width: 100%; /* Use full width of the card */
+}
+
+.user-info h3, .user-info p {
+  margin: 5px 0; /* Small vertical margin, no horizontal */
+}
+
+.delete-match-btn {
+  padding: 10px 20px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  bottom: 10px; /* Positioned at the bottom inside the card */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+.delete-match-btn:hover {
+  background-color: #c9302c;
+}
+
+@media (max-width: 768px) {
+  .matches-grid {
+    grid-template-columns: 1fr; /* One column on smaller screens */
   }
-  
-  .match-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .user-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
-  
-  .user-info {
-    flex-grow: 1;
-  }
-  
-  .user-info h3 {
-    margin: 0;
-    color: #333;
-  }
-  
-  .user-info p {
-    font-size: 0.9em;
-    color: #666;
-  }
-  
-  .view-profile-btn {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .view-profile-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive styling */
-  @media (max-width: 768px) {
-    .match-item {
-      flex-direction: column;
-      align-items: start;
-    }
-  
-    .view-profile-btn {
-      width: 100%;
-      margin-top: 10px;
-    }
-  }
-  
+}
