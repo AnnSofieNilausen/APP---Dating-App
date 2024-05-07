@@ -116,7 +116,7 @@ namespace DatingApp.Model.Matchfeed
             }
         }
         //pull foreign ID from liked persons liked and check if like is mutual
-        //if true create match and push it through repository
+        //if true create match and push it through Repository
         //delete like on both IDs in Repository
         //if false return false
 
@@ -138,7 +138,7 @@ namespace DatingApp.Model.Matchfeed
 
 
         //check if like is match call IsMatch function
-        //if return false add like to like list through repository
+        //if return false add like to like list through Repository
         //return false
         //if true return true
     }
