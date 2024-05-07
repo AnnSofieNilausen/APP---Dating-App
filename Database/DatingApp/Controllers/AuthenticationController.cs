@@ -1,7 +1,6 @@
 using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
-using DatingApp.DataRepository;
 using DatingApp.Model.Auth;
 using DatingApp.Model.P;
 
@@ -10,7 +9,7 @@ namespace DatingApp.Controllers.Auth
     public class AuthenticationController : Controller
     {
         private Repository repository { get; }
-        private UserAuthentication userAuthentication;
+        private readonly UserAuthentication userAuthentication;
 
         public AuthenticationController()
         {

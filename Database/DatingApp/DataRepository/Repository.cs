@@ -28,14 +28,14 @@ namespace DatingApp.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Profile p = new Profile(Convert.ToInt32(data["Pid"]))
+                    Profile p = new(Convert.ToInt32(data["Pid"]))
                     {
 
-                        FName = data["fname"].ToString(),
-                        LName = data["lname"].ToString(),
-                        DOB = Convert.ToDateTime(data["DoB"]),
+                        fname = data["fname"].ToString(),
+                        lname = data["lname"].ToString(),
+                        dob = Convert.ToDateTime(data["DoB"]),
                         gender = data["gender"].ToString(),
-                        AoL = data["aol"].ToString(),
+                        aol = data["aol"].ToString(),
                         username = data["username"].ToString(),
                         sexualOrientation = data["sexual_orientation"].ToString(),
                         bio = data["bio"].ToString(),
@@ -70,9 +70,6 @@ namespace DatingApp.DataRepository
         //Match = false, get profile with limited information
         public Profile GetSafeProfileById(int id, bool match)
         {
-            //creating empty list to fill it from database
-            var profile = new List<Profile>();
-
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
 
@@ -89,13 +86,13 @@ namespace DatingApp.DataRepository
                 {
                     if (match)
                     {
-                        Profile p = new Profile(Convert.ToInt32(data["pid"]))
+                        Profile p = new(Convert.ToInt32(data["pid"]))
                         {
                  
                             fname = data["fname"].ToString(),
                             lname = data["lname"].ToString(),
                             dob = Convert.ToDateTime(data["dob"]),
-                            gender = data["Gender"].ToString(),
+                            gender = data["gender"].ToString(),
                             aol = data["aol"].ToString(),                                                       
                             bio = data["bio"].ToString(),                            
                             interests = data["interests"].ToString(),
@@ -108,13 +105,13 @@ namespace DatingApp.DataRepository
                     }
                     else
                     {
-                        Profile p = new Profile(Convert.ToInt32(data["pid"]))
+                        Profile p = new(Convert.ToInt32(data["pid"]))
                         {
            
                             fname = data["fname"].ToString(),
                             lname = data["lname"].ToString(),
                             dob = Convert.ToDateTime(data["dob"]),
-                            gender = data["Gender"].ToString(),
+                            gender = data["gender"].ToString(),
                             aol = data["aol"].ToString(),
                             bio = data["bio"].ToString(),
                             searchingFor = data["searching_for"].ToString(),
@@ -134,10 +131,7 @@ namespace DatingApp.DataRepository
         }
         //get matchfeed or matched profile(removed sensitive info)
         public Profile GetProfileById(int id)
-        {
-            //creating empty list to fill it from database
-            var profile = new List<Profile>();
-
+        { 
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
 
@@ -152,7 +146,7 @@ namespace DatingApp.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Profile p = new Profile(Convert.ToInt32(data["pid"]))
+                    Profile p = new(Convert.ToInt32(data["pid"]))
                     {
                 
                         fname = data["fname"].ToString(),
@@ -187,11 +181,10 @@ namespace DatingApp.DataRepository
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = @"insert into Profile (Fname,Lname, DoB, Gender, AoL, Username, Sexual_Orientation, Bio, Searching_For, Interests, Occupation, Pictures, Likes, Matches, Instagram, Snapchat) values (@firstname,@lastname, @dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
+            cmd.CommandText = @"insert into profile (fname,lname, dob, gender, aol, username, sexual_orientation, bio, searching_for, interests, occupation, pictures, likes, matches, instagram, snapchat) values (@firstname,@lastname, @dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
 ";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
             cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
             cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
@@ -221,27 +214,27 @@ namespace DatingApp.DataRepository
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"update profile set
-    Fname=@Fname,
-    Lname=@Lname,
-    DoB=@DoB,
-    Gender=@Gender,
-    AoL=@AoL,
-    Username=@Username,
-    Sexual_Orientation=@Sexual_Orientation,
-    Bio=@Bio,
-    Searching_For=@Searching_For,
-    Interests=@Interests,
-    Occupation=@Occupation,
-    Pictures=@Pictures,
-    Likes=@Likes,
-    Matches=@Matches,
-    Snapchat=@Snapchat,
-    Instagram=@Instagram
+    fname=@Fname,
+    lname=@Lname,
+    dob=@DoB,
+    gender=@Gender,
+    aol=@AoL,
+    username=@Username,
+    sexual_orientation=@Sexual_Orientation,
+    bio=@Bio,
+    searching_for=@Searching_For,
+    interests=@Interests,
+    occupation=@Occupation,
+    pictures=@Pictures,
+    likes=@Likes,
+    matches=@Matches,
+    snapchat=@Snapchat,
+    instagram=@Instagram
     
 where
-Pid = @Pid";
+pid = @Pid";
 
-            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, p.ID);
+
             cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
             cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
@@ -282,7 +275,7 @@ Pid = @Pid";
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = @"delete from Profile where Pid = @Pid";
+            cmd.CommandText = @"delete from profile where pid = @Pid";
 
             //adding parameters in a better way
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, id);

@@ -19,11 +19,11 @@ namespace DatingApp.Model.Auth
             string query = "SELECT COUNT(*) FROM login WHERE username = @username AND password = @password";
 
             // Prepare parameters for the query 
-            Dictionary<string, object> parameters = new Dictionary<string, object>
-        {
+            Dictionary<string, object> parameters = new()
+            {
             {"@username", username},
             {"@password", password}
-        };
+            };
 
 
         // Call the base class method to execute the query with parameters and get the results.
@@ -49,11 +49,11 @@ namespace DatingApp.Model.Auth
         {
             string query1 = "SELECT pid FROM profile,login WHERE profile.username = @username AND login.username = @username AND login.password = @password";
             // Prepare parameters for the query 
-            Dictionary<string, object> parameters = new Dictionary<string, object>
-        {
+            Dictionary<string, object> parameters = new()
+            {
             {"@username", username},
             {"@password", password}
-        };
+            };
 
             // Call the base class method to execute the query with parameters and get the results.
             var records = GetDataDyn(query1, parameters);
