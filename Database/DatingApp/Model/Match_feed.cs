@@ -10,13 +10,13 @@ namespace DatingApp.Model
     {
         Repository repo = new Repository();
         //Connecting string for the database
-        private string connectionString = "Host=localhost; Port=5432; Database=Dating App; Username=yourUsername; Password=yourPassword;";
+        private string connectionString = "Host=localhost; Port=5432; Database=Dating App; username=yourUsername; password=yourPassword;";
         //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
         //Method to display a profile for the current user
         // Method to retrieve a random profile ID from the repositary
         private Profile GetRandomProfile()
         {
-            string query = "SELECT PID FROM profile ORDER BY RAND() LIMIT 1";
+            string query = "SELECT pid FROM profile ORDER BY RAND() LIMIT 1";
 
             using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
             {
@@ -37,11 +37,11 @@ namespace DatingApp.Model
             bool isLiked = false;
 
             //SQL query to check if the current user has liked the displayed profile
-            //Pid_1 = Liker, Pid_2 = Liked
+            //pid_1 = Liker, pid_2 = Liked
             string query = @"
             SELECT COUNT(*)
-            FROM Likes
-            WHERE Pid_1 = @UserId AND Pid_2 = @ProfileId
+            FROM likes
+            WHERE pid_1 = @UserId AND pid_2 = @ProfileId
         ";
 
             try
@@ -87,8 +87,8 @@ namespace DatingApp.Model
                 //SQL query to check if a match exists
                 string query = @"
                     SELECT COUNT(*)
-                    FROM Likes AS L1
-                    JOIN Likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
+                    FROM likes AS L1
+                    JOIN likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
                     WHERE L1.UserId = @UserId
                 ";
 

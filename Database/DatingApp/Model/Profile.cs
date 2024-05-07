@@ -16,18 +16,18 @@ namespace DatingApp.Model.P
 
         public Profile() { }
 
-		[JsonPropertyName("Pid")]
+		[JsonPropertyName("pid")]
 		public int ID { get; set; }
-		[JsonPropertyName("FName")]
-		public string FName { get; set; }
-		[JsonPropertyName("LName")]
-		public string LName { get; set; }
+		[JsonPropertyName("fname")]
+		public string fname { get; set; }
+		[JsonPropertyName("lname")]
+		public string lname { get; set; }
 		[JsonPropertyName("dob")]
-		public DateTime DOB { get; set; }
+		public DateTime dob { get; set; }
 		[JsonPropertyName("gender")]
 		public string gender { get; set; }
-		[JsonPropertyName("AoL")]
-		public string AoL { get; set; }
+		[JsonPropertyName("aol")]
+		public string aol { get; set; }
         [JsonPropertyName("username")]
         public string username { get; set; }
         [JsonPropertyName("password")]

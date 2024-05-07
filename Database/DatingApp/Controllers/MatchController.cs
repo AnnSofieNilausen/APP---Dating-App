@@ -1,10 +1,10 @@
 using DatingApp.DataRepository;
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
-using DatingApp.DataRepository.Matches;
+using DatingApp.DataRepository.matches;
 using DatingApp.Model.P;
 
-namespace DatingApp.Controllers.Match
+namespace DatingApp.Controllers.match
 {
     [Route("api/[controller]")]
     public class MatchController : Controller
@@ -24,7 +24,7 @@ namespace DatingApp.Controllers.Match
             return BadRequest("No Profile Found");
         }
 
-        // GET api/Matches/5
+        // GET api/matches/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -98,7 +98,7 @@ namespace DatingApp.Controllers.Match
                 return NoContent();
             }
 
-            return BadRequest($"Unable to delete Match with id {userID}");
+            return BadRequest($"Unable to delete match with id {userID}");
         }
     }
 }
