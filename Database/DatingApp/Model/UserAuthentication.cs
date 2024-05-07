@@ -32,7 +32,10 @@ namespace DatingApp.Model.Auth
             foreach (IDataRecord record in records)
             {
                 if (record != null && Convert.ToInt32(record[0]) > 0)
+                {
                     return true;
+                }
+                   
             }
 
             // Return false if no user matches the provided credentials.
@@ -53,9 +56,15 @@ namespace DatingApp.Model.Auth
             foreach (IDataRecord record in records)
             {
                 if (record != null && Convert.ToInt32(record[0]) > 0)
+                {
                     return Convert.ToInt32(record[0]);
-                break
-            else return 0;
+                    break
+                }
+                else 
+                {
+                    return 0;
+                }
+                break;
             }
 
 
