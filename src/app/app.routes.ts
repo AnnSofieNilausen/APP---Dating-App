@@ -1,16 +1,18 @@
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '../app/components/login/login.component';
-import { MutualMatchesListComponent } from '../app/components/mutual-matches-list/mutual-matches-list.component';
-import { MatchingComponent } from '../app/components/potential-matches-list/potential-matches-list.component';
-import { ProfileComponent } from '../app/components/profile/profile.component';
-import { provideRouter } from '@angular/router';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MutualMatchesListComponent } from './components/mutual-matches-list/mutual-matches-list.component';
+import { MatchingComponent } from './components/potential-matches-list/potential-matches-list.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent, title: 'Login Page'},
-  { path: 'mutual-matches', component: MutualMatchesListComponent, title: 'List of matches' },
-  { path: 'potential-matches', component: MatchingComponent, title: 'Find a Match' },
-  { path: 'profile', component: ProfileComponent, title: 'Profile' },
-  { path: 'navigation', component: NavigationComponent, title: 'Menu' },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'mutual-matches', component: MutualMatchesListComponent },
+  { path: 'potential-matches', component: MatchingComponent },
+  { path: '', redirectTo: '/profile', pathMatch: 'full' } // Redirect to profile by default
 ];
 
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

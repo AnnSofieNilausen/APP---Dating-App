@@ -1,6 +1,7 @@
+<!-- app.component.html -->
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
-  <span class="spacer"></span> <!-- This will push the menu and toggle to the right -->
+  <span class="spacer"></span>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -9,11 +10,14 @@
       <mat-icon>person</mat-icon>
       <span>Profile</span>
     </button>
-    <button mat-menu-item routerLink="/settings">
-      <mat-icon>settings</mat-icon>
-      <span>Settings</span>
+    <button mat-menu-item routerLink="/mutual-matches">
+      <mat-icon>favorite</mat-icon>
+      <span>Mutual Matches</span>
+    </button>
+    <button mat-menu-item routerLink="/potential-matches">
+      <mat-icon>search</mat-icon>
+      <span>Potential Matches</span>
     </button>
   </mat-menu>
-  <mat-slide-toggle>Dark Mode</mat-slide-toggle>
 </mat-toolbar>
 <router-outlet></router-outlet>

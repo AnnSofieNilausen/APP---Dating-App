@@ -1,7 +1,6 @@
-<nav class="navigation-bar">
-    <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
-    <a mat-button routerLink="/about" routerLinkActive="active">About</a>
-    <a mat-button routerLink="/services" routerLinkActive="active">Services</a>
-    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
-  </nav>
-  
+<!-- navigation.component.html -->
+<mat-toolbar color="primary">
+  <button mat-button [routerLink]="'/profile'">Profile</button>
+  <button mat-button [routerLink]="'/mutual-matches'">Mutual Matches</button>
+  <button mat-button [routerLink]="'/potential-matches'">Potential Matches</button>
+</mat-toolbar>
