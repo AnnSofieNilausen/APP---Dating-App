@@ -24,9 +24,9 @@ namespace DatingApp.Controllers.Auth
                     if (access == false)
                         return BadRequest($"Wrong password or username");
                     else if (access == true)
-                    return Repository.GetProfileById();
-
-                    return Ok(profile);
+                        return Repository.GetProfileById();
+                    else 
+                        return BadRequest($"Something Went Wrong")
                 }
             
     }
