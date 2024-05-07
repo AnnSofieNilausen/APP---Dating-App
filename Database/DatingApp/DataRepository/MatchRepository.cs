@@ -23,16 +23,16 @@ namespace DatingApp.DataRepository.matches
         }
 
         /// <summary>
-        /// Retrieves a list of mutual matches for a specified user by querying the matches table.
+        /// Retrieves a list of mutual Matches for a specified user by querying the Matches table.
         /// This method finds users that have mutually liked each other.
         /// </summary>
-        /// <param name="userId">The user ID to retrieve matches for.</param>
-        /// <returns>A list of user IDs that are mutual matches.</returns>
+        /// <param name="userId">The user ID to retrieve Matches for.</param>
+        /// <returns>A list of user IDs that are mutual Matches.</returns>
         public List<int> GetMatchIds(int userId)
         {
-            // SQL query to find mutual likes.
-            // It selects other users who appear as matches for the given user and where the given user is also a match for them.
-            string query = "SELECT * FROM matches WHERE (pid_1 = @UserId) OR (pid_2 = @UserId)";
+            // SQL query to find mutual Likes.
+            // It selects other users who appear as Matches for the given user and where the given user is also a match for them.
+            string query = "SELECT * FROM Matches WHERE (pid_1 = @UserId) OR (pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -56,12 +56,12 @@ namespace DatingApp.DataRepository.matches
                 }
             }
 
-            // Return the list of matches in ID format.
+            // Return the list of Matches in ID format.
             return matches;
         }
 
         /// <summary>
-        /// Deletes a match between the specified user and another user from the matches table.
+        /// Deletes a match between the specified user and another user from the Matches table.
         /// </summary>
         /// <param name="userId">The user ID of the first user.</param>
         /// <param name="matchUserId">The user ID of the match to be deleted.</param>
@@ -70,7 +70,7 @@ namespace DatingApp.DataRepository.matches
         {
             // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
             // ensuring that all references to this match are removed.
-            string query = "DELETE FROM matches WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
+            string query = "DELETE FROM Matches WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user IDs into the SQL command.
             Dictionary<string, object> parameters = new Dictionary<string, object>

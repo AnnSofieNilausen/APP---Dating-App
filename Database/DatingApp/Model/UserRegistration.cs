@@ -17,44 +17,44 @@
 
 //        method to register a new user
 //        public bool registeruser(
-//            string fname, string lname, datetime dob, string email, string phone,
-//            string username, string password, string sexualorientation,
-//            string bio, string searchingfor, string interests,
-//            string occupation, string pictures, string instagram = null, string snapchat = null)
+//            string Fname, string Lname, datetime Dob, string email, string phone,
+//            string Username, string password, string sexualorientation,
+//            string Bio, string searchingfor, string Interests,
+//            string Occupation, string Pictures, string Instagram = null, string Snapchat = null)
 //        {
 //            validation to ensure at least one social media account is provided
-//            if (string.isnullorempty(instagram) && string.isnullorempty(snapchat))
+//            if (string.isnullorempty(Instagram) && string.isnullorempty(Snapchat))
 //            {
-//                throw new argumentexception("at least one social media account (instagram or snapchat) must be provided.");
+//                throw new argumentexception("at least one social media account (Instagram or Snapchat) must be provided.");
 //            }
 
 //            prepare the sql query using parameters to insert user data into the database.
 //            string query = @"
 //            insert into profile 
-//            (fname, lname, dob, email, phone, username, password, sexual_orientation, 
-//            bio, searching_for, interests, occupation, pictures, instagram, snapchat) 
+//            (Fname, Lname, Dob, email, phone, Username, password, sexual_orientation, 
+//            Bio, searching_for, Interests, Occupation, Pictures, Instagram, Snapchat) 
 //            values 
-//            (@fname, @lname, @dob, @email, @phone, @username, @password, @sexualorientation, 
-//            @bio, @searchingfor, @interests, @occupation, @pictures, @instagram, @snapchat)";
+//            (@Fname, @Lname, @Dob, @email, @phone, @Username, @password, @sexualorientation, 
+//            @Bio, @searchingfor, @Interests, @Occupation, @Pictures, @Instagram, @Snapchat)";
 
 //            create a dictionary to hold sql parameters
 //            dictionary<string, object> parameters = new dictionary<string, object>
 //            {
-//                {"@fname", fname},
-//                {"@lname", lname},
-//                {"@dob", dob},
+//                {"@Fname", Fname},
+//                {"@Lname", Lname},
+//                {"@Dob", Dob},
 //                {"@email", email},
 //                {"@phone", phone},
-//                {"@username", username},
+//                {"@Username", Username},
 //                {"@password", password},
 //                {"@sexualorientation", sexualorientation},
-//                {"@bio", bio},
+//                {"@Bio", Bio},
 //                {"@searchingfor", searchingfor},
-//                {"@interests", interests},
-//                {"@occupation", occupation},
-//                {"@pictures", pictures},
-//                {"@instagram", instagram ?? ""},
-//                {"@snapchat", snapchat ?? ""}
+//                {"@Interests", Interests},
+//                {"@Occupation", Occupation},
+//                {"@Pictures", Pictures},
+//                {"@Instagram", Instagram ?? ""},
+//                {"@Snapchat", Snapchat ?? ""}
 //            };
 
 //            execute the sql query to register the user and return the result as true if the operation affected at least one row.

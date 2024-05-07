@@ -24,7 +24,7 @@ namespace DatingApp.Controllers.match
             return BadRequest("No Profile Found");
         }
 
-        // GET api/matches/5
+        // GET api/Matches/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {

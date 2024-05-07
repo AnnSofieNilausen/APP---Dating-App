@@ -3,11 +3,13 @@ using DatingApp.Model;
 using Npgsql;
 using NpgsqlTypes;
 using DatingApp.Model.P;
+using DatingApp.Model.Conversion;
 
 namespace DatingApp.DataRepository
 {
     public class Repository : BaseRepository
     {
+        public ConvertFromDB convertFromDB = new();
         //Get a list of Profiles
         public List<Profile> GetProfiles()
         {
@@ -28,27 +30,25 @@ namespace DatingApp.DataRepository
             {
                 while (data.Read()) //every time loop runs it reads next like from fetched rows
                 {
-                    Profile p = new(Convert.ToInt32(data["Pid"]))
+                    Profile p = new(convertFromDB.convertToInt(data["pid"]))
                     {
 
-                        fname = data["fname"].ToString(),
-                        lname = data["lname"].ToString(),
-                        dob = Convert.ToDateTime(data["DoB"]),
-                        gender = data["gender"].ToString(),
-                        aol = data["aol"].ToString(),
-                        username = data["username"].ToString(),
-                        sexualOrientation = data["sexual_orientation"].ToString(),
-                        bio = data["bio"].ToString(),
-                        searchingFor = data["searching_for"].ToString(),
-                        interests = data["interests"].ToString(),
-                        occupation = data["occupation"].ToString(),
-                        pictures = data["pictures"].ToString(),
-                        likes = Convert.ToInt32(data["likes"]),
-                        matches = Convert.ToInt32(data["matches"]),
-                        instagram = data["instagram"].ToString(),
-                        snapchat = data["snapchat"].ToString()
-
-
+                        Fname = convertFromDB.convertToString(data["fname"]),
+                        Lname = convertFromDB.convertToString(data["lname"]),
+                        Dob = Convert.ToDateTime(data["dob"]),
+                        Gender = convertFromDB.convertToString(data["gender"]),
+                        Aol = convertFromDB.convertToString(data["aol"]),
+                        Username = convertFromDB.convertToString(data["username"]),
+                        Sexualorientation = convertFromDB.convertToString(data["sexual_orientation"]),
+                        Bio = convertFromDB.convertToString(data["bio"]),
+                        Searchingfor = convertFromDB.convertToString(data["searching_for"]),
+                        Interests = convertFromDB.convertToString(data["interests"]),
+                        Occupation = convertFromDB.convertToString(data["occupation"]),
+                        Pictures = convertFromDB.convertToString(data["pictures"]),
+                        Likes = convertFromDB.convertToInt(data["likes"]),
+                        Matches = convertFromDB.convertToInt(data["matches"]),
+                        Instagram = convertFromDB.convertToString(data["instagram"]),
+                        Snapchat = convertFromDB.convertToString(data["instagram"])
                     };
 
 
@@ -86,38 +86,37 @@ namespace DatingApp.DataRepository
                 {
                     if (match)
                     {
-                        Profile p = new(Convert.ToInt32(data["pid"]))
+                        Profile p = new(convertFromDB.convertToInt(data["pid"]))
                         {
-                 
-                            fname = data["fname"].ToString(),
-                            lname = data["lname"].ToString(),
-                            dob = Convert.ToDateTime(data["dob"]),
-                            gender = data["gender"].ToString(),
-                            aol = data["aol"].ToString(),                                                       
-                            bio = data["bio"].ToString(),                            
-                            interests = data["interests"].ToString(),
-                            occupation = data["occupation"].ToString(),
-                            pictures = data["pictures"].ToString(),
-                            instagram = data["instagram"].ToString(),
-                            snapchat = data["snapchat"].ToString()
+                            Fname = convertFromDB.convertToString(data["fname"]),
+                            Lname = convertFromDB.convertToString(data["lname"]),
+                            Dob = Convert.ToDateTime(data["dob"]),
+                            Gender = convertFromDB.convertToString(data["gender"]),
+                            Aol = convertFromDB.convertToString(data["aol"]),                            
+                            Bio = convertFromDB.convertToString(data["bio"]),                            
+                            Interests = convertFromDB.convertToString(data["interests"]),
+                            Occupation = convertFromDB.convertToString(data["occupation"]),
+                            Pictures = convertFromDB.convertToString(data["pictures"]),                            
+                            Instagram = convertFromDB.convertToString(data["instagram"]),
+                            Snapchat = convertFromDB.convertToString(data["instagram"])
                         };
                         return p;
                     }
                     else
                     {
-                        Profile p = new(Convert.ToInt32(data["pid"]))
+                        Profile p = new(convertFromDB.convertToInt(data["pid"]))
                         {
-           
-                            fname = data["fname"].ToString(),
-                            lname = data["lname"].ToString(),
-                            dob = Convert.ToDateTime(data["dob"]),
-                            gender = data["gender"].ToString(),
-                            aol = data["aol"].ToString(),
-                            bio = data["bio"].ToString(),
-                            searchingFor = data["searching_for"].ToString(),
-                            interests = data["interests"].ToString(),
-                            occupation = data["occupation"].ToString(),
-                            pictures = data["pictures"].ToString(),                          
+
+                            Fname = convertFromDB.convertToString(data["fname"]),
+                            Lname = convertFromDB.convertToString(data["lname"]),
+                            Dob = Convert.ToDateTime(data["dob"]),
+                            Gender = convertFromDB.convertToString(data["gender"]),
+                            Aol = convertFromDB.convertToString(data["aol"]),
+                            Bio = convertFromDB.convertToString(data["bio"]),                            
+                            Interests = convertFromDB.convertToString(data["interests"]),
+                            Occupation = convertFromDB.convertToString(data["occupation"]),
+                            Pictures = convertFromDB.convertToString(data["pictures"])
+                            
                         };
                         return p;
                     }
@@ -134,7 +133,7 @@ namespace DatingApp.DataRepository
         { 
             //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
-
+            
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = $"select * from profile where pid = {id}";
@@ -146,25 +145,25 @@ namespace DatingApp.DataRepository
             {
                 if (data.Read()) //if there is any data for given id
                 {
-                    Profile p = new(Convert.ToInt32(data["pid"]))
+                    Profile p = new(convertFromDB.convertToInt(data["pid"]))
                     {
                 
-                        fname = data["fname"].ToString(),
-                        lname = data["lname"].ToString(),
-                        dob = Convert.ToDateTime(data["dob"]),
-                        gender = data["gender"].ToString(),
-                        aol = data["aol"].ToString(),
-                        username = data["username"].ToString(),
-                        sexualOrientation = data["sexual_orientation"].ToString(),
-                        bio = data["bio"].ToString(),
-                        searchingFor = data["searching_for"].ToString(),
-                        interests = data["interests"].ToString(),
-                        occupation = data["occupation"].ToString(),
-                        pictures = data["pictures"].ToString(),
-                        likes = Convert.ToInt32(data["likes"]),
-                        matches = Convert.ToInt32(data["matches"]),
-                        instagram = data["instagram"].ToString(),
-                        snapchat = data["snapchat"].ToString()
+                        Fname = convertFromDB.convertToString(data["fname"]),
+                        Lname = convertFromDB.convertToString(data["lname"]),
+                        Dob = Convert.ToDateTime(data["dob"]),
+                        Gender = convertFromDB.convertToString(data["gender"]),
+                        Aol = convertFromDB.convertToString(data["aol"]),
+                        Username = convertFromDB.convertToString(data["username"]),
+                        Sexualorientation = convertFromDB.convertToString(data["sexual_orientation"]),
+                        Bio = convertFromDB.convertToString(data["bio"]),
+                        Searchingfor = convertFromDB.convertToString(data["searching_for"]),
+                        Interests = convertFromDB.convertToString(data["interests"]),
+                        Occupation = convertFromDB.convertToString(data["occupation"]),
+                        Pictures = convertFromDB.convertToString(data["pictures"]),
+                        Likes = convertFromDB.convertToInt(data["likes"]),
+                        Matches = convertFromDB.convertToInt(data["matches"]),
+                        Instagram = convertFromDB.convertToString(data["instagram"]),
+                        Snapchat = convertFromDB.convertToString(data["instagram"])
                     };
 
                     return p;
@@ -181,26 +180,26 @@ namespace DatingApp.DataRepository
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = @"insert into profile (fname,lname, dob, gender, aol, username, sexual_orientation, bio, searching_for, interests, occupation, pictures, likes, matches, instagram, snapchat) values (@firstname,@lastname, @dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
+            cmd.CommandText = @"insert into profile (Fname,Lname, Dob, Gender, Aol, Username, sexual_orientation, Bio, searching_for, Interests, Occupation, Pictures, Likes, Matches, Instagram, Snapchat) values (@firstname,@lastname, @Dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
 ";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
-            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
-            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
-            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.aol);
-            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
-            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
-            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);
-            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.searchingFor);
-            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.interests);
-            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.occupation);
-            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.pictures);
-            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.likes);
-            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.matches);
-            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.instagram);
-            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.snapchat);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.Dob);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.Gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.Aol);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.Username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.Sexualorientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.Bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.Pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.Likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.Matches);
+            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
+            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
             
 
             //will return true if all goes well
@@ -214,58 +213,58 @@ namespace DatingApp.DataRepository
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = @"update profile set
-    fname=@Fname,
-    lname=@Lname,
-    dob=@DoB,
-    gender=@Gender,
-    aol=@AoL,
-    username=@Username,
+    Fname=@Fname,
+    Lname=@Lname,
+    Dob=@DoB,
+    Gender=@Gender,
+    Aol=@AoL,
+    Username=@Username,
     sexual_orientation=@Sexual_Orientation,
-    bio=@Bio,
+    Bio=@Bio,
     searching_for=@Searching_For,
-    interests=@Interests,
-    occupation=@Occupation,
-    pictures=@Pictures,
-    likes=@Likes,
-    matches=@Matches,
-    snapchat=@Snapchat,
-    instagram=@Instagram
+    Interests=@Interests,
+    Occupation=@Occupation,
+    Pictures=@Pictures,
+    Likes=@Likes,
+    Matches=@Matches,
+    Snapchat=@Snapchat,
+    Instagram=@Instagram
     
 where
 pid = @Pid";
 
 
-            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.fname);
-            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.lname);
-            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.dob);
-            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.gender);
-            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.aol);
-            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.username);
-            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.sexualOrientation);
-            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.bio);
-            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.searchingFor);
-            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.interests);
-            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.occupation);
-            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.pictures);
-            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.likes);
-            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.matches);
-            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.instagram);
-            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.snapchat);
+            cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
+            cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
+            cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.Dob);
+            cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.Gender);
+            cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.Aol);
+            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.Username);
+            cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.Sexualorientation);
+            cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.Bio);
+            cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
+            cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
+            cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.Pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.Likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.Matches);
+            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
+            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
 
-           /* { "@Fname",fname},
-                { "@Lname", lname},
-                { "@DoB", dob},
-                { "@Gender", gender},
+           /* { "@Fname",Fname},
+                { "@Lname", Lname},
+                { "@DoB", Dob},
+                { "@Gender", Gender},
                 { "@AoL", AoL},
-                { "@Username", username},
-                { "@SexualOrientation", sexualOrientation},
-                { "@Bio", bio},
-                { "@SearchingFor", searchingFor},
-                { "@Interests", interests},
-                { "@Occupation", occupation},
-                { "@Pictures", pictures},
-                { "@Instagram", instagram ?? ""},
-                { "@Snapchat", snapchat ?? ""}
+                { "@Username", Username},
+                { "@SexualOrientation", Sexualorientation},
+                { "@Bio", Bio},
+                { "@SearchingFor", Searchingfor},
+                { "@Interests", Interests},
+                { "@Occupation", Occupation},
+                { "@Pictures", Pictures},
+                { "@Instagram", Instagram ?? ""},
+                { "@Snapchat", Snapchat ?? ""}
            */
             bool result = UpdateData(dbConn, cmd);
             return result;

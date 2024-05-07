@@ -18,20 +18,20 @@ namespace DatingApp.Controllers.Auth
         }
 
 
-        [HttpGet("username")]
+        [HttpGet("Username")]
 
         public ActionResult Get(string username, string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-                return BadRequest($"Wrong password or username");
+                return BadRequest($"Wrong password or Username");
             }
 
             else if (access == true)
             {
                 int profid = userAuthentication.GetUserIdFromLogin(username, password);
-                if (profid == 0) { return BadRequest("Wrong password or username"); }
+                if (profid == 0) { return BadRequest("Wrong password or Username"); }
 
                 else {
                     Profile profile = Repository.GetProfileById(profid); 

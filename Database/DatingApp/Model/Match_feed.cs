@@ -39,7 +39,7 @@ namespace DatingApp.Model.Matchfeed
             //pid_1 = Liker, pid_2 = Liked
             string query = @"
             SELECT COUNT(*)
-            FROM likes
+            FROM Likes
             WHERE pid_1 = @UserId AND pid_2 = @ProfileId
         ";
 
@@ -86,8 +86,8 @@ namespace DatingApp.Model.Matchfeed
                 //SQL query to check if a match exists
                 string query = @"
                     SELECT COUNT(*)
-                    FROM likes AS L1
-                    JOIN likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
+                    FROM Likes AS L1
+                    JOIN Likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
                     WHERE L1.UserId = @UserId
                 ";
 

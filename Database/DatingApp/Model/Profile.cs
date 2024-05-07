@@ -9,49 +9,48 @@ namespace DatingApp.Model.P
 			ID = id;
 		}
 
-        public Profile(string fname)
+        public Profile(int id, string username1)
         {
-            username = fname;
+            ID = id;
+            Username = username1;
         }
 
         public Profile() { }
 
 		[JsonPropertyName("pid")]
 		public int ID { get; set; }
-		[JsonPropertyName("fname")]
-		public string fname { get; set; }
-		[JsonPropertyName("lname")]
-		public string lname { get; set; }
-		[JsonPropertyName("dob")]
-		public DateTime dob { get; set; }
-		[JsonPropertyName("gender")]
-		public string gender { get; set; }
-		[JsonPropertyName("aol")]
-		public string aol { get; set; }
-        [JsonPropertyName("username")]
-        public string username { get; set; }
-        [JsonPropertyName("password")]
-        public string password { get; set; }
-        [JsonPropertyName("sexualOrientation")]
-        public string sexualOrientation { get; set; }
-        [JsonPropertyName("bio")]
-        public string bio { get; set; }
-        [JsonPropertyName("searchingFor")]
-        public string searchingFor { get; set; }
-        [JsonPropertyName("interests")]
-        public string interests { get; set; }
-        [JsonPropertyName("occupation")]
-        public string occupation { get; set; }
-        [JsonPropertyName("pictures")]
-        public string pictures { get; set; }
-        [JsonPropertyName("likes")]
-        public int likes { get; set; }
-        [JsonPropertyName("matches")]
-        public int matches { get; set; }
-        [JsonPropertyName("instagram")]
-        public string instagram { get; set; }
-        [JsonPropertyName("snapchat")]
-        public string snapchat { get; set; }
+		[JsonPropertyName("Fname")]
+		public string? Fname { get; set; }
+		[JsonPropertyName("Lname")]
+		public string? Lname { get; set; }
+		[JsonPropertyName("Dob")]
+		public DateTime? Dob { get; set; }
+		[JsonPropertyName("Gender")]
+		public string? Gender { get; set; }
+		[JsonPropertyName("Aol")]
+		public string? Aol { get; set; }
+        [JsonPropertyName("Username")]
+        public string? Username { get; set; }
+        [JsonPropertyName("Sexualorientation")]
+        public string? Sexualorientation { get; set; }
+        [JsonPropertyName("Bio")]
+        public string? Bio { get; set; }
+        [JsonPropertyName("Searchingfor")]
+        public string? Searchingfor { get; set; }
+        [JsonPropertyName("Interests")]
+        public string? Interests { get; set; }
+        [JsonPropertyName("Occupation")]
+        public string? Occupation { get; set; }
+        [JsonPropertyName("Pictures")]
+        public string? Pictures { get; set; }
+        [JsonPropertyName("Likes")]
+        public int? Likes { get; set; }
+        [JsonPropertyName("Matches")]
+        public int? Matches { get; set; }
+        [JsonPropertyName("Instagram")]
+        public string? Instagram { get; set; }
+        [JsonPropertyName("Snapchat")]
+        public string? Snapchat { get; set; }
     }
 }
 

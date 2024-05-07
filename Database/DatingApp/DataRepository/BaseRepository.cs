@@ -43,9 +43,9 @@ namespace DatingApp.DataRepository
         //Lets us parse a get with Parameters
         protected IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
         {
-            using (var conn = new NpgsqlConnection(ConnectionString))
+            using var conn = new NpgsqlConnection(ConnectionString);
             {
-                using (var cmd = new NpgsqlCommand(query, conn))
+                using var cmd = new NpgsqlCommand(query, conn);
                 {
                     // Add parameters to the command.
                     foreach (var param in parameters)
