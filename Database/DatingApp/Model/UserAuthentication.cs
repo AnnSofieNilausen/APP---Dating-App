@@ -25,8 +25,15 @@ namespace DatingApp.Model.Auth
             {"@password", password}
         };
 
+
+        // Call the base class method to execute the query with parameters and get the results.
+
+        var records = GetDataDyn(query, parameters);
+
+    
             // Call the base class method to execute the query with parameters and get the results.
             var records = GetDataDyn(query, parameters);
+
 
             // Check if the count of users with the provided username and password is greater than 0.
             foreach (IDataRecord record in records)
@@ -58,7 +65,7 @@ namespace DatingApp.Model.Auth
                 if (record != null && Convert.ToInt32(record[0]) > 0)
                 {
                     return Convert.ToInt32(record[0]);
-                    break
+                    break;
                 }
                 else 
                 {
