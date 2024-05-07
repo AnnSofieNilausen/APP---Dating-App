@@ -35,7 +35,7 @@ namespace DatingApp.Controllers.Auth
                 if (profid == 0) { return BadRequest("Wrong password or username"); }
 
                 else {
-                    Profile profile = Repository.GetProfileById(profid); 
+                    Profile profile = repository.GetProfileById(profid); 
                     return profile; }
             }
 
