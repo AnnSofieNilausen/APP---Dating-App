@@ -39,7 +39,7 @@ public class UserAuthentication : BaseRepository
     }
     public int GetUserIdFromLogin(string username, string password)
     {
-        string query1 = "SELECT pid FROM Profile WHERE username = @username AND password = @password";
+        string query1 = "SELECT pid FROM profile WHERE username = @username AND password = @password";
         // Prepare parameters for the query 
         Dictionary<string, object> parameters = new Dictionary<string, object>
         {
