@@ -36,7 +36,7 @@ namespace DatingApp.Controllers.Auth
 
                 else {
                     Profile profile = repository.GetProfileById(profid); 
-                    return profile; }
+                    return Ok(profile); }
             }
 
             else
