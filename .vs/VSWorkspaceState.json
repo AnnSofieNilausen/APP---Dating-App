@@ -1,14 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Angular",
-    "\\Angular2",
-    "\\Database\\.idea",
+    "\\Database",
     "\\Database\\DatingApp",
     "\\Database\\DatingApp\\Controllers",
     "\\Database\\DatingApp\\DataRepository",
     "\\Database\\DatingApp\\Model"
   ],
-  "SelectedNode": "\\Database",
+  "SelectedNode": "\\Database\\DatingApp\\Controllers\\ProfileController.cs",
   "PreviewInSolutionExplorer": false
 }
