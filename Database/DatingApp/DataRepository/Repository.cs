@@ -19,7 +19,7 @@ namespace DatingApp.DataRepository
 
             //creating an SQL command
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = "select * from Profile";
+            cmd.CommandText = "select * from profile";
 
             //call the base method to get data
             var data = GetData(dbConn, cmd);

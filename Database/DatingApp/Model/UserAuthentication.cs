@@ -15,7 +15,7 @@ public class UserAuthentication : BaseRepository
     public bool AuthenticateUser(string username, string password)
     {
         // SQL query to check if the username and password combination exists, using parameters.
-        string query = "SELECT COUNT(*) FROM Login WHERE username = @username AND password = @password";
+        string query = "SELECT COUNT(*) FROM login WHERE username = @username AND password = @password";
 
         // Prepare parameters for the query 
         Dictionary<string, object> parameters = new Dictionary<string, object>
