@@ -134,7 +134,7 @@ namespace DatingApp.Model.Matchfeed
                 command.Parameters.AddWithValue("@pid2", profileId);
                 command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
 
-                BaseRepository.InsertData(conn, command);
+                //BaseRepository.InsertData(conn, command);
                 //Create match
                 //Remove Like
                 

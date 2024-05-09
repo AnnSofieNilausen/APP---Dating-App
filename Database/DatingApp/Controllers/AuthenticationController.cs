@@ -6,6 +6,7 @@ using DatingApp.Model.P;
 
 namespace DatingApp.Controllers.Auth
 {
+    [Route("api/[controller]")]
     public class AuthenticationController : Controller
     {
         private Repository Repository { get; }
@@ -18,13 +19,13 @@ namespace DatingApp.Controllers.Auth
         }
 
 
-        [HttpPost()]
-        public ActionResult Post(string username, string password)
+        [HttpGet()]
+        public ActionResult Get(string username, string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-                return null;
+                return BadRequest("Wrong Username or Password");
             }
 
             else if (access == true)
