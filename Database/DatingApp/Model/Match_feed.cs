@@ -3,6 +3,7 @@ using DatingApp.DataRepository;
 using Npgsql;
 using DatingApp.Model.P;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using DatingApp.Model.IDcreator;
 
 namespace DatingApp.Model.Matchfeed
 {
@@ -42,7 +43,7 @@ namespace DatingApp.Model.Matchfeed
         }
 
         //Method to check whether the current user has already been liked by the displayed profile
-        public bool IsProfileLiked(int liker, int liked)
+        public bool CheckIsLiked(int liker, int liked)
         {
             bool isLiked = false;
 
@@ -84,7 +85,7 @@ namespace DatingApp.Model.Matchfeed
 
 
 
-        private bool IsMatch(int liker, int liked)
+        private bool CheckIsMatch(int liker, int liked)
         {
             try
             {
@@ -120,26 +121,40 @@ namespace DatingApp.Model.Matchfeed
                 return false;
             }
         }
-        //pull foreign ID from liked persons liked and check if like is mutual
-        //if true create match and push it through Repository
-        //delete like on both IDs in Repository
-        //if false return false
-
+       
+        //This goes through the checks and motions when a user likes another
         public bool PutLike(int userId, int profileId)
-        {
-            //Check if the like is a match
-            bool isMatch = IsMatch(userId, profileId);
-
-            //If it's not a match, add the like to the like list
-            if (!isMatch)
+        {   //If it's not a match, add the like to the like list
+            IDCreator creator = new();
+            if (CheckIsMatch(userId, profileId))
             {
-                IsProfileLiked(userId, profileId);
-            }
+                string query = @"INSERT INTO match (""match_id"",""pid_1"", ""pid_2"") SELECT @matchid, @pid1, @pid2";
+                var command = new NpgsqlCommand();
+                command.Parameters.AddWithValue("@pid1", userId);
+                command.Parameters.AddWithValue("@pid2", profileId);
+                command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
 
+                BaseRepository.InsertData(conn, command);
+                //Create match
+                //Remove Like
+                
+            }
+            else if(CheckIsLiked(userId, profileId))
+             {
+                //Do Nothing
+
+
+             }
+            else
+            {
+                //Add To Liked
+
+            }
+            
             //Return the result based on wheter it's a match
             //If return = false, its not a match but like has been added
             //If return = true, its a match, and the database has been updated
-            return isMatch;
+            return false;
         }
 
 
