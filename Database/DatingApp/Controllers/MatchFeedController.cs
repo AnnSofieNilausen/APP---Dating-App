@@ -27,17 +27,7 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpPost("{id}, {id1}")]
         public ActionResult Post(int liker, int liked)
         {
-            if (profile == null)
-            {
-                return BadRequest("Profile info not correct");
-            }
-
-            bool status = Repository.InsertProfile(profile);
-            if (status)
-            {
-                return Ok();
-            }
-
+            
             return BadRequest();
         }
 
