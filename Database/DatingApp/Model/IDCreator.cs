@@ -1,4 +1,5 @@
 using DatingApp.Model.Matchfeed;
+using Npgsql;
 
 
 //Generates Unique IDs for use when creating a match or Like
@@ -11,10 +12,10 @@ namespace DatingApp.Model.IDcreator
             Random r = new Random();
             while (true)
             {
-                int i = r.Next(Int32);
-                if (CheckUniqueID( r, match)
+                int i = r.Next();
+                if (CheckUniqueID( i, match))
                 {
-                    return r;
+                    return i;
                 }
             }
 
@@ -23,37 +24,34 @@ namespace DatingApp.Model.IDcreator
         //Checks if the random number generated is already used
         private bool CheckUniqueID(int id, bool match)
         {
-            if (match)
-            {
-                string query = @"
-            SELECT match_id
-            FROM Match
-            WHERE match_id = @id"
-            }
-            else
-            {
-                string query = @"
-            SELECT like_id
-            FROM likes
-            WHERE like_id = @id"
-            }
-            
+                string query;
 
-            using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
-            {
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                if (match)
                 {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@id", id);
-
-
-                    return true;
+                    query = @"
+            SELECT COUNT(*)
+            FROM Match
+            WHERE match_id = @id";
                 }
-            }
+                else
+                {
+                    query = @"
+            SELECT COUNT(*)
+            FROM likes
+            WHERE like_id = @id";
+                }
 
 
+                using NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
 
-            return false;
+                using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+                connection.Open();
+                command.Parameters.AddWithValue("@id", id);
+                int result = int.Parse(command.ExecuteScalar().ToString());
+                bool unique = (result == 0);
+                connection.Close();
+
+                return unique;
         }
     }
     
