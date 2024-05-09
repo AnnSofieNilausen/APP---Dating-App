@@ -32,7 +32,7 @@ namespace DatingApp.DataRepository.matches
         {
             // SQL query to find mutual Likes.
             // It selects other users who appear as Matches for the given user and where the given user is also a match for them.
-            string query = "SELECT * FROM Matches WHERE (pid_1 = @UserId) OR (pid_2 = @UserId)";
+            string query = "SELECT * FROM matches WHERE (pid_1 = @UserId) OR (pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user's ID into the SQL query, preventing SQL injection.
             Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -70,7 +70,7 @@ namespace DatingApp.DataRepository.matches
         {
             // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
             // ensuring that all references to this match are removed.
-            string query = "DELETE FROM Matches WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
+            string query = "DELETE FROM matches WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
 
             // Parameters are used to safely inject the user IDs into the SQL command.
             Dictionary<string, object> parameters = new Dictionary<string, object>

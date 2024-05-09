@@ -8,12 +8,10 @@ namespace DatingApp.Model.Matchfeed
 {
     public class Match_feed : BaseRepository
     {
-        Repository repo = new Repository();
-       
-        //first thing we should do is to find another profile, make sure the profile is not either liked or matched. 
-        //Method to display a profile for the current user
-        // Method to retrieve a random profile ID from the repositary
-        private Profile GetRandomProfile()
+        readonly Repository repo = new Repository();
+
+        // Method to retrieve a random profile ID from the repository
+        private Profile GetRandomProfile(int userid)
         {
             string query = "SELECT pid FROM profile ORDER BY RANDOM() LIMIT 1";
 
@@ -21,13 +19,26 @@ namespace DatingApp.Model.Matchfeed
             {
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
-                    connection.Open();
-                    int randid = Convert.ToInt32(command.ExecuteScalar());
+                    int randid;
+                    while (true)
+                    {
+                        connection.Open();
+                        randid = Convert.ToInt32(command.ExecuteScalar());
+                        if (randid != userid)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
                     Profile Matchfeed_profile = repo.GetSafeProfileById(randid, false);
                     return Matchfeed_profile;
                 }
             }
-            
+
         }
 
         //Method to check whether the current user has already been liked by the displayed profile
@@ -35,7 +46,6 @@ namespace DatingApp.Model.Matchfeed
         {
             bool isLiked = false;
 
-            //SQL query to check if the current user has liked the displayed profile
             //pid_1 = Liker, pid_2 = Liked
             string query = @"
             SELECT COUNT(*)
@@ -45,23 +55,18 @@ namespace DatingApp.Model.Matchfeed
 
             try
             {
-                //Establish connection to the PostgreSQL database
+
                 using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
 
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                   {
-                        // Add parameters to the command to prevent SQL injection
+                    {
                         command.Parameters.AddWithValue("@UserId", liker);
                         command.Parameters.AddWithValue("@ProfileId", liked);
-
-                        // Open the database connection
                         connection.Open();
 
-                        //Execute the query and get the count of rows
                         int count = Convert.ToInt32(command.ExecuteScalar());
 
-                        //checked if the count is greater than 0 to determine if the user has liked the profile 
                         isLiked = count > 0;
                     }
 
@@ -79,7 +84,7 @@ namespace DatingApp.Model.Matchfeed
 
 
 
-        public bool IsMatch(int userId)
+        private bool IsMatch(int liker, int liked)
         {
             try
             {
@@ -96,7 +101,7 @@ namespace DatingApp.Model.Matchfeed
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
                         //Add parameters to the command to prevent SQL injection
-                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@UserId", liker);
 
                         connection.Open();
                         int count = Convert.ToInt32(command.ExecuteScalar());
@@ -120,10 +125,10 @@ namespace DatingApp.Model.Matchfeed
         //delete like on both IDs in Repository
         //if false return false
 
-        public bool IsLike(int userId, int profileId)
+        public bool PutLike(int userId, int profileId)
         {
             //Check if the like is a match
-            bool isMatch = IsMatch(userId);
+            bool isMatch = IsMatch(userId, profileId);
 
             //If it's not a match, add the like to the like list
             if (!isMatch)
@@ -132,16 +137,14 @@ namespace DatingApp.Model.Matchfeed
             }
 
             //Return the result based on wheter it's a match
-            return isMatch;                     
+            //If return = false, its not a match but like has been added
+            //If return = true, its a match, and the database has been updated
+            return isMatch;
         }
 
 
 
-        //check if like is match call IsMatch function
-        //if return false add like to like list through Repository
-        //return false
-        //if true return true
+
     }
 
-    //testing 
-}
+} 

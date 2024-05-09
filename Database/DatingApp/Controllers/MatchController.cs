@@ -15,7 +15,7 @@ namespace DatingApp.Controllers.match
         {
             Repository = new Repository();
         }
-        MatchRepository matchrepository = new MatchRepository();
+        readonly MatchRepository matchrepository = new MatchRepository();
 
         // GET: api/Profile/5
         [HttpGet()]
@@ -58,24 +58,7 @@ namespace DatingApp.Controllers.match
         [HttpPut()]
         public ActionResult Put([FromBody] Profile profile)
         {
-            if (profile == null)
-            {
-                return BadRequest("Profile info not correct");
-            }
-
-            Profile existinProfile = Repository.GetProfileById(profile.ID);
-            if (existinProfile == null)
-            {
-                return NotFound($"Profile with id {profile.ID} not found");
-            }
-
-            bool status = Repository.UpdateProfile(profile);
-            if (status)
-            {
-                return Ok();
-            }
-
-            return BadRequest("Something went wrong");
+            return Ok(false);
         }
 
         // DELETE api/values/5
