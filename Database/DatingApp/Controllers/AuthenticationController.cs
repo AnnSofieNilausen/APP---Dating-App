@@ -18,9 +18,9 @@ namespace DatingApp.Controllers.Auth
         }
 
 
-        [HttpGet("Username")]
+        [HttpPost("Username")]
 
-        public ActionResult Get(string username, string password)
+        public ActionResult Post(string username, string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
