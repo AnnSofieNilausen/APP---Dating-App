@@ -11,10 +11,11 @@ namespace DatingApp.Controllers.MatchFeed
     public class MatchfeedController : Controller
     {
         private Repository Repository { get; }
-
+        private Match_feed matchfeed = new();
         public MatchfeedController()
         {
             Repository = new Repository();
+            
         }
 
         /*
@@ -25,7 +26,8 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpGet("GetProfile")]
         public ActionResult Get(int id)
         {
-            return Ok(Match_feed.GetRandomProfile(id));
+            
+            return Ok(matchfeed.GetRandomProfile(id));
         }
 
         /*
@@ -36,8 +38,8 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpPut("Like")]
         public ActionResult PutLike(int liker, int liked)
         {
-            Match_feed.PutLike(liker, liked);
-            return BadRequest(Match_feed.GetRandomProfile(liker);
+            matchfeed.PutLike(liker, liked);
+            return BadRequest(matchfeed.GetRandomProfile(liker));
         }
 
         /*
@@ -49,7 +51,7 @@ namespace DatingApp.Controllers.MatchFeed
         public ActionResult PutDislike(int disliker, int disliked)
         {
             
-            return BadRequest(Match_feed.GetRandomProfile(disliker);
+            return BadRequest(matchfeed.GetRandomProfile(disliker));
         }
 
 

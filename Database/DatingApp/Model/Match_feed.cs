@@ -5,6 +5,7 @@ using DatingApp.Model.P;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DatingApp.Model.IDcreator;
 using System.Security.Cryptography;
+using DatingApp.DataRepository.BaseRepo;
 
 namespace DatingApp.Model.Matchfeed
 {
@@ -13,7 +14,7 @@ namespace DatingApp.Model.Matchfeed
         readonly Repository repo = new Repository();
 
         // Method to retrieve a random profile ID from the repository
-        private Profile GetRandomProfile(int userid)
+        public Profile GetRandomProfile(int userid)
         {
             string query = "SELECT pid FROM profile ORDER BY RANDOM() LIMIT 1";
 
@@ -98,7 +99,7 @@ namespace DatingApp.Model.Matchfeed
                     //WHERE L1.UserId = @UserId
                     //";
 
-                string query "SELECT COUNT(*) FROM match WHERE (pid_1 = @liker AND pid_2 = @liked) OR (pid_1 = @liked AND pid_2 = @liker);
+                string query = "SELECT COUNT(*) FROM match WHERE (pid_1 = @liker AND pid_2 = @liked) OR (pid_1 = @liked AND pid_2 = @liker)";
 
                 using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
@@ -138,7 +139,6 @@ namespace DatingApp.Model.Matchfeed
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
                         //Add parameters to the command to prevent SQL injection
-                        var command = new NpgsqlCommand();
                         command.Parameters.AddWithValue("@pid1", userId);
                         command.Parameters.AddWithValue("@pid2", profileId);
                         command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
@@ -149,13 +149,12 @@ namespace DatingApp.Model.Matchfeed
                     }
                 }
                 //Deletes the likes from the like table
-                string query = @"DELETE FROM likes WHERE (pid_1 = @pid1 AND pid_2 = @pid2) OR (pid_1 = @pid2 AND pid_2 = @pid1);";
+                query = @"DELETE FROM likes WHERE (pid_1 = @pid1 AND pid_2 = @pid2) OR (pid_1 = @pid2 AND pid_2 = @pid1);";
                 using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
                         //Add parameters to the command to prevent SQL injection
-                        var command = new NpgsqlCommand();
                         command.Parameters.AddWithValue("@pid1", userId);
                         command.Parameters.AddWithValue("@pid2", profileId);
                         command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
@@ -184,7 +183,6 @@ namespace DatingApp.Model.Matchfeed
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
                         //Add parameters to the command to prevent SQL injection
-                        var command = new NpgsqlCommand();
                         command.Parameters.AddWithValue("@pid1", userId);
                         command.Parameters.AddWithValue("@pid2", profileId);
                         command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(false));

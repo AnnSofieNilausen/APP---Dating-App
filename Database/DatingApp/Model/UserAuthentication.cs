@@ -3,6 +3,7 @@ using Npgsql;
 using System.Data;
 using System.Collections.Generic;
 using DatingApp.DataRepository;
+using DatingApp.DataRepository.BaseRepo;
 namespace DatingApp.Model.Auth
 {
     public class UserAuthentication : BaseRepository

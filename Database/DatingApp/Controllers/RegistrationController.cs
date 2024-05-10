@@ -11,21 +11,17 @@ namespace DatingApp.Controllers.Registration
     [Route("api/[controller]")]
     public class RegistrationController : Controller
     {
-
-        public RegistrationController()
-        {
-        }
-
+        private Userregistration Userregistration;
 
         [HttpPost()]
-        public ActionResult Post([FromBody] Profile profile)
+        public ActionResult Post([FromBody] Profile profile, string password)
         {
             if (profile == null)
             {
                 return BadRequest("Profile info not correct");
             }
 
-            bool status = UserRegistration.registeruser(profile);
+            bool status = Userregistration.registeruser(profile, password);
             if (status)
             {
                 return Ok();

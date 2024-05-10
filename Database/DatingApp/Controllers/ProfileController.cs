@@ -5,7 +5,7 @@ using DatingApp.Model.P;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace DatingApp.Controllers.Profile
+namespace DatingApp.Controllers.P
 {
     [Route("api/[controller]")]
     public class ProfileController : Controller

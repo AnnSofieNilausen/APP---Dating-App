@@ -4,6 +4,7 @@ using Npgsql;
 using NpgsqlTypes;
 using DatingApp.Model.P;
 using DatingApp.Model.Conversion;
+using DatingApp.DataRepository.BaseRepo;
 
 namespace DatingApp.DataRepository
 {
