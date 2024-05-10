@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 
 
-namespace DatingApp.DataRepository
+namespace DatingApp.DataRepository.BaseRepo
 {
     public class BaseRepository
     {

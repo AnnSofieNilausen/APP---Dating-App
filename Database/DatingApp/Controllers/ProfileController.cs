@@ -35,24 +35,6 @@ namespace DatingApp.Controllers
             return Ok(profile);
         }
 
-       
-        // POST api/values
-        [HttpPost]
-        public ActionResult Post([FromBody]Profile profile)
-        {
-            if (profile == null)
-            {
-                return BadRequest("Profile info not correct");
-            }
-
-            bool status = Repository.InsertProfile(profile);
-            if (status)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
-        }
 
         // PUT api/values/5
         [HttpPut()]
