@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-mutual-matches-list',
-  templateUrl: './mutual-matches-list.component.html',
+  templateUrl: '../../components/mutual-matches-list/mutual-matches-list.component.html',
   styleUrls: ['./mutual-matches-list.component.css'],
   standalone: true,
   imports: [CommonModule] // Ensure CommonModule is imported

@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile(): void {
     if (this.profile) {
-      const pidNumber = Number(this.profile.pid); // Convert pid to number if necessary
+      const pidNumber = Number(this.profile.ID); // Convert pid to number if necessary
       this.profileService.updateProfile(pidNumber, this.profile).subscribe({
         next: (updatedProfile) => this.profile = updatedProfile,
         error: (error) => console.error('Failed to update profile', error)
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
 
   deleteProfile(): void {
     if (this.profile) {
-      const pidNumber = Number(this.profile.pid);
+      const pidNumber = Number(this.profile.ID);
       this.profileService.deleteProfile(pidNumber).subscribe({
         next: () => this.router.navigate(['/login']),
         error: (error) => console.error('Failed to delete profile', error)

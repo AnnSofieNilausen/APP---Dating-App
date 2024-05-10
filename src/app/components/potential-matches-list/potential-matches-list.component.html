@@ -1,21 +1,16 @@
-<!-- src/app/matching/potential-matches-list.component.html -->
-
-<div class="potential-matches-container">
-  <h2>Potential Matches</h2>
-  <div *ngIf="potentialMatches.length; else noMatches">
-    <div *ngFor="let match of potentialMatches" class="match-card">
-      <img [src]="match.pictures?.[0]" alt="{{ match.fname }}'s profile picture" class="profile-pic">
-      <div class="match-info">
-        <h3>{{ match.fname }} {{ match.lname }}</h3>
-        <p>{{ match.bio || 'No bio available' }}</p>
-        <div class="actions">
-          <button (click)="likeUser(match.pid)" class="like-button">Like</button>
-          <button (click)="dislikeUser(match.pid)" class="dislike-button">Dislike</button>
-        </div>
+<!-- potential-matches-list.component.html -->
+<div *ngIf="potentialMatches.length > 0; else noMatches">
+  <ul>
+    <li *ngFor="let profile of potentialMatches">
+      <div>
+        <h3>{{ profile.Fname }}</h3>
+        <p>{{ profile.Bio }}</p>
+        <button (click)="likeUser(profile.ID)">Like</button>
+        <button (click)="dislikeUser(profile.ID)">Dislike</button>
       </div>
-    </div>
-  </div>
-  <ng-template #noMatches>
-    <p>No potential matches found. Check back later!</p>
-  </ng-template>
+    </li>
+  </ul>
 </div>
+<ng-template #noMatches>
+  <p>No potential matches found.</p>
+</ng-template>

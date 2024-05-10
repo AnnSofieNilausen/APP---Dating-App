@@ -26,9 +26,9 @@ export class LoginComponent {
    this.authService.login(this.username, this.password).subscribe
    (
      {
-     next: (data) =>
+     next: (Profile) =>
        {
-       console.log('Login successful:', data);
+       console.log('Login successful:', Profile);
        },
      error: (error) =>
        {

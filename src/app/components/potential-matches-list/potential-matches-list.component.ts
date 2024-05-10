@@ -28,7 +28,7 @@ export class MatchingComponent implements OnInit {
     });
   }
 
-  likeUser(userId: bigint): void {
+  likeUser(userId: Number): void {
     this.matchService.likeProfile(Number(userId)).subscribe({
       next: () => {
         // Optionally, refresh the list of potential matches or update the UI
@@ -37,7 +37,7 @@ export class MatchingComponent implements OnInit {
     });
   }
 
-  dislikeUser(userId: bigint): void {
+  dislikeUser(userId: number): void {
     this.matchService.dislikeProfile(Number(userId)).subscribe({
       next: () => {
         // Optionally, refresh the list of potential matches or update the UI

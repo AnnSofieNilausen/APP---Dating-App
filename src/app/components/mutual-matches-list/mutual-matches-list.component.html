@@ -5,10 +5,10 @@
   <ul *ngIf="matches.length > 0; else noMatches">
     <li *ngFor="let match of matches">
       <div class="match-card">
-        <h3>{{ match.fname }} {{ match.lname }}</h3>
-        <p>Bio: {{ match.bio || 'No bio available' }}</p>
+        <h3>{{ match.Fname }} {{ match.Lname }}</h3>
+        <p>Bio: {{ match.Bio || 'No bio available' }}</p>
         <!-- Adjust the delete button to use 'id' or the appropriate identifier -->
-        <button (click)="deleteMatch(match.id)">Delete Match</button>
+        <button (click)="deleteMatch(match.ID)">Delete Match</button>
       </div>
     </li>
   </ul>
