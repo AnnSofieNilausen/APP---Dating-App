@@ -11,7 +11,7 @@ namespace DatingApp.DataRepository
     {
         protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp2.0; Username=postgres; Password=yourpassword;";
 
-        protected NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
+        protected internal NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
 
             conn.Open();
@@ -19,28 +19,27 @@ namespace DatingApp.DataRepository
         }
 
          
-        protected bool InsertData(NpgsqlConnection conn, NpgsqlCommand cmd)
+        protected internal bool InsertData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
             cmd.ExecuteNonQuery();
             return true;
         }
 
-        protected bool UpdateData(NpgsqlConnection conn, NpgsqlCommand cmd)
+        protected internal bool UpdateData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
             cmd.ExecuteNonQuery();
             return true;
         }
 
-        protected bool DeleteData(NpgsqlConnection conn, NpgsqlCommand cmd)
+        protected internal bool DeleteData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
             cmd.ExecuteNonQuery();
             return true;
         }
 
-        //Lets us parse a get with Parameters
         protected IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
         {
             using var conn = new NpgsqlConnection(ConnectionString);
@@ -65,7 +64,7 @@ namespace DatingApp.DataRepository
                 }
             }
         }
-        protected int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+        protected internal int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {

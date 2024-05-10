@@ -20,17 +20,25 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpGet]
         public ActionResult Get()
         {
+
             return Ok();
         }
 
-        //Post a like
-        [HttpPost("{id}, {id1}")]
-        public ActionResult Post(int liker, int liked)
+        //Put a like
+        [HttpPut("Like")]
+        public ActionResult PutLike(int liker, int liked)
         {
             
             return BadRequest();
         }
 
+        //Put a dislike
+        [HttpPut("Dislike")]
+        public ActionResult PutDislike(int disliker, int disliked)
+        {
+
+            return BadRequest();
+        }
 
 
 
