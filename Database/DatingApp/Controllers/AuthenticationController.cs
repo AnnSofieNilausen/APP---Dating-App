@@ -18,25 +18,18 @@ namespace DatingApp.Controllers.Auth
             userAuthentication = new UserAuthentication();
         }
 
-
-<<<<<<< HEAD
-        [HttpPost()]
-
-        public ActionResult Post(string username, string password)
-=======
-        [HttpGet()]
-        public ActionResult Get(string username, string password)
->>>>>>> b93fa2feab9bd3ceb7a2e695bf56b9fda0bda068
+        [HttpGet("login")]
+        public ActionResult Login([FromQuery] string username, [FromQuery] string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-<<<<<<< HEAD
+
                 string i = "bad";
                 return Ok(i);
-=======
+
                 return BadRequest("Wrong Username or Password");
->>>>>>> b93fa2feab9bd3ceb7a2e695bf56b9fda0bda068
+
             }
 
             else if (access == true)
@@ -57,12 +50,5 @@ namespace DatingApp.Controllers.Auth
         }
 
     }
-
-
-
-
-
-
-
 
 }
