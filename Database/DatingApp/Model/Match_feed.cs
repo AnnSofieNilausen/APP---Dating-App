@@ -4,6 +4,7 @@ using Npgsql;
 using DatingApp.Model.P;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DatingApp.Model.IDcreator;
+using System.Security.Cryptography;
 
 namespace DatingApp.Model.Matchfeed
 {
@@ -89,13 +90,15 @@ namespace DatingApp.Model.Matchfeed
         {
             try
             {
-                //SQL query to check if a match exists
-                string query = @"
-                    SELECT COUNT(*)
-                    FROM likes AS L1
-                    JOIN likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
-                    WHERE L1.UserId = @UserId
-                ";
+                //Legacy SQL Statement
+                    //string query = @"
+                    //SELECT COUNT(*)
+                    //FROM likes AS L1
+                    //JOIN likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
+                    //WHERE L1.UserId = @UserId
+                    //";
+
+                string query "SELECT COUNT(*) FROM match WHERE (pid_1 = @liker AND pid_2 = @liked) OR (pid_1 = @liked AND pid_2 = @liker);
 
                 using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
@@ -103,7 +106,7 @@ namespace DatingApp.Model.Matchfeed
                     {
                         //Add parameters to the command to prevent SQL injection
                         command.Parameters.AddWithValue("@UserId", liker);
-
+                        command.Parameters.AddWithValue("@LikedProfileId", liked);
                         connection.Open();
                         int count = Convert.ToInt32(command.ExecuteScalar());
 
@@ -128,32 +131,75 @@ namespace DatingApp.Model.Matchfeed
             IDCreator creator = new();
             if (CheckIsMatch(userId, profileId))
             {
-                string query = @"INSERT INTO match (""match_id"",""pid_1"", ""pid_2"") SELECT @matchid, @pid1, @pid2";
-                var command = new NpgsqlCommand();
-                command.Parameters.AddWithValue("@pid1", userId);
-                command.Parameters.AddWithValue("@pid2", profileId);
-                command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
+                //Inserts the Match
+                string query = @"INSERT INTO match (""match_id"",""pid_1"", ""pid_2"") SELECT @matchid, @pid1, @pid2";           
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+                {
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                    {
+                        //Add parameters to the command to prevent SQL injection
+                        var command = new NpgsqlCommand();
+                        command.Parameters.AddWithValue("@pid1", userId);
+                        command.Parameters.AddWithValue("@pid2", profileId);
+                        command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
 
-                //BaseRepository.InsertData(conn, command);
-                //Create match
-                //Remove Like
-                
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        
+                    }
+                }
+                //Deletes the likes from the like table
+                string query = @"DELETE FROM likes WHERE (pid_1 = @pid1 AND pid_2 = @pid2) OR (pid_1 = @pid2 AND pid_2 = @pid1);";
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+                {
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                    {
+                        //Add parameters to the command to prevent SQL injection
+                        var command = new NpgsqlCommand();
+                        command.Parameters.AddWithValue("@pid1", userId);
+                        command.Parameters.AddWithValue("@pid2", profileId);
+                        command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+
+                return true;
             }
             else if(CheckIsLiked(userId, profileId))
              {
+                //if the like is a duplicate
                 //Do Nothing
-
+                return false;
 
              }
             else
             {
-                //Add To Liked
+                //Inserts the Match
+                string query = @"INSERT INTO match (""liked_id"",""pid_1"", ""pid_2"") SELECT @likeid, @pid1, @pid2";
+                using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
+                {
+                    using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                    {
+                        //Add parameters to the command to prevent SQL injection
+                        var command = new NpgsqlCommand();
+                        command.Parameters.AddWithValue("@pid1", userId);
+                        command.Parameters.AddWithValue("@pid2", profileId);
+                        command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(false));
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+
+                return false;
 
             }
             
-            //Return the result based on wheter it's a match
-            //If return = false, its not a match but like has been added
-            //If return = true, its a match, and the database has been updated
+            
             return false;
         }
 
