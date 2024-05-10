@@ -60,19 +60,14 @@ namespace DatingApp.DataRepository.matches
             return matches;
         }
 
-        /// <summary>
-        /// Deletes a match between the specified user and another user from the Matches table.
-        /// </summary>
-        /// <param name="userId">The user ID of the first user.</param>
-        /// <param name="matchUserId">The user ID of the match to be deleted.</param>
-        /// <returns>True if the operation was successful, indicating one or more rows were affected, false otherwise.</returns>
+        // Deletes a match between the specified user and another user from the Matches table
+        // name="userId">The user ID of the first user
+        // The user ID of the match to be deleted
+        // Return true if the operation was successful, indicating one or more rows were affected, false otherwise
         public bool DeleteMatch(int userId, int matchUserId)
         {
-            // SQL command to delete a match entry. This deletes rows where either the user or the match is specified in either column,
-            // ensuring that all references to this match are removed.
             string query = "DELETE FROM match WHERE (pid_1 = @UserId AND pid_2 = @MatchUserId) OR (pid_1 = @MatchUserId AND pid_2 = @UserId)";
 
-            // Parameters are used to safely inject the user IDs into the SQL command.
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@UserId", userId},

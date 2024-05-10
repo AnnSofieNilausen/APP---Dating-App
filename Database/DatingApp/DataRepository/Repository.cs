@@ -4,6 +4,7 @@ using Npgsql;
 using NpgsqlTypes;
 using DatingApp.Model.P;
 using DatingApp.Model.Conversion;
+using DatingApp.DataRepository.BaseRepo;
 
 namespace DatingApp.DataRepository
 {
@@ -180,7 +181,7 @@ namespace DatingApp.DataRepository
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = @"insert into profile (Fname,Lname, Dob, Gender, Aol, Username, sexual_orientation, Bio, searching_for, Interests, Occupation, Pictures, Likes, Matches, Instagram, Snapchat) values (@firstname,@lastname, @Dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
+            cmd.CommandText = @"insert into profile (fname, lname, dob, gender, aol, username, sexual_orientation, bio, searching_for, interests, occupation, pictures, likes, matches, instagram, snapchat) values (@firstname,@lastname, @Dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
 ";
 
             //adding parameters in a better way
