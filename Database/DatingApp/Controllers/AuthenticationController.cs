@@ -18,14 +18,15 @@ namespace DatingApp.Controllers.Auth
         }
 
 
-        [HttpPost("Username")]
+        [HttpPost()]
 
         public ActionResult Post(string username, string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-                return BadRequest($"Wrong password or Username");
+                string i = "bad";
+                return Ok(i);
             }
 
             else if (access == true)
