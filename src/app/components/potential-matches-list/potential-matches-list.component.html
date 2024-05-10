@@ -1,16 +1,21 @@
-<div *ngIf="profiles.length; else noProfiles" class="profile-container">
-  <ng-container *ngFor="let profile of profiles">
-    <div class="profile-card">
-      <button (click)="dislikeProfile(profile.id)" class="dislike-btn action-btn">Dislike</button>
-      <img [src]="profile.pictureUrl" alt="{{profile.name}}'s profile picture" class="profile-picture">
-      <div class="profile-info">
-        <h3>{{ profile.name }}</h3>
-        <p>{{ profile.description }}</p>
+<!-- src/app/matching/potential-matches-list.component.html -->
+
+<div class="potential-matches-container">
+  <h2>Potential Matches</h2>
+  <div *ngIf="potentialMatches.length; else noMatches">
+    <div *ngFor="let match of potentialMatches" class="match-card">
+      <img [src]="match.pictures?.[0]" alt="{{ match.fname }}'s profile picture" class="profile-pic">
+      <div class="match-info">
+        <h3>{{ match.fname }} {{ match.lname }}</h3>
+        <p>{{ match.bio || 'No bio available' }}</p>
+        <div class="actions">
+          <button (click)="likeUser(match.pid)" class="like-button">Like</button>
+          <button (click)="dislikeUser(match.pid)" class="dislike-button">Dislike</button>
+        </div>
       </div>
-      <button (click)="likeProfile(profile.id)" class="like-btn action-btn">Like</button>
     </div>
-  </ng-container>
+  </div>
+  <ng-template #noMatches>
+    <p>No potential matches found. Check back later!</p>
+  </ng-template>
 </div>
-<ng-template #noProfiles>
-  <p>No profiles available to display. Please check back later.</p>
-</ng-template>

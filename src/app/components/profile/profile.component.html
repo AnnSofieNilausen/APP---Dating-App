@@ -1,65 +1,65 @@
 <!-- profile.component.html -->
-<form (ngSubmit)="updateProfile()">
+<form *ngIf="profile" (ngSubmit)="updateProfile()">
   <mat-form-field appearance="fill">
     <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="userProfile.firstName" name="firstName" required>
+    <input matInput [value]="profile.fname || 'Not provided'" name="firstName" required readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="userProfile.lastName" name="lastName" required>
+    <input matInput [value]="profile.lname || 'Not provided'" name="lastName" required readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]="userProfile.email" name="email" type="email">
+    <input matInput [value]="profile.email || 'Not provided'" name="email" type="email" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Date of Birth</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="userProfile.dob" name="dob">
+    <input matInput [value]="profile.dob ? (profile.dob | date:'mediumDate') : 'Not provided'" name="dob" readonly>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Gender</mat-label>
-    <input matInput [(ngModel)]="userProfile.gender" name="gender">
+    <input matInput [value]="profile.gender || 'Not provided'" name="gender" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Area of Life (AoL)</mat-label>
-    <input matInput [(ngModel)]="userProfile.aol" name="aol">
+    <input matInput [value]="profile.aol || 'Not provided'" name="aol" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]="userProfile.username" name="username">
+    <input matInput [value]="profile.username || 'Not provided'" name="username" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Sexual Orientation</mat-label>
-    <input matInput [(ngModel)]="userProfile.sexualOrientation" name="sexualOrientation">
+    <input matInput [value]="profile.sexualOrientation || 'Not provided'" name="sexualOrientation" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Bio</mat-label>
-    <textarea matInput [(ngModel)]="userProfile.bio" name="bio"></textarea>
+    <textarea matInput [value]="profile.bio || 'Not provided'" name="bio" readonly></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Searching For</mat-label>
-    <input matInput [(ngModel)]="userProfile.searchingFor" name="searchingFor">
+    <input matInput [value]="profile.searchingFor || 'Not provided'" name="searchingFor" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Interests</mat-label>
-    <input matInput [(ngModel)]="userProfile.interests" name="interests">
+    <input matInput [value]="profile.interests || 'Not provided'" name="interests" readonly>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Occupation</mat-label>
-    <input matInput [(ngModel)]="userProfile.occupation" name="occupation">
+    <input matInput [value]="profile.occupation || 'Not provided'" name="occupation" readonly>
   </mat-form-field>
 
   <button type="submit" mat-raised-button color="primary">Update Profile</button>

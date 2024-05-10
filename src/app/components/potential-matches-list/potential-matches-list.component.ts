@@ -1,42 +1,48 @@
+// src/app/matching/matching.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { MatchingService } from '../../services/matching.service';
-import { CommonModule } from '@angular/common';
+import { MatchService } from '../../services/match.service';
+import { Profile } from '../../models/profile';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-matching',
   standalone: true,
-  templateUrl: './potential-matches-list.component.html',
-  styleUrls: ['./potential-matches-list.component.css'],
-  imports: [CommonModule]
+  templateUrl: './potential-matches-list.component.html', // relative path to the HTML template
+  styleUrls: ['./potential-matches-list.component.css'], // relative path to the CSS file
+  imports: [CommonModule, NgIf]
 })
 export class MatchingComponent implements OnInit {
-  profiles: any[] = [];
+  potentialMatches: Profile[] = [];
 
-  constructor(private matchingService: MatchingService) { }
+  constructor(private matchService: MatchService) {}
 
-  ngOnInit() {
-    this.loadProfiles();
+  ngOnInit(): void {
+    this.loadPotentialMatches();
   }
 
-  // Loads the profiles to be displayed
-  loadProfiles(): void {
-    this.matchingService.getProfiles().subscribe({
-      next: (profiles) => this.profiles = profiles,
-      error: (err) => console.error('Failed to load profiles', err)
+  loadPotentialMatches(): void {
+    this.matchService.getPotentialMatches().subscribe({
+      next: (matches) => this.potentialMatches = matches,
+      error: (error) => console.error('Failed to load potential matches', error)
     });
   }
 
-  // Handles the 'Like' action
-  likeProfile(profileId: number): void {
-    this.matchingService.likeProfile(profileId).subscribe({
-      complete: () => this.profiles = this.profiles.filter(p => p.id !== profileId)
+  likeUser(userId: bigint): void {
+    this.matchService.likeProfile(Number(userId)).subscribe({
+      next: () => {
+        // Optionally, refresh the list of potential matches or update the UI
+      },
+      error: (error) => console.error('Error liking user', error)
     });
   }
 
-  // Handles the 'Dislike' action
-  dislikeProfile(profileId: number): void {
-    this.matchingService.dislikeProfile(profileId).subscribe({
-      complete: () => this.profiles = this.profiles.filter(p => p.id !== profileId)
+  dislikeUser(userId: bigint): void {
+    this.matchService.dislikeProfile(Number(userId)).subscribe({
+      next: () => {
+        // Optionally, refresh the list of potential matches or update the UI
+      },
+      error: (error) => console.error('Error disliking user', error)
     });
   }
 }

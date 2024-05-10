@@ -1,57 +1,65 @@
-// profile.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
-import { UserProfile } from '../../models/profile';
-import { Router } from '@angular/router';
+import { Profile } from '../../models/profile';
 import { CommonModule } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepicker, MatDatepickerToggle } from '@angular/material/datepicker';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [CommonModule, MatFormField, MatLabel, FormsModule, ReactiveFormsModule, MatDatepickerModule],
+  imports: [CommonModule, FormsModule, MatFormField, MatDatepicker, MatLabel, MatDatepickerToggle]
 })
 export class ProfileComponent implements OnInit {
-  @Input() id!: number;  // Input property to receive id from parent component
-  userProfile!: UserProfile;
+  profile: Profile | null = null;
 
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private route: ActivatedRoute // Import ActivatedRoute
+  ) {}
 
-  ngOnInit() {
-    this.loadProfile();
-  }
-
-  loadProfile() {
-    this.profileService.getProfile(this.id).subscribe({
-      next: (profile) => {
-        this.userProfile = profile;
-      },
-      error: (err) => console.error('Failed to load profile', err)
+  ngOnInit(): void {
+    // Check for navigation state profile first
+    this.route.paramMap.subscribe(params => {
+      const routerState = this.router.getCurrentNavigation()?.extras.state;
+      if (routerState && routerState['profile']) {
+        this.profile = routerState['profile'];
+      } else {
+        // If no navigation state, load profile normally
+        this.loadProfile();
+      }
     });
   }
 
-  updateProfile() {
-    this.profileService.updateProfile(this.userProfile).subscribe({
-      next: () => {
-        console.log('Profile updated successfully');
-        // Optionally redirect or perform additional actions
-        this.router.navigate(['/profile']);  // Example redirection
-      },
-      error: (err) => console.error('Error updating profile:', err)
+  loadProfile(): void {
+    this.profileService.getProfile(1).subscribe({
+      next: (data) => this.profile = data,
+      error: (error) => console.error('Failed to load profile', error)
     });
   }
 
-  deleteProfile() {
-    this.profileService.deleteProfile(this.userProfile.id).subscribe({
-      next: () => {
-        console.log('Profile deleted successfully');
-        this.router.navigate(['/']);  // Redirect to home or another appropriate route
-      },
-      error: (err) => console.error('Error deleting profile:', err)
-    });
+  updateProfile(): void {
+    if (this.profile) {
+      const pidNumber = Number(this.profile.pid); // Convert pid to number if necessary
+      this.profileService.updateProfile(pidNumber, this.profile).subscribe({
+        next: (updatedProfile) => this.profile = updatedProfile,
+        error: (error) => console.error('Failed to update profile', error)
+      });
+    }
+  }
+
+  deleteProfile(): void {
+    if (this.profile) {
+      const pidNumber = Number(this.profile.pid);
+      this.profileService.deleteProfile(pidNumber).subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: (error) => console.error('Failed to delete profile', error)
+      });
+    }
   }
 }

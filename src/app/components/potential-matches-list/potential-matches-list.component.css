@@ -1,70 +1,57 @@
-/* Styling for the profile container */
-.profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-}
+/* src/app/matching/potential-matches-list.component.css */
 
-.profile-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.potential-matches-container {
   padding: 20px;
-  background: white;
+  max-width: 800px;
+  margin: auto;
+}
+
+.match-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #f9f9f9;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  width: 300px; /* Set a fixed square size */
-  height: 300px; /* Set a fixed square size */
-  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.profile-picture {
-  width: 100%;
-  height: auto;
-  max-height: 150px; /* Adjust based on your preference */
+.profile-pic {
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  border-radius: 5px;
+  border-right: 1px solid #ccc;
 }
 
-.action-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.match-info {
   padding: 10px;
-  cursor: pointer;
+  flex-grow: 1;
+}
+
+.match-info h3 {
+  margin-top: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.like-button,
+.dislike-button {
   border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
   border-radius: 5px;
-  font-size: 16px;
   color: white;
 }
 
-.like-btn {
-  right: -60px; /* Adjust based on your layout */
-  background-color: #4CAF50;
+.like-button {
+  background-color: #28a745; /* Green */
 }
 
-.dislike-btn {
-  left: -60px; /* Adjust based on your layout */
-  background-color: #f44336;
-}
-
-@media (max-width: 600px) {
-  .profile-card {
-    width: 90%;
-    height: auto;
-    flex-direction: column;
-  }
-
-  .action-btn {
-    position: static;
-    transform: none;
-    margin: 5px;
-  }
-
-  .like-btn, .dislike-btn {
-    width: 100%;
-  }
+.dislike-button {
+  background-color: #dc3545; /* Red */
 }

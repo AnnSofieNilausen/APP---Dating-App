@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MutualMatchesListComponent } from './mutual-matches-list.component';
+import { MatchesComponent } from './mutual-matches-list.component';
 
 describe('MutualMatchesListComponent', () => {
-  let component: MutualMatchesListComponent;
-  let fixture: ComponentFixture<MutualMatchesListComponent>;
+  let component: MatchesComponent;
+  let fixture: ComponentFixture<MatchesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MutualMatchesListComponent]
+      imports: [MatchesComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MutualMatchesListComponent);
+    fixture = TestBed.createComponent(MatchesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

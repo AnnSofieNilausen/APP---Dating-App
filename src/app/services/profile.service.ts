@@ -1,30 +1,27 @@
-// profile.service.ts
+// src/app/services/profile.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserProfile } from '../models/profile'; 
-import { ReactiveFormsModule } from '@angular/forms';
+import { Profile } from '../models/profile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'http://localhost:5057/api'; // Base URL for user-related API endpoints
+  private profileUrl = 'http://yourapi.com/api/profiles';  // Adjust URL as needed
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // Fetches the profile of a user by their ID
-  getProfile(userId: number): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/profile/${userId}`);
+  getProfile(userId: number): Observable<Profile> {
+    return this.http.get<Profile>(`${this.profileUrl}/${userId}`);
   }
 
-  // Updates the user's profile with new data
-  updateProfile(profile: UserProfile): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile/${profile.id}`, profile);
+  updateProfile(userId: number, profile: Profile): Observable<Profile> {
+    return this.http.put<Profile>(`${this.profileUrl}/${userId}`, profile);
   }
 
-  // Delete the user's profile 
-  deleteProfile(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/profile/${id}`);
+  deleteProfile(userId: number): Observable<any> {
+    return this.http.delete(`${this.profileUrl}/${userId}`);
   }
 }
