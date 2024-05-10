@@ -16,7 +16,7 @@ namespace DatingApp.Controllers.Registration
         }
 
 
-        [HttpPost]
+        [HttpPost()]
         public ActionResult Post([FromBody] Profile profile)
         {
             if (profile == null)
