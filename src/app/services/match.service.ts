@@ -1,36 +1,61 @@
-// src/app/services/match.service.ts
-
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/profile';
+import { AuthenticationService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchService {
-  private matchFeedUrl = 'http://yourapi.com/api/matchFeed';  // Adjust URL as needed
-  private matchUrl = 'http://yourapi.com/api/match';          // Adjust URL as needed
+  private matchFeedUrl = 'https://localhost:7196/api/MatchFeed';  // Base URL for match feed
+  private matchUrl = 'https://localhost:7196/api/Match';  // Base URL for matches
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
   getPotentialMatches(): Observable<Profile[]> {
-    return this.http.get<Profile[]>(`${this.matchFeedUrl}/potential`);
+    const userId = this.authService.getCurrentUserId();
+    if (userId === null) {
+      throw new Error("User not logged in");
+    }
+    return this.http.get<Profile[]>(`${this.matchFeedUrl}/GetProfile`, {
+      params: new HttpParams().set('id', userId.toString())
+    });
   }
 
   getCurrentMatches(): Observable<Profile[]> {
-    return this.http.get<Profile[]>(`${this.matchFeedUrl}/current`);
+    const userId = this.authService.getCurrentUserId();
+    if (userId === null) {
+      throw new Error("User not logged in");
+    }
+    return this.http.get<Profile[]>(`${this.matchUrl}/${userId}`);
   }
 
   likeProfile(likedUserId: number): Observable<any> {
-    return this.http.post(`${this.matchUrl}/like`, { likedUserId });
+    const likerId = this.authService.getCurrentUserId();
+    if (likerId === null) {
+      throw new Error("User not logged in");
+    }
+    return this.http.put(`${this.matchFeedUrl}/Like`, null, {
+      params: new HttpParams().set('liker', likerId.toString()).set('liked', likedUserId.toString())
+    });
   }
 
   dislikeProfile(dislikedUserId: number): Observable<any> {
-    return this.http.post(`${this.matchUrl}/dislike`, { dislikedUserId });
+    const dislikerId = this.authService.getCurrentUserId();
+    if (dislikerId === null) {
+      throw new Error("User not logged in");
+    }
+    return this.http.put(`${this.matchFeedUrl}/Dislike`, null, {
+      params: new HttpParams().set('disliker', dislikerId.toString()).set('disliked', dislikedUserId.toString())
+    });
   }
 
-  deleteMatch(matchId: number): Observable<any> {
-    return this.http.delete(`${this.matchUrl}/delete/${matchId}`);
+  deleteMatch(matcherId: number): Observable<any> {
+    const userId = this.authService.getCurrentUserId();
+    if (userId === null) {
+      throw new Error("User not logged in");
+    }
+    return this.http.delete(`${this.matchUrl}/${userId}/${matcherId}`);
   }
 }

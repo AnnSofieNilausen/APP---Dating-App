@@ -9,7 +9,7 @@ import { Profile } from '../models/profile';
   providedIn: 'root'
 })
 export class ProfileService {
-  private profileUrl = 'http://yourapi.com/api/profiles';  // Adjust URL as needed
+  private profileUrl = 'https://localhost:7196/api/profile';  // Adjust URL as needed
 
   constructor(private http: HttpClient) {}
 
