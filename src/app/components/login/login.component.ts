@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../../services/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -10,7 +9,7 @@ import { NgIf } from '@angular/common';
  standalone: true,
  templateUrl: './login.component.html',
  styleUrls: ['./login.component.css'],
- imports: [FormsModule, NgIf]
+ imports: [FormsModule]
 })
 export class LoginComponent {
  username: string = '';
@@ -21,22 +20,18 @@ export class LoginComponent {
  constructor(private authService: AuthenticationService, private router: Router) {}
 
 
- onLogin(): void
- {
-   this.authService.login(this.username, this.password).subscribe
-   (
-     {
-     next: (Profile) =>
-       {
-       console.log('Login successful:', Profile);
-       },
-     error: (error) =>
-       {
+ onLogin(): void {
+   this.authService.login(this.username, this.password).subscribe({
+     next: (profile) => {
+       // Pass data directly via state
+       const navigationExtras: NavigationExtras = {
+         state: { profile }
+       };
+       this.router.navigate(['/profile'], navigationExtras);
+     },
+     error: (error) => {
        this.errorMessage = 'Invalid username or password';
-       }
      }
-   )
+   });
  }
 }
-
-

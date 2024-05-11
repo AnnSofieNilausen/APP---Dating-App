@@ -7,7 +7,7 @@ import { Profile } from '../models/profile';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://yourapi.com/api/authentication';
+  private apiUrl = 'https://localhost:7196/api/authentication';
 
   constructor(private http: HttpClient) {}
 
