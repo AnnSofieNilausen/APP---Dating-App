@@ -157,7 +157,6 @@ namespace DatingApp.Model.Matchfeed
                         //Add parameters to the command to prevent SQL injection
                         command.Parameters.AddWithValue("@pid1", userId);
                         command.Parameters.AddWithValue("@pid2", profileId);
-                        command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(true));
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -176,8 +175,8 @@ namespace DatingApp.Model.Matchfeed
              }
             else
             {
-                //Inserts the Match
-                string query = @"INSERT INTO match (""liked_id"",""pid_1"", ""pid_2"") SELECT @likeid, @pid1, @pid2";
+                //Inserts the like
+                string query = @"INSERT INTO likes (""like_id"",""pid_1"", ""pid_2"") SELECT @likeid, @pid1, @pid2";
                 using (NpgsqlConnection connection = new NpgsqlConnection(ConnectionString))
                 {
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
@@ -185,7 +184,7 @@ namespace DatingApp.Model.Matchfeed
                         //Add parameters to the command to prevent SQL injection
                         command.Parameters.AddWithValue("@pid1", userId);
                         command.Parameters.AddWithValue("@pid2", profileId);
-                        command.Parameters.AddWithValue("@matchid", creator.GetUniqueIntID(false));
+                        command.Parameters.AddWithValue("@likeid", creator.GetUniqueIntID(false));
 
                         connection.Open();
                         command.ExecuteNonQuery();

@@ -44,13 +44,12 @@ namespace DatingApp.Model.IDcreator
 
                 using NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
 
-                using NpgsqlCommand command = new NpgsqlCommand(query, connection);                
+                using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+                
                 command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
                 connection.Open();
                 int result = int.Parse(command.ExecuteScalar().ToString());
                 bool unique = (result == 0);
-                connection.Close();
 
                 return unique;
         }
