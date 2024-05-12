@@ -1,3 +1,4 @@
+using DatingApp.DataRepository.BaseRepo;
 using DatingApp.Model.Matchfeed;
 using Npgsql;
 
@@ -7,9 +8,10 @@ namespace DatingApp.Model.IDcreator
 {
     public class IDCreator : Match_feed
     {
+        BaseRepository baserepo = new();
+        Random r = new Random();
         public int GetUniqueIntID(bool match) 
         {
-            Random r = new Random();
             while (true)
             {
                 int i = r.Next();
@@ -40,19 +42,23 @@ namespace DatingApp.Model.IDcreator
             FROM likes
             WHERE like_id = @id";
                 }
+           
+             
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    {"@id", id}
+                };
+                return baserepo.ExecuteNonQuery(query, parameters) > 0;
+        }
 
+        public int GetRandomInt(int max) 
+        {
+            int rand =r.Next(max);
 
-                using NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
+            return rand;
 
-                using NpgsqlCommand command = new NpgsqlCommand(query, connection);
-                
-                command.Parameters.AddWithValue("@id", id);
-                connection.Open();
-                int result = int.Parse(command.ExecuteScalar().ToString());
-                bool unique = (result == 0);
-
-                return unique;
         }
     }
+
     
 }
