@@ -13,15 +13,15 @@ export class MatchService {
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
-  getPotentialMatches(): Observable<Profile[]> {
+  getPotentialMatches(): Observable<Profile> {
     const userId = this.authService.getCurrentUserId();
     if (userId === null) {
       throw new Error("User not logged in");
     }
-    return this.http.get<Profile[]>(`${this.matchFeedUrl}/GetProfile`, {
+    return this.http.get<Profile>(`${this.matchFeedUrl}/GetProfile`, {
       params: new HttpParams().set('id', userId.toString())
     });
-  }
+  }  
 
   getCurrentMatches(): Observable<Profile[]> {
     const userId = this.authService.getCurrentUserId();

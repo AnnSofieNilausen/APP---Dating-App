@@ -1,5 +1,5 @@
 export interface Profile {
-  ID: number;  // Ensure consistency in how this is used across your application
+  pid: number;  // Ensure consistency in how this is used across your application
   Fname: string;
   Lname?: string;
   Dob: Date;

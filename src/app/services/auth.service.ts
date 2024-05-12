@@ -20,18 +20,18 @@ export class AuthenticationService {
     // Assuming the backend returns the profile including an 'id' field upon successful login
     return this.http.get<Profile>(`${this.apiUrl}/login`, { params }).pipe(
       tap((profile: Profile) => {
-        if (profile && profile.ID) {
-          sessionStorage.setItem('userId', profile.ID.toString()); // Store user ID in session storage
+        if (profile && profile.pid) {
+          sessionStorage.setItem('userId', profile.pid.toString()); // Store user ID in session storage
         }
       })
     );
   }
 
   // Method to retrieve the current user's ID from session storage
-  getCurrentUserId(): number {
+  getCurrentUserId(): number | null {
     const userId = sessionStorage.getItem('userId');
-    return userId ? parseInt(userId) : -1; // Return -1 or another indicator value when there's no user ID
-  }  
+    return userId ? parseInt(userId) : null;  // Changed from -1 to null
+  }
 
   // Method to check if the user is logged in
   isLoggedIn(): boolean {

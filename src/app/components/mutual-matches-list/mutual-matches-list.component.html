@@ -2,13 +2,13 @@
 
 <div class="matches-container">
   <h2>Your Matches</h2>
-  <ul *ngIf="matches.length > 0; else noMatches">
-    <li *ngFor="let match of matches">
+  <ul *ngIf="mutualMatches.length > 0; else noMatches">
+    <li *ngFor="let match of mutualMatches">
       <div class="match-card">
         <h3>{{ match.Fname }} {{ match.Lname }}</h3>
         <p>Bio: {{ match.Bio || 'No bio available' }}</p>
-        <!-- Adjust the delete button to use 'id' or the appropriate identifier -->
-        <button (click)="deleteMatch(match.ID)">Delete Match</button>
+        <!-- Make sure to use the correct identifier, update if it's not ID -->
+        <button (click)="deleteMatch(match.pid)">Delete Match</button>
       </div>
     </li>
   </ul>

@@ -1,15 +1,11 @@
 <!-- potential-matches-list.component.html -->
-<div *ngIf="potentialMatches.length > 0; else noMatches">
-  <ul>
-    <li *ngFor="let profile of potentialMatches">
-      <div>
-        <h3>{{ profile.Fname }}</h3>
-        <p>{{ profile.Bio }}</p>
-        <button (click)="likeUser(profile.ID)">Like</button>
-        <button (click)="dislikeUser(profile.ID)">Dislike</button>
-      </div>
-    </li>
-  </ul>
+<div *ngIf="currentProfile; else noMatches">
+  <div>
+    <h3>{{ currentProfile.Fname }}</h3>
+    <p>{{ currentProfile.Bio }}</p>
+    <button (click)="likeUser()">Like</button>
+    <button (click)="dislikeUser()">Dislike</button>
+  </div>
 </div>
 <ng-template #noMatches>
   <p>No potential matches found.</p>

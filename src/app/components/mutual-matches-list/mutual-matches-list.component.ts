@@ -1,38 +1,36 @@
-// src/app/matches/matches.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from '../../services/match.service';
-import { Profile } from '../../models/profile'; // Updated import
+import { Profile } from '../../models/profile';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-mutual-matches-list',
-  templateUrl: '../../components/mutual-matches-list/mutual-matches-list.component.html',
-  styleUrls: ['./mutual-matches-list.component.css'],
+  selector: 'app-mutual-matches',
   standalone: true,
-  imports: [CommonModule] // Ensure CommonModule is imported
+  templateUrl: './mutual-matches-list.component.html',
+  styleUrls: ['./mutual-matches-list.component.css'],
+  imports: [CommonModule]
 })
 export class MatchesComponent implements OnInit {
-  matches: Profile[] = [];  // Changed type from Match[] to Profile[]
+  mutualMatches: Profile[] = [];
 
   constructor(private matchService: MatchService) {}
 
   ngOnInit(): void {
-    this.loadMatches();
+    this.loadMutualMatches();
   }
 
-  loadMatches(): void {
+  loadMutualMatches(): void {
     this.matchService.getCurrentMatches().subscribe({
-      next: (matches) => this.matches = matches,
-      error: (error) => console.error('Failed to load matches', error)
+      next: (matches) => this.mutualMatches = matches,
+      error: (error) => console.error('Failed to load mutual matches', error)
     });
   }
 
-  deleteMatch(matchId: number): void {
-    this.matchService.deleteMatch(matchId).subscribe({
+  deleteMatch(matcherId: number): void {
+    this.matchService.deleteMatch(matcherId).subscribe({
       next: () => {
-        // Optionally, refresh the list of matches or update the UI
-        this.loadMatches();  // Reload the matches after deletion
+        console.log('Match deleted successfully');
+        this.mutualMatches = this.mutualMatches.filter(match => match.pid !== matcherId);  // Update the list after deletion
       },
       error: (error) => console.error('Failed to delete match', error)
     });
