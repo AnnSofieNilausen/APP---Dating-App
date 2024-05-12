@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f0e67ee8d78b5d2db49550eaeb09333e1b0f36a")]
->>>>>>> ce5a7a7fc3e53cbe541cd16ea7f470652c1829ff
 [assembly: System.Reflection.AssemblyProductAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APApiDbS2024InClass")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
