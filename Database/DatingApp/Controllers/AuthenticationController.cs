@@ -14,7 +14,7 @@ namespace DatingApp.Controllers.Auth
 
         public AuthenticationController()
         {
-            Repository = new Repository();
+            Repository = new Repository();   
             userAuthentication = new UserAuthentication();
         }
 
@@ -27,8 +27,6 @@ namespace DatingApp.Controllers.Auth
 
                 string i = "bad";
                 return Ok(i);
-
-                return BadRequest("Wrong Username or Password");
 
             }
 
