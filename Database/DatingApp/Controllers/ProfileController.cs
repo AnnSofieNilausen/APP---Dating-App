@@ -50,7 +50,7 @@ namespace DatingApp.Controllers.P
             bool status = Repository.UpdateProfile(profile);
             if (status)
             {
-                return Ok(profile);
+                return Ok(Repository.GetProfileById(profile.ID));
             }
 
             return BadRequest("Something went wrong");
