@@ -196,9 +196,9 @@ namespace DatingApp.DataRepository
             cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
             cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
             cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
-            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.Pictures);
-            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.Likes);
-            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.Matches);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Text , p.Pictures);
+            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Integer, p.Likes);
+            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Integer, p.Matches);
             cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
             cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
             
@@ -219,36 +219,30 @@ namespace DatingApp.DataRepository
     Dob=@DoB,
     Gender=@Gender,
     Aol=@AoL,
-    Username=@Username,
     sexual_orientation=@Sexual_Orientation,
     Bio=@Bio,
     searching_for=@Searching_For,
     Interests=@Interests,
     Occupation=@Occupation,
     Pictures=@Pictures,
-    Likes=@Likes,
-    Matches=@Matches,
     Snapchat=@Snapchat,
     Instagram=@Instagram
     
 where
-pid = @Pid";
+pid = @pid";
 
-
+            cmd.Parameters.AddWithValue("@pid", NpgsqlDbType.Integer, p.ID);
             cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
             cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.Dob);
             cmd.Parameters.AddWithValue("@Gender", NpgsqlDbType.Text, p.Gender);
             cmd.Parameters.AddWithValue("@AoL", NpgsqlDbType.Text, p.Aol);
-            cmd.Parameters.AddWithValue("@Username", NpgsqlDbType.Text, p.Username);
             cmd.Parameters.AddWithValue("@Sexual_Orientation", NpgsqlDbType.Text, p.Sexualorientation);
             cmd.Parameters.AddWithValue("@Bio", NpgsqlDbType.Text, p.Bio);
             cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
             cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
             cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
-            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Bytea, p.Pictures);
-            cmd.Parameters.AddWithValue("@Likes", NpgsqlDbType.Bigint, p.Likes);
-            cmd.Parameters.AddWithValue("@Matches", NpgsqlDbType.Bigint, p.Matches);
+            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Text , p.Pictures);
             cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
             cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
 
