@@ -62,7 +62,7 @@ namespace DatingApp.Controllers.match
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}, {id2}")]
+        [HttpDelete()]
         public ActionResult Delete(int userID, int matcherID)
         {
             Profile existingProfile = Repository.GetProfileById(userID);
@@ -70,15 +70,13 @@ namespace DatingApp.Controllers.match
             if (existingProfile == null)
             {
                 return NotFound($"Profile with id {userID} not found");
-            }else if (existingForeignProfile.ID == matcherID)
-            {
-                return NotFound($"Profile with id {matcherID} not found");
+           
             }
 
             bool status = matchrepository.DeleteMatch(userID, matcherID);
             if (status)
             {
-                return NoContent();
+                return Ok(true);
             }
 
             return BadRequest($"Unable to delete match with id {userID}");
