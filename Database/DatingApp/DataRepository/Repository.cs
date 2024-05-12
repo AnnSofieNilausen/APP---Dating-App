@@ -246,12 +246,11 @@ pid = @pid";
             cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
             cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
 
-           /* { "@Fname",Fname},
+           /*{ "@Fname",Fname},
                 { "@Lname", Lname},
                 { "@DoB", Dob},
                 { "@Gender", Gender},
                 { "@AoL", AoL},
-                { "@Username", Username},
                 { "@SexualOrientation", Sexualorientation},
                 { "@Bio", Bio},
                 { "@SearchingFor", Searchingfor},
