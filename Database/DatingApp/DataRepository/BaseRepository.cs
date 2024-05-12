@@ -9,7 +9,7 @@ namespace DatingApp.DataRepository.BaseRepo
 {
     public class BaseRepository
     {
-        protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourpassword;";
+        protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp2.0; Username=postgres; Password=yourpassword;";
 
         protected internal NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
