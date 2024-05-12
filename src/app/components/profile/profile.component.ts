@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { AuthenticationService } from '../../services/auth.service';
@@ -10,8 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
-import { MatDateRangePicker } from '@angular/material/datepicker';
-
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -25,47 +24,62 @@ import { MatDateRangePicker } from '@angular/material/datepicker';
   ]
 })
 export class ProfileComponent implements OnInit {
-  profile: Profile | null = null;
+  profile: Profile = {
+    pid: 0,
+    Fname: '',
+    Lname: '',
+    Dob: new Date(),
+    Gender: '',
+    Aol: '',
+    Username: '',
+    SexualOrientation: '',
+    Bio: '',
+    SearchingFor: '',
+    Interests: '',
+    Occupation: '',
+    Pictures: '',
+    Likes: 0,
+    Matches: 0,
+    Instagram: '',
+    Snapchat: ''
+  };
 
-  constructor(
-    private profileService: ProfileService,
-    private authService: AuthenticationService, // Add the AuthenticationService
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    @ViewChild('profileForm') profileForm!: NgForm;
 
-  ngOnInit(): void {
-    this.loadProfile();
-  }
-
-  loadProfile(): void {
-    const userId = this.authService.getCurrentUserId();
-    if (userId === null || userId === -1) {  // Add a check for -1 if continuing to use it
-      console.error('Invalid or no user ID found');
-      this.router.navigate(['/login']);  // Redirect to login or show an error message
-      return;
-    }
-    this.profileService.getProfile(userId).subscribe({
-      next: (data) => this.profile = data,
-      error: (error) => console.error('Failed to load profile', error)
-    });
-  }
+    constructor(
+      private profileService: ProfileService,
+      private authService: AuthenticationService,
+      private router: Router
+    ) {}
   
-  updateProfile(): void {
-    if (this.profile) {
-      this.profileService.updateProfile(this.profile.pid, this.profile).subscribe({
-        next: (updatedProfile) => this.profile = updatedProfile,
-        error: (error) => console.error('Failed to update profile', error)
-      });
+    ngOnInit(): void {
+      this.loadProfile();
+    }
+  
+    loadProfile(): void {
+      const userId = this.authService.getCurrentUserId();
+      if (userId !== null) {
+        this.profileService.getProfile(userId).subscribe({
+          next: (data) => this.profile = data,
+          error: (error) => {
+            console.error('Failed to load profile', error);
+            this.router.navigate(['/login']);
+          }
+        });
+      } else {
+        this.router.navigate(['/login']);
+      }
+    }
+  
+    updateProfile(): void {
+      if (this.profile && this.profileForm.valid) {
+        this.profileService.updateProfile(this.profile.pid, this.profile).subscribe({
+          next: (updatedProfile) => {
+            this.profile = updatedProfile;
+            console.log('Profile updated:', this.profile);
+          },
+          error: (error) => console.error('Failed to update profile', error)
+        });
+      }
     }
   }
-
-  deleteProfile(): void {
-    if (this.profile) {
-      this.profileService.deleteProfile(this.profile.pid).subscribe({
-        next: () => this.router.navigate(['/login']),
-        error: (error) => console.error('Failed to delete profile', error)
-      });
-    }
-  }
-}
