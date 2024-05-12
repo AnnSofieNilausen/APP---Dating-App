@@ -9,7 +9,7 @@ namespace DatingApp.DataRepository.BaseRepo
 {
     public class BaseRepository
     {
-        protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp2.0; Username=postgres; Password=yourpassword;";
+        protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourpassword;";
 
         protected internal NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
@@ -40,7 +40,7 @@ namespace DatingApp.DataRepository.BaseRepo
             return true;
         }
 
-        protected IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
+        public IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
         {
             using var conn = new NpgsqlConnection(ConnectionString);
             {
@@ -64,7 +64,7 @@ namespace DatingApp.DataRepository.BaseRepo
                 }
             }
         }
-        protected internal int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+        public int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {

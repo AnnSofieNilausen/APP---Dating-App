@@ -6,21 +6,29 @@ using Npgsql;
 //Generates Unique IDs for use when creating a match or Like
 namespace DatingApp.Model.IDcreator
 {
-    public class IDCreator : Match_feed
+    public class IDCreator
     {
-        BaseRepository baserepo = new();
-        Random r = new Random();
+        readonly BaseRepository baserepo = new();
+        Random rand = new Random();
+
         public int GetUniqueIntID(bool match) 
         {
-            while (true)
-            {
-                int i = r.Next();
-                if (CheckUniqueID( i, match))
-                {
-                    return i;
-                }
-            }
 
+            while(true)
+            {
+
+                int j = rand.Next();          
+                if (CheckUniqueID(j, match))
+                {
+                    return j + 1;
+                }
+                else
+                {
+                    return j;
+                }
+                
+           }
+          
         }
 
         //Checks if the random number generated is already used
@@ -31,14 +39,14 @@ namespace DatingApp.Model.IDcreator
                 if (match)
                 {
                     query = @"
-            SELECT COUNT(*)
-            FROM Match
+            SELECT *
+            FROM match
             WHERE match_id = @id";
                 }
                 else
                 {
                     query = @"
-            SELECT COUNT(*)
+            SELECT *
             FROM likes
             WHERE like_id = @id";
                 }
@@ -48,15 +56,15 @@ namespace DatingApp.Model.IDcreator
                 {
                     {"@id", id}
                 };
-                return baserepo.ExecuteNonQuery(query, parameters) > 0;
+                //return repo.GetDataDyn(query, parameters).Count();
+                return false;
         }
-
+  
         public int GetRandomInt(int max) 
         {
-            int rand =r.Next(max);
+           int r = rand.Next(0, max);
 
-            return rand;
-
+            return r;
         }
     }
 

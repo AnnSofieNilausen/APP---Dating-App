@@ -38,7 +38,7 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpPut("Like")]
         public ActionResult PutLike(int liker, int liked)
         {
-            matchfeed.PutLike(liker, liked);
+            //matchfeed.PutLike(liker, liked);
             return Ok(matchfeed.GetRandomProfile(liker));
         }
 

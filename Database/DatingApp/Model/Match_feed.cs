@@ -1,52 +1,52 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using DatingApp.DataRepository;
-using Npgsql;
+﻿using DatingApp.DataRepository;
 using DatingApp.Model.P;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using DatingApp.Model.IDcreator;
-using System.Security.Cryptography;
 using DatingApp.DataRepository.BaseRepo;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using System;
+using DatingApp.Model.IDcreator;
 
 namespace DatingApp.Model.Matchfeed
 {
     public class Match_feed : BaseRepository
     {
-        IDCreator creator = new();
+
         public BaseRepository baserepo = new BaseRepository();
         readonly Repository repo = new Repository();
-
+        IDCreator idcreator = new IDCreator();
+        
         // Method to retrieve a random profile ID from the repository
-        public Profile GetRandomProfile(int userid)
+        public int GetRandomProfile(int userid)
         {
-            string query = "SELECT COUNT(*) FROM profile";
+            //var rand = new Random();
+            string query = "SELECT * FROM profile";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
+            int count = baserepo.GetDataDyn(query, parameters).Count();
+            
+            //int randid;
+            
+            while(true)
             {
-                parameters.Add("@pid", userid);
-            }
-
-            int count = Convert.ToInt32(baserepo.ExecuteNonQuery(query, parameters));
-            int randid;
-            while (true)
-            {
-                randid = creator.GetRandomInt(count);
-                if (randid != userid)
-                {
-                    break;
-                }
-                else
+                randid = rand.Next(count);
+                if (randid == userid)
                 {
                     continue;
                 }
+                else
+                {
+                    break;
+                }
+                
             }
-
+            
+            return count;
+            
             Profile Matchfeed_profile = repo.GetSafeProfileById(randid, false);
             return Matchfeed_profile;
+            
         }
 
 
         
-
+        
         //Method to check whether the current user has already been liked by the displayed profile
         public bool CheckIsLiked(int liker, int liked)
         {
@@ -54,7 +54,7 @@ namespace DatingApp.Model.Matchfeed
 
             //pid_1 = Liker, pid_2 = Liked
             string query = @"
-            SELECT COUNT(*)
+            SELECT *
             FROM likes
             WHERE pid_1 = @UserId AND pid_2 = @ProfileId
         ";
@@ -67,7 +67,7 @@ namespace DatingApp.Model.Matchfeed
                     parameter.Add("@ProfileId", liked);
                 }
 
-                isLiked = Convert.ToInt32(baserepo.ExecuteNonQuery(query, parameter)) > 0;
+                isLiked = baserepo.GetDataDyn(query, parameter).Count() > 0;
 
             }
             catch (Exception ex)
@@ -94,14 +94,14 @@ namespace DatingApp.Model.Matchfeed
                     //WHERE L1.UserId = @UserId
                     //";
 
-                string query = "SELECT COUNT(*) FROM match WHERE (pid_1 = @liker AND pid_2 = @liked) OR (pid_1 = @liked AND pid_2 = @liker)";
+                string query = "SELECT * FROM match WHERE (pid_1 = @liker AND pid_2 = @liked) OR (pid_1 = @liked AND pid_2 = @liker)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                        {
                            parameter.Add("@UserId", liker);
                            parameter.Add("@LikedProfileId", liked);
                        }
                //if the count is greater than 0, a match exists
-              return Convert.ToInt32(baserepo.ExecuteNonQuery(query, parameter)) > 0;
+              return baserepo.GetDataDyn(query, parameter).Count() > 0;
 
             }
 
@@ -170,7 +170,7 @@ namespace DatingApp.Model.Matchfeed
         }
 
 
-
+        
 
     }
 
