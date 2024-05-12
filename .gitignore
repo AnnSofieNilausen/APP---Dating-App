@@ -36,3 +36,4 @@
 *.json
 /Database/DatingApp/obj/APApiDbS2024InClass.csproj.nuget.dgspec.json
 /Database/DatingApp/obj/project.nuget.cache
+/Database/DatingApp/bin/Debug/net7.0/APApiDbS2024InClass.dll
