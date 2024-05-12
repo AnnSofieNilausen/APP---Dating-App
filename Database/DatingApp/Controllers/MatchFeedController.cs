@@ -39,7 +39,7 @@ namespace DatingApp.Controllers.MatchFeed
         public ActionResult PutLike(int liker, int liked)
         {
             matchfeed.PutLike(liker, liked);
-            return BadRequest(matchfeed.GetRandomProfile(liker));
+            return Ok(matchfeed.GetRandomProfile(liker));
         }
 
         /*
@@ -51,17 +51,7 @@ namespace DatingApp.Controllers.MatchFeed
         public ActionResult PutDislike(int disliker, int disliked)
         {
             
-            return BadRequest(matchfeed.GetRandomProfile(disliker));
+            return Ok(matchfeed.GetRandomProfile(disliker));
         }
-
-
-
-
-
-
     }
-
-
-
-
 }

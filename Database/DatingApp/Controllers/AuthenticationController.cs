@@ -14,18 +14,20 @@ namespace DatingApp.Controllers.Auth
 
         public AuthenticationController()
         {
-            Repository = new Repository();
+            Repository = new Repository();   
             userAuthentication = new UserAuthentication();
         }
 
-
-        [HttpGet()]
-        public ActionResult Get(string username, string password)
+        [HttpGet("login")]
+        public ActionResult Login([FromQuery] string username, [FromQuery] string password)
         {
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-                return BadRequest("Wrong Username or Password");
+
+                string i = "bad";
+                return Ok(i);
+
             }
 
             else if (access == true)
@@ -46,12 +48,5 @@ namespace DatingApp.Controllers.Auth
         }
 
     }
-
-
-
-
-
-
-
 
 }
