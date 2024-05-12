@@ -649,26 +649,32 @@
     ]
   },
   "packageFolders": {
-    "/Users/annsofienilausen/.nuget/packages/": {}
+    "C:\\Users\\jona9\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj",
+      "projectUniqueName": "C:\\Users\\jona9\\source\\repos\\APP---Dating-App\\Database\\DatingApp\\APApiDbS2024InClass.csproj",
       "projectName": "APApiDbS2024InClass",
-      "projectPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/APApiDbS2024InClass.csproj",
-      "packagesPath": "/Users/annsofienilausen/.nuget/packages/",
-      "outputPath": "/Users/annsofienilausen/Desktop/APP---Dating-App2/database/DatingApp/obj/",
+      "projectPath": "C:\\Users\\jona9\\source\\repos\\APP---Dating-App\\Database\\DatingApp\\APApiDbS2024InClass.csproj",
+      "packagesPath": "C:\\Users\\jona9\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jona9\\source\\repos\\APP---Dating-App\\Database\\DatingApp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/annsofienilausen/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\jona9\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
-        "/usr/local/share/dotnet/sdk/7.0.315/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -681,6 +687,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -719,8 +730,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.315/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Npgsql' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
+      "libraryId": "Npgsql",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

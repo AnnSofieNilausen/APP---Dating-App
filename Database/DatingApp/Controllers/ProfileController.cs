@@ -38,13 +38,9 @@ namespace DatingApp.Controllers.P
 
         // PUT api/values/5
         [HttpPut()]
-        public ActionResult Put(int id, [FromBody] Profile profile)
+        public ActionResult Put([FromBody] Profile profile)
         {
-            if (id != profile.ID)
-            {
-                return BadRequest("Mismatched profile ID");
-            }
-
+            
             Profile existingprofile = Repository.GetProfileById(profile.ID);
             if (existingprofile == null)
             {
