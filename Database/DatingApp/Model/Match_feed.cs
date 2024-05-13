@@ -105,7 +105,7 @@ namespace DatingApp.Model.Matchfeed
         private int CheckIsMutualLike(int liker, int liked)
             {
             
-                string query = $"SELECT * FROM likes WHERE (pid_1 = @userid AND pid_2 = @profileid) OR (pid_1 = @profileid AND pid_2 = @userid)";
+                string query = $"SELECT * FROM likes WHERE (pid_1 = @profileid AND pid_2 = @userid)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                        {
                            parameter.Add(@"userid", liker);
@@ -117,9 +117,14 @@ namespace DatingApp.Model.Matchfeed
         }
        
         //This goes through the checks and motions when a user likes another
-        public object PutLike(int userId, int profileId)
+        public bool PutLike(int userId, int profileId)
         {   //If it's not a match, add the like to the like list
-            if (CheckIsMutualLike(userId, profileId) > 1)
+            if (CheckIsMatch(userId, profileId) == true)
+            {
+                //Do Nothing if Match already exists
+                return true;
+            }
+            else if (CheckIsMutualLike(userId, profileId) == 1)
             {
                 try
                 {
@@ -145,12 +150,12 @@ namespace DatingApp.Model.Matchfeed
                     }
                     baserepo.ExecuteNonQuery(query, parameter2);
 
-                    return 1;
+                    return true;
 
                 } catch (Exception ex)
                 {
                     Console.WriteLine($"Error checking for match: {ex.Message}");
-                    return 6;
+                    return false;
                 }
                 
             }
@@ -158,16 +163,9 @@ namespace DatingApp.Model.Matchfeed
              {
                 //if the like is a duplicate
                 //Do Nothing
-                return 2;
+                return true;
 
              }
-            else if (CheckIsMatch(userId, profileId)==true)
-            {
-                //Do Nothing if Match already exists
-                return 3;
-
-
-            }
             else if (CheckIsMutualLike(userId,profileId)<=1)
             {
                 //Inserts the like
@@ -181,10 +179,10 @@ namespace DatingApp.Model.Matchfeed
                         }
                         baserepo.ExecuteNonQuery(query, parameter2);
 
-                return 4;
+                return true;
 
             }
-            return 5;
+            return false;
 
         }
 
