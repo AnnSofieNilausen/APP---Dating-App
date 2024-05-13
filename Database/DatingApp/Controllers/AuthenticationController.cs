@@ -24,10 +24,7 @@ namespace DatingApp.Controllers.Auth
             bool access = userAuthentication.AuthenticateUser(username, password);
             if (access == false)
             {
-
-                string i = "bad";
-                return Ok(i);
-
+                return Ok(false);
             }
 
             else if (access == true)

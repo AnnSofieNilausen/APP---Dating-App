@@ -1,35 +1,38 @@
 using DatingApp.DataRepository.BaseRepo;
 using DatingApp.Model.Matchfeed;
 using Npgsql;
+using System.Runtime.InteropServices;
+
 
 
 //Generates Unique IDs for use when creating a match or Like
 namespace DatingApp.Model.IDcreator
 {
     public class IDCreator
-    {
+    { 
         readonly BaseRepository baserepo = new();
         Random rand = new Random();
 
-        public int GetUniqueIntID(bool match) 
+        public int GetUniqueIntID(bool match, [ Optional ] int rand1) 
         {
 
             while(true)
             {
 
-                int j = rand.Next();          
-                if (CheckUniqueID(j, match))
+                //int j = rand.Next();
+                int j = rand1;
+                if (!CheckUniqueID(j, match))
                 {
-                    return j;
+                    return j;                   
                 }
-                return j;
-                
-           }
+                return -1;
+
+            }
           
         }
 
         //Checks if the random number generated is already used
-        private bool CheckUniqueID(int id, bool match)
+        public bool CheckUniqueID(int id, bool match)
         {
                 string query;
 
