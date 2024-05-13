@@ -89,11 +89,11 @@ namespace DatingApp.Model.Matchfeed
                 //WHERE L1.UserId = @UserId
                 //";
 
-                string query = $"SELECT * FROM match WHERE (pid_1 = {liker} AND pid_2 = {liked}) OR (pid_1 = {liked} AND pid_2 = {liker})";
+                string query = $"SELECT * FROM match WHERE (pid_1 = @userid AND pid_2 = @profileid) OR (pid_1 = @profileid AND pid_2 = userid)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                 {
-                    parameter.Add("@UserId", liker);
-                    parameter.Add("@LikedProfileId", liked);
+                    parameter.Add("@userid", liker);
+                    parameter.Add("@profileid", liked);
                 }
                 //if the count is greater than 0, a match exists
                 return baserepo.GetDataDyn(query, parameter).Any();
@@ -112,11 +112,11 @@ namespace DatingApp.Model.Matchfeed
         private int CheckIsMutualLike(int liker, int liked)
             {
             
-                string query = $"SELECT * FROM likes WHERE (pid_1 = @userId AND pid_2 = @profileId) OR (pid_1 = @profileId AND pid_2 = @userId)";
+                string query = $"SELECT * FROM likes WHERE (pid_1 = @userid AND pid_2 = @profilepd) OR (pid_1 = @profileid AND pid_2 = @userid)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                        {
-                           parameter.Add(@"UserId", liker);
-                           parameter.Add(@"LikedProfileId", liked);
+                           parameter.Add(@"userid", liker);
+                           parameter.Add(@"profileid", liked);
                        }
                //if the count is greater than 0, a match exists
               return baserepo.GetDataDyn(query, parameter).Count();
