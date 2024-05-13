@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using DatingApp.Model.P;
 using DatingApp.Model.Matchfeed;
 
-
 namespace DatingApp.Controllers.MatchFeed
 {
     [Route("api/[controller]")]
@@ -38,9 +37,10 @@ namespace DatingApp.Controllers.MatchFeed
         [HttpPut("Like")]
         public ActionResult PutLike(int liker, int liked)
         {
-            //matchfeed.PutLike(liker, liked);
-            return Ok(matchfeed.GetRandomProfile(liker));
+            matchfeed.GetRandomProfile(liker);                               
+            return Ok(matchfeed.PutLike(liker, liked) );
         }
+
 
         /*
         Put a dislike

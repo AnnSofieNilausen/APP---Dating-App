@@ -62,7 +62,7 @@ namespace DatingApp.Model.IDcreator
   
         public int GetRandomInt(int max) 
         {
-           int r = rand.Next(0, max);
+           int r = rand.Next(1, max);
 
             return r;
         }

@@ -42,8 +42,10 @@ namespace DatingApp.DataRepository.BaseRepo
 
         public IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
         {
+
             using var conn = new NpgsqlConnection(ConnectionString);
             {
+                conn.Close();
                 using var cmd = new NpgsqlCommand(query, conn);
                 {
                     // Add parameters to the command.
