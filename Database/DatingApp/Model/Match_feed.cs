@@ -26,7 +26,7 @@ namespace DatingApp.Model.Matchfeed
             
             while(true)
             {
-                randid = rand.Next(count);
+                randid = rand.Next(1, count);
                 if (randid == userid)
                 {
                     continue;
@@ -81,13 +81,6 @@ namespace DatingApp.Model.Matchfeed
         {
             try
             {
-                //Legacy SQL Statement
-                //string query = @"
-                //SELECT COUNT(*)
-                //FROM likes AS L1
-                //JOIN likes AS L2 ON L1.UserId = L2.LikedProfileId AND L1.LikedProfileId = L2.UserId
-                //WHERE L1.UserId = @UserId
-                //";
 
                 string query = $"SELECT * FROM match WHERE (pid_1 = @userid AND pid_2 = @profileid) OR (pid_1 = @profileid AND pid_2 = userid)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
@@ -112,7 +105,7 @@ namespace DatingApp.Model.Matchfeed
         private int CheckIsMutualLike(int liker, int liked)
             {
             
-                string query = $"SELECT * FROM likes WHERE (pid_1 = @userid AND pid_2 = @profilepd) OR (pid_1 = @profileid AND pid_2 = @userid)";
+                string query = $"SELECT * FROM likes WHERE (pid_1 = @userid AND pid_2 = @profileid) OR (pid_1 = @profileid AND pid_2 = @userid)";
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                        {
                            parameter.Add(@"userid", liker);
@@ -128,53 +121,63 @@ namespace DatingApp.Model.Matchfeed
         {   //If it's not a match, add the like to the like list
             if (CheckIsMutualLike(userId, profileId) > 1)
             {
-                //Inserts the Match
-                string query1 = @"INSERT INTO match (""match_id"",""pid_1"", ""pid_2"") SELECT @matchid, @pid1, @pid2";           
+                try
+                {
+                    //Inserts the Match
+                    string query1 = @"INSERT INTO match (""match_id"",""pid_1"", ""pid_2"") SELECT @matchunique, @pid1, @pid2";
 
-                        Dictionary<string, object> parameter = new Dictionary<string, object>();
-                        {
-                            parameter.Add(@"pid1", userId);
-                            parameter.Add(@"pid2", profileId);
-                            parameter.Add(@"matchid", idcreator.GetUniqueIntID(true));
-                        }
-                        baserepo.GetDataDyn(query1, parameter);     
-                    
+                    Dictionary<string, object> parameter = new Dictionary<string, object>();
+                    {
+                        parameter.Add(@"pid1", userId);
+                        parameter.Add(@"pid2", profileId);
+                        parameter.Add(@"matchunique", idcreator.GetUniqueIntID(true));
+                    }
+                    baserepo.ExecuteNonQuery(query1, parameter);
+
+
+                    //Deletes the likes from the like table
+                    string query = $"DELETE FROM likes WHERE (pid_1 = @pid1 AND pid_2 = @pid2) OR (pid_1 = @pid2 AND pid_2 = @pid1)";
+
+                    Dictionary<string, object> parameter2 = new Dictionary<string, object>();
+                    {
+                        parameter2.Add("@pid1", userId);
+                        parameter2.Add("@pid2", profileId);
+                    }
+                    baserepo.ExecuteNonQuery(query, parameter2);
+
+                    return 1;
+
+                } catch (Exception ex)
+                {
+                    Console.WriteLine($"Error checking for match: {ex.Message}");
+                    return 6;
+                }
                 
-                //Deletes the likes from the like table
-                string query = $"DELETE FROM likes WHERE (pid_1 = @pid1 AND pid_2 = @pid2) OR (pid_1 = @pid2 AND pid_2 = @pid1)";
-
-                        Dictionary<string, object> parameter2 = new Dictionary<string, object>();
-                        {
-                            parameter2.Add("@pid1", userId);
-                            parameter2.Add("@pid2", profileId);
-                        }
-                        baserepo.GetDataDyn(query, parameter2);
-
-                return 1;
             }
-            if(CheckIsLiked(userId, profileId)==true)
+             else if(CheckIsLiked(userId, profileId)==true)
              {
                 //if the like is a duplicate
                 //Do Nothing
                 return 2;
 
              }
-            if (CheckIsMatch(userId, profileId)==true)
+            else if (CheckIsMatch(userId, profileId)==true)
             {
                 //Do Nothing if Match already exists
                 return 3;
 
 
-            }if (CheckIsMutualLike(userId,profileId)<=1)
+            }
+            else if (CheckIsMutualLike(userId,profileId)<=1)
             {
                 //Inserts the like
-                string query = @"INSERT INTO likes (""like_id"",""pid_1"", ""pid_2"") SELECT @likeid, @pid1, @pid2";
+                string query = @"INSERT INTO likes (""like_id"",""pid_1"", ""pid_2"") SELECT @likeunique, @pid1, @pid2";
 
                         Dictionary<string, object> parameter2 = new Dictionary<string, object>();
                         {
                             parameter2.Add(@"pid1", userId);
                             parameter2.Add(@"pid2", profileId);
-                            parameter2.Add(@"likeid", idcreator.GetUniqueIntID(false));
+                            parameter2.Add(@"likeunique", idcreator.GetUniqueIntID(false));
                         }
                         baserepo.ExecuteNonQuery(query, parameter2);
 

@@ -20,12 +20,9 @@ namespace DatingApp.Model.IDcreator
                 int j = rand.Next();          
                 if (CheckUniqueID(j, match))
                 {
-                    return j + 1;
-                }
-                else
-                {
                     return j;
                 }
+                return j;
                 
            }
           
@@ -41,23 +38,23 @@ namespace DatingApp.Model.IDcreator
                     query = @"
             SELECT *
             FROM match
-            WHERE match_id = @id";
+            WHERE match_id = @myid";
                 }
                 else
                 {
                     query = @"
             SELECT *
             FROM likes
-            WHERE like_id = @id";
+            WHERE like_id = @myid";
                 }
            
              
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    {"@id", id}
+                    {"@myid", id}
                 };
-                //return repo.GetDataDyn(query, parameters).Count();
-                return false;
+                return baserepo.GetDataDyn(query, parameters).Count() >0;
+      
         }
   
         public int GetRandomInt(int max) 
