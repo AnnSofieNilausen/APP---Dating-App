@@ -84,19 +84,29 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  deleteProfile(): void {
-    if (this.profile.pid && this.profileForm.valid) { // Checking form validity on delete might not be necessary unless it impacts server logic.
-      this.profileService.deleteProfile(this.profile.pid).subscribe({
-        next: () => {
-          console.log('Profile deleted successfully');
-          this.router.navigate(['/login']); // Redirect to login or home page after deletion
+  confirmReAuthenticationAndDelete(): void {
+    const password = prompt('Please re-enter your password to confirm deletion:');
+    if (password) {
+      this.authService.reAuthenticate(this.profile.Username, password).subscribe({
+        next: (response) => {
+          if (response) {
+            this.deleteProfile();
+          } else {
+            alert('Re-authentication failed. Unable to delete profile.');
+          }
         },
-        error: (error) => {
-          console.error('Failed to delete profile', error);
-        }
+        error: () => alert('Re-authentication failed. Unable to delete profile.')
       });
-    } else {
-      console.error('Form is not valid or profile does not exist. Cannot delete profile.');
     }
+  }
+
+  deleteProfile(): void {
+    this.profileService.deleteProfile(this.profile.pid).subscribe({
+      next: () => {
+        console.log('Profile deleted successfully');
+        this.router.navigate(['/login']);
+      },
+      error: (error) => console.error('Failed to delete profile', error)
+    });
   }
 }

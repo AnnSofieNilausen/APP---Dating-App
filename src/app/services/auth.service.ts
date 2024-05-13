@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'; // Import tap operator for side-effects
+import { tap } from 'rxjs/operators';
 import { Profile } from '../models/profile';
 
 @Injectable({
@@ -12,34 +12,44 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
+  // Login method to authenticate users.
   login(username: string, password: string): Observable<Profile> {
-    let params = new HttpParams()
-      .append('username', username)
-      .append('password', password);
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(username + ':' + password)
+    });
 
-    // Assuming the backend returns the profile including an 'id' field upon successful login
-    return this.http.get<Profile>(`${this.apiUrl}/login`, { params }).pipe(
-      tap((profile: Profile) => {
-        if (profile && profile.pid) {
-          sessionStorage.setItem('userId', profile.pid.toString()); // Store user ID in session storage
-        }
-      })
-    );
+    return this.http.get<Profile>(`${this.apiUrl}/login?username=${username}&password=${password}`, { headers })
+      .pipe(
+        tap((profile: Profile) => {
+          if (profile && profile.pid) {
+            sessionStorage.setItem('userId', profile.pid.toString());
+          }
+        })
+      );
   }
 
-  // Method to retrieve the current user's ID from session storage
+  // Re-authenticate the user for critical actions.
+  reAuthenticate(username: string, password: string): Observable<boolean> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(username + ':' + password)
+    });
+    // Sending GET request with basic authentication headers and query parameters
+    return this.http.get<boolean>(`${this.apiUrl}/reAuthenticate?username=${username}&password=${password}`, { headers })
+      .pipe(
+        tap(success => {
+          console.log('Re-authentication ' + (success ? 'successful' : 'failed'));
+        })
+      );
+  }
+
+  // Get the current user's ID from session storage.
   getCurrentUserId(): number | null {
     const userId = sessionStorage.getItem('userId');
-    return userId ? parseInt(userId) : null;  // Changed from -1 to null
+    return userId ? parseInt(userId) : null;
   }
 
-  // Method to check if the user is logged in
+  // Check if the user is logged in.
   isLoggedIn(): boolean {
     return this.getCurrentUserId() != null;
-  }
-
-  // Logout method to clear the session
-  logout(): void {
-    sessionStorage.removeItem('userId'); // Clear user ID from session storage
   }
 }
