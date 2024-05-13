@@ -1,18 +1,21 @@
 <!-- profile.component.html -->
- <!-- First Name -->
- <mat-form-field appearance="fill">
-  <mat-label>First Name</mat-label>
-  <input matInput type="text" name="Fname" [(ngModel)]="profile.Fname" required minlength="2" #Fname="ngModel">
-  <mat-error *ngIf="Fname.errors?.['required']">First name is required.</mat-error>
-  <mat-error *ngIf="Fname.errors?.['minlength']">First name must be at least 2 characters long.</mat-error>
-</mat-form-field>
+<form #profileForm="ngForm" (ngSubmit)="updateProfile()">
 
-<!-- Last Name -->
-<mat-form-field appearance="fill">
-  <mat-label>Last Name</mat-label>
-  <input matInput type="text" name="Lname" [(ngModel)]="profile.Lname" #Lname="ngModel">
-  <!-- Add validation messages for Lname if needed -->
-</mat-form-field>
+  <!-- First Name -->
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" name="Fname" [(ngModel)]="profile.Fname" required minlength="2" #Fname="ngModel">
+    <mat-error *ngIf="Fname.errors?.['required']">First name is required.</mat-error>
+    <mat-error *ngIf="Fname.errors?.['minlength']">First name must be at least 2 characters long.</mat-error>
+  </mat-form-field>
+
+  <!-- Last Name -->
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" name="Lname" [(ngModel)]="profile.Lname" required minlength="2" #Lname="ngModel">
+    <mat-error *ngIf="Lname.errors?.['required']">Last name is required.</mat-error>
+    <mat-error *ngIf="Lname.errors?.['minlength']">Last name must be at least 2 characters long.</mat-error>
+  </mat-form-field>
 
   <!-- Date of Birth -->
   <mat-form-field appearance="fill">
@@ -23,44 +26,57 @@
     <mat-error *ngIf="Dob.errors?.['required']">Date of birth is required.</mat-error>
   </mat-form-field>
 
+  <!-- Gender -->
   <mat-form-field appearance="fill">
     <mat-label>Gender</mat-label>
-    <input matInput [(ngModel)]="profile.Gender" name="gender">
+    <input matInput type="text" name="Gender" [(ngModel)]="profile.Gender" required #Gender="ngModel">
+    <mat-error *ngIf="Gender.errors?.['required']">Gender is required.</mat-error>
   </mat-form-field>
 
+  <!-- Area of Life (AoL) -->
   <mat-form-field appearance="fill">
     <mat-label>Area of Life (AoL)</mat-label>
-    <input matInput [(ngModel)]="profile.Aol" name="aol">
+    <input matInput type="text" name="Aol" [(ngModel)]="profile.Aol" #Aol="ngModel">
   </mat-form-field>
 
+  <!-- Username (Readonly) -->
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>
     <input matInput [value]="profile.Username" name="username" readonly>
   </mat-form-field>
 
+  <!-- Sexual Orientation -->
   <mat-form-field appearance="fill">
     <mat-label>Sexual Orientation</mat-label>
-    <input matInput [(ngModel)]="profile.SexualOrientation" name="sexualOrientation">
+    <input matInput type="text" name="SexualOrientation" [(ngModel)]="profile.SexualOrientation" #SexualOrientation="ngModel">
   </mat-form-field>
 
+  <!-- Bio -->
   <mat-form-field appearance="fill">
     <mat-label>Bio</mat-label>
     <textarea matInput [(ngModel)]="profile.Bio" name="bio"></textarea>
   </mat-form-field>
 
+  <!-- Searching For -->
   <mat-form-field appearance="fill">
     <mat-label>Searching For</mat-label>
-    <input matInput [(ngModel)]="profile.SearchingFor" name="searchingFor">
+    <input matInput type="text" name="SearchingFor" [(ngModel)]="profile.SearchingFor" #SearchingFor="ngModel">
   </mat-form-field>
 
+  <!-- Interests -->
   <mat-form-field appearance="fill">
     <mat-label>Interests</mat-label>
-    <input matInput [(ngModel)]="profile.Interests" name="interests">
+    <input matInput type="text" name="Interests" [(ngModel)]="profile.Interests" #Interests="ngModel">
   </mat-form-field>
 
+  <!-- Occupation -->
   <mat-form-field appearance="fill">
     <mat-label>Occupation</mat-label>
-    <input matInput [(ngModel)]="profile.Occupation" name="occupation">
+    <input matInput type="text" name="Occupation" [(ngModel)]="profile.Occupation" #Occupation="ngModel">
   </mat-form-field>
 
-  <button type="submit" mat-raised-button color="primary">Update Profile</button>
+  <!-- Buttons for actions -->
+  <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Update Profile</button>
+  <button mat-raised-button color="warn" (click)="deleteProfile()">Delete Profile</button>
+
+</form>

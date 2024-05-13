@@ -17,7 +17,6 @@ import { NgForm } from '@angular/forms';
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  providers: [NativeDateAdapter],
   imports: [
     CommonModule, MatButtonModule, MatInputModule, FormsModule, MatFormFieldModule, 
     MatLabel, MatDatepickerModule, MatDatepickerToggle, MatNativeDateModule,
@@ -44,42 +43,60 @@ export class ProfileComponent implements OnInit {
     Snapchat: ''
   };
 
-    @ViewChild('profileForm') profileForm!: NgForm;
+  @ViewChild('profileForm') profileForm!: NgForm;
 
-    constructor(
-      private profileService: ProfileService,
-      private authService: AuthenticationService,
-      private router: Router
-    ) {}
-  
-    ngOnInit(): void {
-      this.loadProfile();
-    }
-  
-    loadProfile(): void {
-      const userId = this.authService.getCurrentUserId();
-      if (userId !== null) {
-        this.profileService.getProfile(userId).subscribe({
-          next: (data) => this.profile = data,
-          error: (error) => {
-            console.error('Failed to load profile', error);
-            this.router.navigate(['/login']);
-          }
-        });
-      } else {
-        this.router.navigate(['/login']);
-      }
-    }
-  
-    updateProfile(): void {
-      if (this.profile && this.profileForm.valid) {
-        this.profileService.updateProfile(this.profile.pid, this.profile).subscribe({
-          next: (updatedProfile) => {
-            this.profile = updatedProfile;
-            console.log('Profile updated:', this.profile);
-          },
-          error: (error) => console.error('Failed to update profile', error)
-        });
-      }
+  constructor(
+    private profileService: ProfileService,
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loadProfile();
+  }
+
+  loadProfile(): void {
+    const userId = this.authService.getCurrentUserId();
+    if (userId !== null) {
+      this.profileService.getProfile(userId).subscribe({
+        next: (data) => this.profile = data,
+        error: (error) => {
+          console.error('Failed to load profile', error);
+          this.router.navigate(['/login']);
+        }
+      });
+    } else {
+      this.router.navigate(['/login']);
     }
   }
+
+  updateProfile(): void {
+    if (this.profileForm.valid) {
+      this.profileService.updateProfile(this.profile.pid, this.profile).subscribe({
+        next: (updatedProfile) => {
+          this.profile = updatedProfile;
+          console.log('Profile updated:', this.profile);
+        },
+        error: (error) => console.error('Failed to update profile', error)
+      });
+    } else {
+      console.error('Form is not valid. Please check your input and try again.');
+    }
+  }
+
+  deleteProfile(): void {
+    if (this.profile.pid && this.profileForm.valid) { // Checking form validity on delete might not be necessary unless it impacts server logic.
+      this.profileService.deleteProfile(this.profile.pid).subscribe({
+        next: () => {
+          console.log('Profile deleted successfully');
+          this.router.navigate(['/login']); // Redirect to login or home page after deletion
+        },
+        error: (error) => {
+          console.error('Failed to delete profile', error);
+        }
+      });
+    } else {
+      console.error('Form is not valid or profile does not exist. Cannot delete profile.');
+    }
+  }
+}
