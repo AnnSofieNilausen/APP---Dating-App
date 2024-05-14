@@ -28,8 +28,7 @@ namespace DatingApp.Controllers.match
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            List<Profile> profile = new List<Profile>();
-            profile = matchrepository.GetMatchProfiles(id);
+            List<Profile> profile = matchrepository.GetMatchProfiles(id);
             if (profile == null)
                 return NotFound($"Profile with id {id} not found");
 

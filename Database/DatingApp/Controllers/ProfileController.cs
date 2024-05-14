@@ -2,6 +2,8 @@
 using DatingApp.Model;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.Model.P;
+using Microsoft.AspNetCore.Identity;
+using DatingApp.Model.Auth;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,12 +12,9 @@ namespace DatingApp.Controllers.P
     [Route("api/[controller]")]
     public class ProfileController : Controller
     {
-        private Repository Repository { get; }
 
-        public ProfileController()
-        {
-            Repository = new Repository();
-        }
+        private Repository Repository { get; }
+        private readonly UserAuthentication userAuthentication;
 
         // GET: api/Profile
         [HttpGet]
@@ -57,23 +56,28 @@ namespace DatingApp.Controllers.P
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        [HttpDelete("{id},{username},{password}")]
+        public ActionResult Delete(int id, string username, string password)
         {
-            Profile existingProfile = Repository.GetProfileById(id);
-            if (existingProfile == null)
+            if (userAuthentication.AuthenticateUser(username, password))
             {
-                return NotFound($"Profile with id {id} not found");
-            }
+                Profile existingProfile = Repository.GetProfileById(id);
+                if (existingProfile == null)
+                {
+                    return NotFound($"Profile with id {id} not found");
+                }
 
-            bool status = Repository.DeleteProfile(id);
-            if (status)
-            {
-                return NoContent();
-            }
+                bool status = Repository.DeleteProfile(id);
+                if (status)
+                {
+                    return NoContent();
+                }
 
-            return BadRequest($"Unable to delete profile with id {id}");
+                return BadRequest($"Unable to delete profile with id {id}");
+            }
+            else { return Ok(false); }
         }
+            
     }
 }
 

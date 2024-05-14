@@ -19,7 +19,7 @@ namespace DatingApp.Model.Reg
         }
 
         //method to register a new user
-        public bool registeruser(Profile p, String Password)
+        public bool registerUser(Profile p, String Password)
         {
             //validation to ensure at least one social media account is provided
             if (string.IsNullOrEmpty(p.Instagram) && string.IsNullOrEmpty(p.Snapchat))

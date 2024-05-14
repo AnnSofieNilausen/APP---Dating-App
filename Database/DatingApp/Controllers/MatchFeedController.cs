@@ -9,14 +9,8 @@ namespace DatingApp.Controllers.MatchFeed
     [Route("api/[controller]")]
     public class MatchfeedController : Controller
     {
-        private Repository Repository { get; }
         private Match_feed matchfeed = new();
-        public MatchfeedController()
-        {
-            Repository = new Repository();
-            
-        }
-
+        
         /*
         Get a random profile
         Needs id of the profile who is logged in

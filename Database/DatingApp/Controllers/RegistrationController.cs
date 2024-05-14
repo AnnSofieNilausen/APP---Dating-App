@@ -21,7 +21,7 @@ namespace DatingApp.Controllers.Registration
                 return BadRequest("Profile info not correct");
             }
 
-            bool status = Userregistration.registeruser(profile, password);
+            bool status = Userregistration.registerUser(profile, password);
             if (status)
             {
                 return Ok();
