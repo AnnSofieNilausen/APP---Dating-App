@@ -19,13 +19,13 @@ namespace DatingApp.Model.IDcreator
             while(true)
             {
 
-                //int j = rand.Next();
-                int j = rand1;
+                int j = rand.Next();
+                //int j = rand1;
                 if (!CheckUniqueID(j, match))
                 {
                     return j;                   
                 }
-                return -1;
+                
 
             }
           

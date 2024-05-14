@@ -29,7 +29,7 @@ namespace DatingApp.Model.Auth
 
         // Call the base class method to execute the query with parameters and get the results.
 
-        var records = GetDataDyn(query, parameters);
+            var records = GetDataDyn(query, parameters);
 
 
             // Check if the count of users with the provided Username and password is greater than 0.

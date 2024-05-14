@@ -66,7 +66,7 @@ namespace DatingApp.Controllers.P
         [HttpDelete("{id},{username},{password}")]
         public ActionResult Delete(int id, string username, string password)
         {
-            if (userAuthentication.AuthenticateUser(username, password))
+            if (userAuthentication.AuthenticateUser(username, password) && userAuthentication.GetUserIdFromLogin(username, password) == id)
             {
                 Profile existingProfile = Repository.GetProfileById(id);
                 if (existingProfile == null)
