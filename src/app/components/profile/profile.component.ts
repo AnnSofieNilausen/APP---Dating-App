@@ -85,28 +85,42 @@ export class ProfileComponent implements OnInit {
   }
 
   confirmReAuthenticationAndDelete(): void {
+    const username = sessionStorage.getItem('username'); // Assuming you store username similarly as userId
     const password = prompt('Please re-enter your password to confirm deletion:');
-    if (password) {
-      this.authService.reAuthenticate(this.profile.Username, password).subscribe({
+    
+    if (password && username) {
+      this.authService.reAuthenticate(username, password).subscribe({
         next: (response) => {
           if (response) {
-            this.deleteProfile();
+            this.deleteProfile(username, password);
           } else {
             alert('Re-authentication failed. Unable to delete profile.');
           }
         },
-        error: () => alert('Re-authentication failed. Unable to delete profile.')
+        error: () => {
+          console.error('Re-authentication failed.');
+          alert('Re-authentication failed. Unable to delete profile.');
+        }
       });
     }
   }
-
-  deleteProfile(): void {
-    this.profileService.deleteProfile(this.profile.pid).subscribe({
-      next: () => {
-        console.log('Profile deleted successfully');
-        this.router.navigate(['/login']);
-      },
-      error: (error) => console.error('Failed to delete profile', error)
-    });
+  
+  deleteProfile(username: string, password: string): void {
+    const userId = this.authService.getCurrentUserId();
+    if (userId !== null) {
+      this.profileService.deleteProfile(userId, username, password).subscribe({
+        next: () => {
+          console.log('Profile deleted successfully');
+          this.router.navigate(['/login']);
+          sessionStorage.clear(); // Clear session storage after deletion
+        },
+        error: (error) => {
+          console.error('Failed to delete profile', error);
+          alert('Error deleting profile. Please try again.');
+        }
+      });
+    } else {
+      console.error('User ID not found for deletion.');
+    }
   }
-}
+}  

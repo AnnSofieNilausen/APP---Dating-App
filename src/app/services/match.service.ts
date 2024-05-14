@@ -50,12 +50,4 @@ export class MatchService {
       params: new HttpParams().set('disliker', dislikerId.toString()).set('disliked', dislikedUserId.toString())
     });
   }
-
-  deleteMatch(matcherId: number): Observable<any> {
-    const userId = this.authService.getCurrentUserId();
-    if (userId === null) {
-      throw new Error("User not logged in");
-    }
-    return this.http.delete(`${this.matchUrl}/${userId}/${matcherId}`);
-  }
 }

@@ -12,21 +12,21 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  // Login method to authenticate users.
   login(username: string, password: string): Observable<Profile> {
     const headers = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa(username + ':' + password)
+        'Authorization': 'Basic ' + btoa(username + ':' + password)
     });
 
     return this.http.get<Profile>(`${this.apiUrl}/login?username=${username}&password=${password}`, { headers })
-      .pipe(
-        tap((profile: Profile) => {
-          if (profile && profile.pid) {
-            sessionStorage.setItem('userId', profile.pid.toString());
-          }
-        })
-      );
-  }
+        .pipe(
+            tap((profile: Profile) => {
+                if (profile && profile.pid) {
+                    sessionStorage.setItem('userId', profile.pid.toString());
+                    sessionStorage.setItem('username', username); // Store username for later use
+                }
+            })
+        );
+}
 
   // Re-authenticate the user for critical actions.
   reAuthenticate(username: string, password: string): Observable<boolean> {

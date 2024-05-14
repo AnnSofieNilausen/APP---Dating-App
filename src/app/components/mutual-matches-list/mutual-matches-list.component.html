@@ -7,8 +7,6 @@
       <div class="match-card">
         <h3>{{ match.Fname }} {{ match.Lname }}</h3>
         <p>Bio: {{ match.Bio || 'No bio available' }}</p>
-        <!-- Make sure to use the correct identifier, update if it's not ID -->
-        <button (click)="deleteMatch(match.pid)">Delete Match</button>
       </div>
     </li>
   </ul>

@@ -39,11 +39,11 @@
     <input matInput type="text" name="Aol" [(ngModel)]="profile.Aol" #Aol="ngModel">
   </mat-form-field>
 
-  <!-- Username (Readonly) -->
-  <mat-form-field appearance="fill">
-    <mat-label>Username</mat-label>
-    <input matInput [value]="profile.Username" name="username" readonly>
-  </mat-form-field>
+ <!-- Username (Readonly, visually distinguished) -->
+ <mat-form-field appearance="fill" class="readonly-field">
+  <mat-label>Username</mat-label>
+  <input matInput [value]="profile.Username" name="username" readonly>
+</mat-form-field>
 
   <!-- Sexual Orientation -->
   <mat-form-field appearance="fill">
@@ -76,8 +76,11 @@
   </mat-form-field>
 
   <!-- Buttons for actions -->
-  <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Update Profile</button>
-  <button mat-raised-button color="warn" (click)="deleteProfile()">Delete Profile</button>
-  <button mat-raised-button color="warn" (click)="confirmReAuthenticationAndDelete()">Delete Profile</button>
+  <div class="action-buttons">
+    <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Update Profile</button>
+    <button type="button" mat-raised-button color="warn" (click)="confirmReAuthenticationAndDelete()">
+      Delete Profile
+    </button>
+  </div>
 
 </form>

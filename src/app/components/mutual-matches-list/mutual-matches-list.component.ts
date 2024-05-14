@@ -25,14 +25,4 @@ export class MatchesComponent implements OnInit {
       error: (error) => console.error('Failed to load mutual matches', error)
     });
   }
-
-  deleteMatch(matcherId: number): void {
-    this.matchService.deleteMatch(matcherId).subscribe({
-      next: () => {
-        console.log('Match deleted successfully');
-        this.mutualMatches = this.mutualMatches.filter(match => match.pid !== matcherId);  // Update the list after deletion
-      },
-      error: (error) => console.error('Failed to delete match', error)
-    });
-  }
 }

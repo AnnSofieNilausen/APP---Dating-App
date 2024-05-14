@@ -1,7 +1,7 @@
 // src/app/services/profile.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/profile';
 
@@ -18,10 +18,14 @@ export class ProfileService {
   }
 
   updateProfile(userId: number, profile: Profile): Observable<Profile> {
-    return this.http.put<Profile>(`${this.profileUrl}/${userId}`, profile);
+    return this.http.put<Profile>(`${this.profileUrl}/`, profile);
   }
 
-  deleteProfile(userId: number): Observable<any> {
-    return this.http.delete(`${this.profileUrl}/${userId}`);
-  }
+  deleteProfile(userId: number, username: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('userId', userId)
+      .set('username', username)
+      .set('password', password);
+    return this.http.delete(`${this.profileUrl}`, { params });
+}
 }
