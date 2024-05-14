@@ -14,7 +14,7 @@ namespace DatingApp.Controllers.P
     {
 
         private Repository Repository { get; }
-        private readonly UserAuthentication userAuthentication;
+        private readonly UserAuthentication userAuthentication = new();
 
         public ProfileController()
         {
@@ -63,10 +63,12 @@ namespace DatingApp.Controllers.P
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id},{username},{password}")]
+        [HttpDelete()]
         public ActionResult Delete(int id, string username, string password)
         {
-            if (userAuthentication.AuthenticateUser(username, password) && userAuthentication.GetUserIdFromLogin(username, password) == id)
+            bool first = userAuthentication.AuthenticateUser(username, password);
+            int second = userAuthentication.GetUserIdFromLogin(username, password);
+            if (first && second == id)
             {
                 Profile existingProfile = Repository.GetProfileById(id);
                 if (existingProfile == null)
@@ -74,10 +76,10 @@ namespace DatingApp.Controllers.P
                     return NotFound($"Profile with id {id} not found");
                 }
 
-                bool status = Repository.DeleteProfile(id);
+                bool status = Repository.DeleteProfile(username);
                 if (status)
                 {
-                    return NoContent();
+                    return Ok(true);
                 }
 
                 return BadRequest($"Unable to delete profile with id {id}");

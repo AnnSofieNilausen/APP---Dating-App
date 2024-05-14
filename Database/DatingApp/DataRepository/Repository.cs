@@ -264,14 +264,15 @@ pid = @pid";
             return result;
         } 
 
-        public bool DeleteProfile(int id)
+        public bool DeleteProfile(string username)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
             var cmd = dbConn.CreateCommand();
-            cmd.CommandText = @"delete from profile where pid = @Pid";
+            cmd.CommandText = @"delete from profile where username = @Pid;
+                                delete from login where username = @Pid;";
 
             //adding parameters in a better way
-            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Integer, id);
+            cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Text, username);
 
             //will return true if all goes well
             bool result = DeleteData(dbConn, cmd);

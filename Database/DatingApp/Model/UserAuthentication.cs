@@ -17,7 +17,7 @@ namespace DatingApp.Model.Auth
         public bool AuthenticateUser(string username, string password)
         {
             // SQL query to check if the Username and password combination exists, using parameters.
-            string query = "SELECT COUNT(*) FROM login WHERE Username = @Username AND password = @password";
+            string query = "SELECT * FROM login WHERE username = @Username AND password = @password";
 
             // Prepare parameters for the query 
             Dictionary<string, object> parameters = new()
@@ -29,21 +29,8 @@ namespace DatingApp.Model.Auth
 
         // Call the base class method to execute the query with parameters and get the results.
 
-            var records = GetDataDyn(query, parameters);
+            return GetDataDyn(query, parameters).Count() > 0;
 
-
-            // Check if the count of users with the provided Username and password is greater than 0.
-            foreach (IDataRecord record in records)
-            {
-                if (record != null && Convert.ToInt32(record[0]) > 0)
-                {
-                    return true;
-                }
-                   
-            }
-
-            // Return false if no user Matches the provided credentials.
-            return false;
         }
 
         public int GetUserIdFromLogin(string username, string password)
