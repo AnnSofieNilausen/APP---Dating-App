@@ -14,6 +14,7 @@ namespace DatingApp.Model.Matchfeed
         readonly Repository repo = new Repository();
         IDCreator idcreator = new IDCreator();
         
+
         // Method to retrieve a random profile ID from the repository
         public Profile GetRandomProfile(int userid)
         {
@@ -77,6 +78,7 @@ namespace DatingApp.Model.Matchfeed
             return isLiked;
         }
 
+        //Checks whether the two given ids are matched
         private bool CheckIsMatch(int liker, int liked)
         {
             try
@@ -88,7 +90,7 @@ namespace DatingApp.Model.Matchfeed
                     parameter.Add("@userid", liker);
                     parameter.Add("@profileid", liked);
                 }
-                //if the count is greater than 0, a match exists
+                //if count is higher than 0 a match exist
                 return baserepo.GetDataDyn(query, parameter).Any();
 
             }
@@ -111,7 +113,8 @@ namespace DatingApp.Model.Matchfeed
                            parameter.Add(@"userid", liker);
                            parameter.Add(@"profileid", liked);
                        }
-               //if the count is greater than 0, a match exists
+
+               //if the count is greater than 0 they like eachother
               return baserepo.GetDataDyn(query, parameter).Count();
 
         }
@@ -124,6 +127,7 @@ namespace DatingApp.Model.Matchfeed
                 //Do Nothing if Match already exists
                 return true;
             }
+            //if its a match then create match and remove redundant likes
             else if (CheckIsMutualLike(userId, profileId) == 1)
             {
                 try
@@ -166,6 +170,7 @@ namespace DatingApp.Model.Matchfeed
                 return true;
 
              }
+            //if its a like but not a match, insert the like
             else if (CheckIsMutualLike(userId,profileId)<=1)
             {
                 //Inserts the like

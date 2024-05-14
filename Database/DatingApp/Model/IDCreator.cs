@@ -60,6 +60,7 @@ namespace DatingApp.Model.IDcreator
       
         }
   
+        //gets random int with int max being the highest
         public int GetRandomInt(int max) 
         {
            int r = rand.Next(1, max);

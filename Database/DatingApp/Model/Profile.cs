@@ -9,6 +9,7 @@ namespace DatingApp.Model.P;
 			ID = id;
 		}
 
+    //Creates a profile with the same values as the one in the database
     public Profile(int id, string username1)
     {
         ID = id;

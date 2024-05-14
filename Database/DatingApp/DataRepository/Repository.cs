@@ -5,6 +5,7 @@ using NpgsqlTypes;
 using DatingApp.Model.P;
 using DatingApp.Model.Conversion;
 using DatingApp.DataRepository.BaseRepo;
+using System.Data;
 
 namespace DatingApp.DataRepository
 {
@@ -204,7 +205,7 @@ namespace DatingApp.DataRepository
             return result;
         }
 
-        //updates a profile in the database and returns true or false
+        //updates a profile in the database and returns true or false   
         public bool UpdateProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);

@@ -23,7 +23,7 @@ namespace DatingApp.Controllers.P
         }
 
 
-        // GET api/profile/5
+        // GET profile from id
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -37,7 +37,7 @@ namespace DatingApp.Controllers.P
         }
 
 
-        // PUT api/values/5
+        // PUT profile by id, updates Profile
         [HttpPut()]
         public ActionResult Put([FromBody] Profile profile)
         {
@@ -57,7 +57,7 @@ namespace DatingApp.Controllers.P
             return BadRequest("Something went wrong");
         }
 
-        // DELETE api/values/5
+        // DELETE Profile based on id - Requires second authentication
         [HttpDelete()]
         public ActionResult Delete(int id, string username, string password)
         {

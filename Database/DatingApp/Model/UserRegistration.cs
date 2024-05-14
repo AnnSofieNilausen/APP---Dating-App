@@ -27,7 +27,6 @@ namespace DatingApp.Model.Reg
                 throw new ArgumentException("at least one social media account (instagram or snapchat) must be provided.");
             }
 
-            //prepare the sql query using parameters to insert user data into the database.
             string query = @"
             insert into profile 
             (fname, lname, dob, gender, aol, username, sexual_orientation, 
@@ -38,7 +37,7 @@ namespace DatingApp.Model.Reg
 
             Insert into login (username, password) values (@username, @password)";
 
-            //create a dictionary to hold sql parameters
+            //creates a dictionary to hold sql parameters
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
                 {"@fname", p.Fname},
@@ -58,7 +57,6 @@ namespace DatingApp.Model.Reg
                 {"@snapchat", p.Snapchat ?? ""}
             };
 
-           //execute the sql query to register the user and return the result as true if the operation affected at least one row.
             return baserepo.ExecuteNonQuery(query, parameters) > 0;
         }
     }

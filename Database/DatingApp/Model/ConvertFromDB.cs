@@ -3,6 +3,7 @@ using NpgsqlTypes;
 
 namespace DatingApp.Model.Conversion
 {
+    //created to fix DBNull error which occured
     public class ConvertFromDB
     {
         //Converts From DB to Int and checks if null
