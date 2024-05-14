@@ -16,13 +16,18 @@ namespace DatingApp.Controllers.P
         private Repository Repository { get; }
         private readonly UserAuthentication userAuthentication;
 
+        public ProfileController()
+        {
+            Repository = new Repository();
+        }
+
         // GET: api/Profile
         [HttpGet]
         public ActionResult Get()
         {
             return Ok(Repository.GetProfiles());
         }
-        
+
         // GET api/profile/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
@@ -30,8 +35,9 @@ namespace DatingApp.Controllers.P
             Profile profile = new Profile();
             profile = Repository.GetProfileById(id);
             if (profile == null)
+            {
                 return NotFound($"Profile with id {id} not found");
-
+            }
             return Ok(profile);
         }
 
