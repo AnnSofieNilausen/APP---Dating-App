@@ -219,9 +219,8 @@ namespace DatingApp.DataRepository
     Bio=@Bio,
     searching_for=@Searching_For,
     Interests=@Interests,
-    Occupation=@Occupation,
-    Snapchat=@Snapchat,
-    Instagram=@Instagram
+    Occupation=@Occupation
+
     
 where
 pid = @pid";
@@ -237,8 +236,7 @@ pid = @pid";
             cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
             cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
             cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
-            cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
-            cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
+            
 
             bool result = UpdateData(dbConn, cmd);
             return result;

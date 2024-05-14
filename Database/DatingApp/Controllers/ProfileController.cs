@@ -9,6 +9,7 @@ using DatingApp.Model.Auth;
 
 namespace DatingApp.Controllers.P
 {
+    //Handles all control in regards to the profile of the perosn logged in
     [Route("api/[controller]")]
     public class ProfileController : Controller
     {
@@ -21,12 +22,6 @@ namespace DatingApp.Controllers.P
             Repository = new Repository();
         }
 
-        // GET: api/Profile
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return Ok(Repository.GetProfiles());
-        }
 
         // GET api/profile/5
         [HttpGet("{id}")]

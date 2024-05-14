@@ -19,7 +19,6 @@ namespace DatingApp.Controllers.match
 
 
         //Get profiles by Id
-        //
         // GET api/Matches/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
@@ -31,32 +30,8 @@ namespace DatingApp.Controllers.match
             return Ok(profile);
         }
 
-        //Post
-        [HttpPost]
-        public ActionResult Post([FromBody] Profile profile)
-        {
-            if (profile == null)
-            {
-                return BadRequest("Profile info not correct");
-            }
 
-            bool status = Repository.InsertProfile(profile);
-            if (status)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
-        }
-
-        //Put
-        [HttpPut()]
-        public ActionResult Put([FromBody] Profile profile)
-        {
-            return Ok(false);
-        }
-
-        // DELETE api/values/5
+        // Deletes a match
         [HttpDelete()]
         public ActionResult Delete(int userID, int matcherID)
         {
