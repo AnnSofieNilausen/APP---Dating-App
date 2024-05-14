@@ -11,6 +11,7 @@ namespace DatingApp.DataRepository.BaseRepo
     {
         protected const string ConnectionString = "Host=localhost; Port=5432; Database=DatingApp; Username=postgres; Password=yourpassword;";
 
+        //Database Connection to "get" data, can do other operations
         protected internal NpgsqlDataReader? GetData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
 
@@ -18,7 +19,9 @@ namespace DatingApp.DataRepository.BaseRepo
             return cmd.ExecuteReader();
         }
 
-         
+
+
+        //Database Connection to "insert" data, can do other operations
         protected internal bool InsertData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
@@ -26,6 +29,8 @@ namespace DatingApp.DataRepository.BaseRepo
             return true;
         }
 
+
+        //Database Connection to "Update" data, can do other operations
         protected internal bool UpdateData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
@@ -33,6 +38,8 @@ namespace DatingApp.DataRepository.BaseRepo
             return true;
         }
 
+
+        //Database Connection to "Delete" data, can do other operations
         protected internal bool DeleteData(NpgsqlConnection conn, NpgsqlCommand cmd)
         {
             conn.Open();
@@ -40,6 +47,8 @@ namespace DatingApp.DataRepository.BaseRepo
             return true;
         }
 
+
+        //Database Connection to "dynamically" get data, its just a way to infer parameters and return a reader
         public IEnumerable<IDataRecord> GetDataDyn(string query, Dictionary<string, object> parameters)
         {
 
@@ -66,6 +75,9 @@ namespace DatingApp.DataRepository.BaseRepo
                 }
             }
         }
+
+
+        //Database Connection to "execute" any SQL function not needing a reader but just to be executed with only a count as return
         public int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))

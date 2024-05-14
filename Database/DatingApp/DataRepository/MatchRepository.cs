@@ -22,12 +22,9 @@ namespace DatingApp.DataRepository.matches
            return matches;
         }
 
-        /// <summary>
-        /// Retrieves a list of mutual Matches for a specified user by querying the Matches table.
-        /// This method finds users that have mutually liked each other.
-        /// </summary>
-        /// <param name="userId">The user ID to retrieve Matches for.</param>
-        /// <returns>A list of user IDs that are mutual Matches.</returns>
+
+
+        //Returns a list of Ids with which the given id is matched in the database
         public List<int> GetMatchIds(int userId)
         {
 
@@ -38,10 +35,9 @@ namespace DatingApp.DataRepository.matches
                 {"@UserId", userId}
             };
 
-            // Initialize a list to hold the IDs of matching users.
+            // Initialize a list to hold the IDs of matching IDs
             List<int> matches = new List<int>();
 
-            // Execute the query and iterate over each data record returned.
             foreach (IDataRecord record in GetDataDyn(query, parameters))
             {
                 if (Convert.ToInt32(record["pid_1"]) == userId)
@@ -57,6 +53,8 @@ namespace DatingApp.DataRepository.matches
             // Return the list of Matches in List[IDs] format.
             return matches;
         }
+
+
 
         // Deletes a match between the specified user and another user from the Matches table
         // The user ID of the first user

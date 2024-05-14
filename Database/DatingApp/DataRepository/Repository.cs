@@ -12,24 +12,23 @@ namespace DatingApp.DataRepository
     {
         public ConvertFromDB convertFromDB = new();
         //Get a list of Profiles
+        //Returns a list of profiles
         public List<Profile> GetProfiles()
         {
-            //creating empty list to fill it from database
             var profiles = new List<Profile>();
 
-            //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
 
-            //creating an SQL command
+            
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = "select * from profile";
 
-            //call the base method to get data
+            
             var data = GetData(dbConn, cmd);
 
             if (data != null)
             {
-                while (data.Read()) //every time loop runs it reads next like from fetched rows
+                while (data.Read()) 
                 {
                     Profile p = new(convertFromDB.convertToInt(data["pid"]))
                     {
@@ -71,14 +70,11 @@ namespace DatingApp.DataRepository
         //Match = false, get profile with limited information
         public Profile GetSafeProfileById(int id, bool match)
         {
-            //create a new connection for database
             var dbConn = new NpgsqlConnection(ConnectionString);
 
-            //creating an SQL command
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = $"select * from profile where pid = {id}";
 
-            //call the base method to get data
             var data = GetData(dbConn, cmd);
 
             if (data != null)
@@ -129,17 +125,16 @@ namespace DatingApp.DataRepository
 
             return null;
         }
-        //get matchfeed or matched profile(removed sensitive info)
+
+        //get Full profile with all information for a given ID
         public Profile GetProfileById(int id)
         { 
-            //create a new connection for database
+
             var dbConn = new NpgsqlConnection(ConnectionString);
-            
-            //creating an SQL command
+
             var cmd = dbConn.CreateCommand();
             cmd.CommandText = $"select * from profile where pid = {id}";
 
-            //call the base method to get data
             var data = GetData(dbConn, cmd);
 
             if (data != null)
@@ -176,7 +171,8 @@ namespace DatingApp.DataRepository
 
             return null;
         }
-        //add a new profile
+
+        //adds a new profile to the database
         public bool InsertProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -184,7 +180,6 @@ namespace DatingApp.DataRepository
             cmd.CommandText = @"insert into profile (fname, lname, dob, gender, aol, username, sexual_orientation, bio, searching_for, interests, occupation, pictures, likes, matches, instagram, snapchat) values (@firstname,@lastname, @Dob, @Gender, @AoL, @Username, @Sexual_Orientation, @Bio, @Searching_For, @Interests, @Occupation, @Pictures, @Likes, @Matches, @Instagram, @Snapchat)
 ";
 
-            //adding parameters in a better way
             cmd.Parameters.AddWithValue("@Fname", NpgsqlDbType.Text, p.Fname);
             cmd.Parameters.AddWithValue("@Lname", NpgsqlDbType.Text, p.Lname);
             cmd.Parameters.AddWithValue("@DoB", NpgsqlDbType.Date, p.Dob);
@@ -203,12 +198,13 @@ namespace DatingApp.DataRepository
             cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
             
 
-            //will return true if all goes well
+            //return true if succesful
             bool result = InsertData(dbConn, cmd);
 
             return result;
         }
 
+        //updates a profile in the database and returns true or false
         public bool UpdateProfile(Profile p)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -224,7 +220,6 @@ namespace DatingApp.DataRepository
     searching_for=@Searching_For,
     Interests=@Interests,
     Occupation=@Occupation,
-    Pictures=@Pictures,
     Snapchat=@Snapchat,
     Instagram=@Instagram
     
@@ -242,28 +237,14 @@ pid = @pid";
             cmd.Parameters.AddWithValue("@Searching_For", NpgsqlDbType.Text, p.Searchingfor);
             cmd.Parameters.AddWithValue("@Interests", NpgsqlDbType.Text, p.Interests);
             cmd.Parameters.AddWithValue("@Occupation", NpgsqlDbType.Text, p.Occupation);
-            cmd.Parameters.AddWithValue("@Pictures", NpgsqlDbType.Text , p.Pictures);
             cmd.Parameters.AddWithValue("@Instagram", NpgsqlDbType.Text, p.Instagram);
             cmd.Parameters.AddWithValue("@Snapchat", NpgsqlDbType.Text, p.Snapchat);
 
-           /*{ "@Fname",Fname},
-                { "@Lname", Lname},
-                { "@DoB", Dob},
-                { "@Gender", Gender},
-                { "@AoL", AoL},
-                { "@SexualOrientation", Sexualorientation},
-                { "@Bio", Bio},
-                { "@SearchingFor", Searchingfor},
-                { "@Interests", Interests},
-                { "@Occupation", Occupation},
-                { "@Pictures", Pictures},
-                { "@Instagram", Instagram ?? ""},
-                { "@Snapchat", Snapchat ?? ""}
-           */
             bool result = UpdateData(dbConn, cmd);
             return result;
         } 
 
+        //Deletes profile from database
         public bool DeleteProfile(string username)
         {
             var dbConn = new NpgsqlConnection(ConnectionString);
@@ -271,10 +252,10 @@ pid = @pid";
             cmd.CommandText = @"delete from profile where username = @Pid;
                                 delete from login where username = @Pid;";
 
-            //adding parameters in a better way
+
             cmd.Parameters.AddWithValue("@Pid", NpgsqlDbType.Text, username);
 
-            //will return true if all goes well
+            //on succes return true
             bool result = DeleteData(dbConn, cmd);
 
             return result;

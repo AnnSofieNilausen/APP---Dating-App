@@ -18,6 +18,9 @@ namespace DatingApp.Controllers.Auth
             userAuthentication = new UserAuthentication();
         }
 
+        //Controls handling a Login
+        //Takes username and password, if these are not found: false is returned
+        //if found it returns a Profile
         [HttpGet("login")]
         public ActionResult Login([FromQuery] string username, [FromQuery] string password)
         {

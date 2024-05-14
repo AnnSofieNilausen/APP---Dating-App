@@ -17,13 +17,9 @@ namespace DatingApp.Controllers.match
         }
         readonly MatchRepository matchrepository = new MatchRepository();
 
-        // GET: api/Profile/5
-        [HttpGet()]
-        public ActionResult Get()
-        {
-            return BadRequest("No Profile Found");
-        }
 
+        //Get profiles by Id
+        //
         // GET api/Matches/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
