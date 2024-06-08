@@ -6,9 +6,9 @@ export interface Profile {
   Gender: string;
   Aol: string;
   Username: string;
-  SexualOrientation: string;
+  Sexualorientation: string;
   Bio?: string;
-  SearchingFor?: string;
+  Searchingfor?: string;
   Interests?: string;
   Occupation?: string;
   Pictures?: string;  // Consider defining what 'pictures' are, such as string[]

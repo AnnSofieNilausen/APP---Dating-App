@@ -31,9 +31,9 @@ export class ProfileComponent implements OnInit {
     Gender: '',
     Aol: '',
     Username: '',
-    SexualOrientation: '',
+    Sexualorientation: '',
     Bio: '',
-    SearchingFor: '',
+    Searchingfor: '',
     Interests: '',
     Occupation: '',
     Pictures: '',
@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit {
         next: (updatedProfile) => {
           this.profile = updatedProfile;
           console.log('Profile updated:', this.profile);
+          this.loadProfile(); // Reload the profile data - added after hand in
         },
         error: (error) => console.error('Failed to update profile', error)
       });
